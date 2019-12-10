@@ -1,6 +1,6 @@
 //autor: joaquim.ferrer
 
-package capaDades;
+package domini;
 
 import java.util.Vector;
 

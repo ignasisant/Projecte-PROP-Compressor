@@ -1,4 +1,4 @@
-package capaDades;
+package domini;
 
 public class Color {  //cada imatge és una matriu de Colors
     private int r;

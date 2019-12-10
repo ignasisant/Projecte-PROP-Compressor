@@ -1,6 +1,6 @@
 //author joaquim.ferrer
 
-package capaDomini;
+package domini;
 import java.util.*;
 
 //Passos per codificar
@@ -36,7 +36,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
 
         public Node(){
             freq = 0;
-            nombre = null;
+            nombre = 0;
             left = null;
             right = null;
         }
@@ -83,23 +83,23 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
     private String comprimit;
 
     public HuffmanTree(){
-        frequencies = new T[4096];  //nombre de valors que té una DCT amb un maxval de 255
+        frequencies = new int[4096];  //nombre de valors que té una DCT amb un maxval de 255
         Arrays.fill(frequencies, 0);
         root = null;
         comprimit = "";
         
     } 
 
-    private static void creatraductor(Node n, int colocar, int n){
-        if (n.getLeft() = null && n.getRight() == null){
+    private void creatraductor(Node n, int colocar, int num){
+        if (n.getLeft() == null && n.getRight() == null){
             //Estic en una fulla
-            traductor.put(n.getNombre,new parell(colocar,n)); //Per cada nombre que hi ha tinc la seva traducció
+            traductor.put(n.getNombre(),new parell(colocar,num)); //Per cada nombre que hi ha tinc la seva traducció
         }
         if (n.getLeft() != null){
-            creatraductor(n.getLeft(), (colocar<<<1), n+1); //Shifto. He ficat un zero
+            creatraductor(n.getLeft(), (colocar<<<1), num+1); //Shifto. He ficat un zero
         } 
         if (n.getRight() != null){
-            creatraductor(n.getRight(), (colocar<<<1)|1, n+1); //Shifto i he fet la or amb un 1 per tant he ficat un u al final
+            creatraductor(n.getRight(), (colocar<<<1)|1, num+1); //Shifto i he fet la or amb un 1 per tant he ficat un u al final
         }
     }
 
@@ -112,20 +112,20 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
             if(frequencies[i] != 0){
                 Node n = new Node();
                 n.setNombre(i-2047); //Cal restar perque he modificat abans el numero.
-                n.setFreq = frequencies[i]; //li poso el seu nombre de frequencia.
+                n.setFreq(frequencies[i]); //li poso el seu nombre de frequencia.
                 Cua.add(n); //afegeixo el node a la cua
             }
 
             //Aqui començo a crear l'arbre
         }
         //Aqui comença la magia del huffmann encoding
-        while (Cua.size > 1){  //mentre tingui algo am priotitat major de un nombre. Mai serà 1. Quan sigui 1 hauré acabat perque haué encuat la santa arrel de totes.
+        while (Cua.size() > 1){  //mentre tingui algo am priotitat major de un nombre. Mai serà 1. Quan sigui 1 hauré acabat perque haué encuat la santa arrel de totes.
             Node n1 = Cua.poll(); //tipic pop de tota la vida.
             Node n2 = Cua.poll();
             //He obtingut els dos primers de menys prioritat   
             Node pare = new Node();
             pare.setNombre(-1); //és un node intermig
-            pare.setFreq(n1.getFreq + n2.getFreq); //la frequencia és la suma de les dues. Node intern.
+            pare.setFreq(n1.getFreq() + n2.getFreq()); //la frequencia és la suma de les dues. Node intern.
             pare.setRight(n2); //aqui va el segon pq es un minheap
             pare.setLeft(n1); //aqui el primer.
             Cua.add(pare); //afegeixo al pare.
@@ -135,6 +135,8 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
          //tinc l'arbre generat. Ara fa falta anar creant el codi que estarà codificat
         creatraductor(root,0,0); //tinc el traductor fet ja jejejejeje
         int control = 0;
+        String result = "";
+        char aux;
         for (int i : input){
             parell trad = traductor.get(i); //obtinc un parell de la traduccio
             
