@@ -55,4 +55,33 @@ public class Fitxer {
     public String getExt(File f){
         return f.getName().substring(f.getName().lastIndexOf(".") + 1);
     }
+
+
+    static public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) {
+        try(
+            
+            FileWriter fw = new FileWriter("/tmp/stats" ,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw)
+            ) {
+                out.println(nomFitxer+"\t"+algoId+"\t"+duration+"\t"+String.format("%.2f", compress));
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+    }
+
+    public String getStats(){
+        Path path = Paths.get("/tmp/stats");
+        byte[] data = new byte[0];
+        String stats = "";
+        try {
+        data = Files.readAllBytes(path);
+        stats = new String(data);
+       
+        } catch (IOException e) {
+        stats = "No hi ha cap estadistica per el moment";
+        }
+        return stats;
+    }
 }
