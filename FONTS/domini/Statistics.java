@@ -13,22 +13,18 @@ public class Statistics {
     private int inSize;
     private int outSize;
     private int type;
-    private int algo;
     private long start;
     private long end;
-    private static Statistics singleton = new Statistics();
 
-    private Statistics() {
 
-    }
-    public static Statistics initStatistics() {
-        return singleton;
-    }
+    public  static void main(String[] args) {
 
-    public void startStats(String nomFitxer, int algoId, int inSize ) {
-        this.start =  System.currentTimeMillis();
         
     }
+    public Statistics() {
+
+    }
+
 
     public void startTimer() {
         this.start =  System.currentTimeMillis();
