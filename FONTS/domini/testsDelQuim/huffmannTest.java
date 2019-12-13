@@ -3,48 +3,30 @@ package domini.testsDelQuim;
 import domini.HuffmanTree;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Vector;
+
+import static java.lang.System.exit;
 
 public class huffmannTest {
 
-    private static String intToChars(Integer in){
-        String res = "";
-        BigInteger big = BigInteger.valueOf(in);
-        byte[] array = big.toByteArray();
-        System.out.println("El byte array te una llargada de " + array.length);
-        for (byte i : array){
-            res += (char)i;
-        }
-        return res;
-    }
-
-    private static Integer charsToInteger(String in){
-        byte[] array = new byte[in.length()];
-        for (int i = 0; i < in.length(); i++ ){
-            array[i] = (byte) in.toCharArray()[i];
-        }
-        BigInteger big = new BigInteger(array);
-        return big.intValue();
-    }
-
-
-    private static String donamString(String in){
-        String result = "";
-        int mascara = 128;
-        for (char i : in.toCharArray()){
-            int aux = i;
-            for (int j = 0; j<8; j++){
-                if ((aux & mascara) == 0){
-                    result += '0';
-                } else {
-                    result += '1';
-                }
-                aux = aux << 1;
-            }
-
-        }
-        return result;
-    }
+//    private static String intToChars(Integer in){
+//        return getString(in);
+//    }
+//
+//    private static Integer charsToInteger(String in){
+//        byte[] array = new byte[in.length()];
+//        for (int i = 0; i < in.length(); i++ ){
+//            array[i] = (byte) in.toCharArray()[i];
+//        }
+//        BigInteger big = new BigInteger(array);
+//        return big.intValue();
+//    }
+//
+//
+//    private static String donamString(String in){
+//        return getString(in);
+//    }
 
     public static void main(String[] args) {
 //        String a = "hhhhoollllllla";
@@ -61,28 +43,78 @@ public class huffmannTest {
 
 //        int a = 543782956;
 
-        String result = "1010101011010101010101010101010101010101010111010101010101010101011111111111111111";
-        while (result.length()%8 != 0){  //en aquets cas
-            result+=('0');
-        }
-        String comprimit = "";
-        char[] res = result.toCharArray();
-        for (int x = 0; x < res.length;){
-            char a = '\0';
-            int ini = x;
-            for (; x < ini + 8; x++){
-                if (res[x] == '0'){
-                    a = (char) (a << 1);
+//        String result = "1010101011010101010101010101010101010101010111010101010101010101011111111111111111";
+//        while (result.length()%8 != 0){  //en aquets cas
+//            result+=('0');
+//        }
+//        String comprimit = "";
+//        char[] res = result.toCharArray();
+//        for (int x = 0; x < res.length;){
+//            char a = '\0';
+//            int ini = x;
+//            for (; x < ini + 8; x++){
+//                if (res[x] == '0'){
+//                    a = (char) (a << 1);
+//
+//                } else {
+//                    a = (char) ((a << 1) | 1);
+//                }
+//            }
+//            comprimit+=a; //vaig fincant els chars
+//        }
+//
+//
+//        System.out.println(donamString(comprimit));
 
-                } else {
-                    a = (char) ((a << 1) | 1);
-                }
+        //A sobre tests parcials de funcions concretes
+        //A sota, test de l'aplicatiu principal
+//        Vector <Integer> prova1 = new Vector<Integer>();
+//        Vector <Integer> prova3 = new Vector<Integer>();
+//        Vector <Integer> prova2 = new Vector<Integer>();
+//        for (int i = 0; i < 200; i++){
+//           for (int j = 0; j < i; j++) {
+//                prova1.add(i);
+//                prova2.add(i);
+//                prova3.add(i);
+//            }
+//        }
+
+        Vector<Integer> tot = new Vector<Integer>();
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(0);
+        tot.add(1);
+        tot.add(1);
+        tot.add(1);
+        tot.add(1);
+        tot.add(2);
+        tot.add(2);
+        tot.add(3);
+        tot.add(4);
+        tot.add(5);
+        tot.add(5);
+        tot.add(5);
+//        tot.addAll(prova1);
+//        tot.addAll(prova2);
+//        tot.addAll(prova3);
+        HuffmanTree huff = new HuffmanTree();
+        System.out.println("El vector té una llargada de " + tot.size());
+        String result = huff.encode(tot);
+        System.out.println("L'String comprimit te una llargada de " + result.length());
+        Vector<Integer> stalin = huff.decode(result,7);
+        for (int i = 0; i < tot.size(); i++){
+            if (stalin.get(i) != tot.get(i)){
+                System.out.println("A l'element " + i + "no coincideixen els vectors. Todo Mal");
+                exit(0);
             }
-            comprimit+=a; //vaig fincant els chars
         }
-
-
-        System.out.println(donamString(comprimit));
-
+        System.out.println("tot bé piratilla jejejeje");
     }
 }

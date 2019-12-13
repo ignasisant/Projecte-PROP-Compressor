@@ -30,7 +30,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
 //        }
 //    }
 
-    private class Node {   //Visibilitatd e package
+    private static class Node {   //Visibilitatd e package
         private int freq;
         private int nombre;
         private Node left;
@@ -80,7 +80,6 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
 
     private HashMap<Integer, Integer> frequencies; //llargada màxima que pot arribar a tenir
     private Node root;
-    private PriorityQueue<Node> Cua;
     private HashMap<Integer, String> traductor; //té el nombre, la traducció a int i en nombre de bits que té
     private String comprimit;
     private String Arbre;
@@ -91,11 +90,11 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
     }
 
     private String creaPedazoString(Vector<Integer> input) {  //Crea un pedazostring a través de
-        String a = "";
+        StringBuilder a = new StringBuilder();
         for (int i : input) {
-            a+=traductor.get(i); //aqui li cardo tot l'input
+            a.append(traductor.get(i)); //aqui li cardo tot l'input
         }
-        return a;
+        return a.toString();
     }
 
     private String intToChars(Integer in){
@@ -108,6 +107,8 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         }
         return res;
     }
+
+
 
     private Integer charsToInteger(String in){
         byte[] array = new byte[in.length()];
@@ -163,40 +164,43 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
             }
 
         }
-        Cua = new PriorityQueue<Node>(input.size(), new comparador());
+        PriorityQueue<Node> cua = new PriorityQueue<Node>(input.size(), new comparador());
         for (int i : frequencies.keySet()) {  //Creo tots els nodes i els encuo segons la prioritat de la seva frequencia.
             Node n = new Node();
             n.setNombre(i); //Cal restar perque he modificat abans el numero.
             n.setFreq(frequencies.get(i)); //li poso el seu nombre de frequencia.
-            Cua.add(n); //afegeixo el node a la cua
+            cua.add(n); //afegeixo el node a la cua
             //Aqui començo a crear l'arbre
         }
         //Aqui comença la magia del huffmann encoding
-        while (Cua.size() > 1) {  //mentre tingui algo am priotitat major de un nombre. Mai serà 1. Quan sigui 1 hauré acabat perque haué encuat la santa arrel de totes.
-            Node n1 = Cua.poll(); //tipic pop de tota la vida.
-            Node n2 = Cua.poll();
+        while (cua.size() > 1) {  //mentre tingui algo am priotitat major de un nombre. Mai serà 1. Quan sigui 1 hauré acabat perque haué encuat la santa arrel de totes.
+            Node n1 = cua.poll(); //tipic pop de tota la vida.
+            Node n2 = cua.poll();
             //He obtingut els dos primers de menys prioritat   
             Node pare = new Node();
             pare.setNombre(0); //és un node intermig
+            assert n2 != null;
             pare.setFreq(n1.getFreq() + n2.getFreq()); //la frequencia és la suma de les dues. Node intern.
             pare.setRight(n1); //a la dreta el petit
             pare.setLeft(n2); //a l'esquerra el gran.
-            Cua.add(pare); //afegeixo al pare.
+            cua.add(pare); //afegeixo al pare.
             //CAL MARCAR SEMPRE L'ARREL!!!!!
             root = pare; //Aquesa arrel anirà canviant fins a que quedarà l'ultim node
         }
         //tinc l'arbre generat. Ara fa falta anar creant el codi que estarà codificat
+        assert root != null;
         creatraductor(root, ""); //tinc el traductor fet ja jejejejeje
         System.out.print("He obtingut el seguent diccionari:  ");
         System.out.println(traductor);
         int control = 0;
-        String result = creaPedazoString(input) + Arbre; //He obtingut un string ja amb el codi de huffmann, li sumo l'arbre
+        StringBuilder result = new StringBuilder(creaPedazoString(input) + Arbre); //He obtingut un string ja amb el codi de huffmann, li sumo l'arbre
         while (result.length()%8 != 0){  //en aquets cas
-            result+=('\0');
+            result.append('\0');
         }
 
         //Això em passa un string a una colla de bytes
-        char[] res = result.toCharArray();
+        //D'aquí a baix està comprovat el seu funcionament
+        char[] res = result.toString().toCharArray();
         for (int x = 0; x < res.length;){
             char a = '\0';
             int ini = x;
@@ -220,9 +224,10 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         if (arbre[n] == '1'){ //és una fulla
             n ++;
             //Aqui comença el nombre a col.locar
-            String nombre = "";
-            for (;n<n+17;n++) { //aixi ja ha sumat un quan acabi aixo
-                nombre += arbre[n];
+            StringBuilder nombre = new StringBuilder();
+            int ini = n;
+            for (;n<ini+17;n++) { //aixi ja ha sumat un quan acabi aixo
+                nombre.append(arbre[n]);
             }
 
 
@@ -252,6 +257,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         }
         return result;
     }
+
 
     public Vector<Integer> muntaStrucura(){
         Vector<Integer> result = new Vector<Integer>();
