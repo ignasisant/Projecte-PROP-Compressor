@@ -15,6 +15,7 @@ public class Statistics {
     private int type;
     private long start;
     private long end;
+    private long duration;
 
 
     public  static void main(String[] args) {
@@ -47,7 +48,7 @@ public class Statistics {
     }
    
     public void updateStats(String path, int algoId) {
-        long duration = this.end-this.start;
+        duration = this.end-this.start;
         double compress = 100 - ((float) this.outSize/ (float) this.inSize*100.0);
         printHeader();
         System.out.println(path+"\t "+type+"\t "+algoId+"\t "+duration+"\t  "+String.format("%.2f", compress));

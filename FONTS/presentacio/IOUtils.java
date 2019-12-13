@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.*;
 
-class IOUtils {
+public class IOUtils {
     private int action = -1;
     private Integer algoId;
     private String outfile;
@@ -22,13 +22,16 @@ class IOUtils {
     private Statistics st;
     private Compressio comp;
     private Descompressio decomp;
+    private VistaPrincipal vistaPrincipal;
 
     public IOUtils() {
         this.st = new Statistics();
         this.comp = new Compressio(st);
         this.decomp = new Descompressio(st);
+        this.vistaPrincipal = new VistaPrincipal(this);      
                                                                                            
     }
+
 
     public IOUtils(String infile, String outfile, int action, int algo) throws Exception {
         setInputFile(infile);
@@ -40,8 +43,11 @@ class IOUtils {
         this.decomp = new Descompressio(st);
 
     }
-    public void run() throws Exception {
 
+
+
+    public void run() throws Exception {
+        vistaPrincipal.hacerVisible();
         if(this.infile.getName() == "") throw new FileNotSelected();
         if(this.algoId != 0 && this.algoId != 1 && this.algoId != 2) throw new AlgorithmNotSelected();
         if(this.action == -1) throw new ActionNotSelected();
@@ -69,7 +75,7 @@ class IOUtils {
         }
     }
 
-    private void setType(int type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -105,7 +111,28 @@ class IOUtils {
 
     public void getStats(){ 
         st.printHeader();
-        System.out.println(st.getStats());}
+        System.out.println(st.getStats());
+    }
+
+    public void getNomArxiu(){
+        return ;
+    }
+    
+    public void getPesIni(){
+        return ;
+    }
+
+    public void getPesFin(){
+        return ;
+    }
+
+    public void getGrau(){
+        return ;
+    }
+
+    public void getTemps(){
+        return ;
+    }
 
 
 
