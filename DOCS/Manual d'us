@@ -1,0 +1,18 @@
+Compilació:
+
+	-	Per compilar es necessari situar-se al directiri FONT/ del projecte i executar:
+			
+			make build
+			make jar
+
+	- Si no hi hagut cap error trobareu l'executable icetaton.jar en el directori EXE/ del projecte, per executar:
+
+			java -jar path/to/icetaton.jar
+
+	- Per eliminar tots .class generats durant la compilació:
+
+			make clean
+
+Manual d'us:
+
+	- 
