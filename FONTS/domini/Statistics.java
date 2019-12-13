@@ -10,28 +10,24 @@ import java.nio.file.Paths;
 
 
 public class Statistics {
-    private int inSize;
-    private int outSize;
-    private int type;
     private long start;
     private long end;
     private long duration;
 
+    private static Statistics singleton = new Statistics();
 
-    public  static void main(String[] args) {
-
-        
-    }
-    public Statistics() {
 
     }
+    public static Statistics getStatistics() {
+        return singleton;
+    }
 
-
-    public void startTimer() {
+    public void initStats() {
         this.start =  System.currentTimeMillis();
     }
 
-    public void endTimer() {
+    public void saveStats(String nomFitxer, int algoId, int inSize, int outSize ) {
+       //TODO: if (this.start == null) tira excepcio no sha inicialitzat el contador
         this.end =  System.currentTimeMillis();
     }
    
@@ -63,21 +59,16 @@ public class Statistics {
                 e.printStackTrace();
             }
 
+
+        Fitxer.saveStatistic(nomFitxer, algoId, compress, duration);
+
+       
+
+
     }
 
-    public String getStats(){
-        Path path = Paths.get("/tmp/stats");
-        byte[] data = new byte[0];
-        String stats = "";
-        try {
-        data = Files.readAllBytes(path);
-        stats = new String(data);
-       
-        } catch (IOException e) {
-        System.out.println("No hi ha cap estadistica per el moment");
-        }
-        return stats;
-    }
+
+
 
     public void printHeader(){
         System.out.println("Fitxer\t\t|"+"Type |"+" AlgoId |"+" Duration |"+" %");
