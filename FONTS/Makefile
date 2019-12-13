@@ -1,17 +1,18 @@
 
 JAVA := $(wildcard */*.java)
 CLASS := $(wildcard */*.class)
+FILES := $(shell echo '$(CLASS)' | sed 's/\$$/\\$$/g')
 NOM := entrega2.jar
 
-ini:
-	javac $(JAVA)
-
+build:
+	@javac   $(JAVA)
+	@echo "Compilat correctament.\nExecuta 'make jar' per generar l'executable."
 jar:
 	
-	jar -cvf ../EXE/$(NOM) $(CLASS)  
+	@jar cfm ../EXE/$(NOM) MANIFEST.MF $(FILES)
 	@chmod +x ../EXE/$(NOM)
-	@echo -e "\n\nL'executable $(NOM) es troba al directori EXE/"
+	@echo  "OK!\n\nL'executable $(NOM) es troba al directori ../EXE/"
 
 
 clean:
-	rm -f dades/*.class  domini/*.class  presentacio/*.class ../EXE/$(NOM)
+	@rm -f domini/*.class presentacio/*.class dades/*.class
