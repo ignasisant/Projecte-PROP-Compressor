@@ -2,7 +2,7 @@ package domini;
 import java.io.*;
 import java.util.Vector;
 
-public class Descompressio {
+class Descompressio {
     private Algorithm algo;
     private Fitxer f;
     private Statistics st;

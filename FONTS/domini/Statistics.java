@@ -1,13 +1,8 @@
 package domini;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 
 
-public class Statistics {
+class Statistics {
     private long start;
     private long end;
     private long duration;

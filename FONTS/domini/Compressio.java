@@ -2,7 +2,7 @@ package domini;
 import java.io.File;
 
 
-public class Compressio {
+class Compressio {
     private Algorithm algo;
 
     private Fitxer f;
