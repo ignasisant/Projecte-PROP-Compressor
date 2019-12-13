@@ -19,15 +19,13 @@ public class IOUtils {
     private String outfile;
     private File infile;
     private int type;
-    private Statistics st;
     private Compressio comp;
     private Descompressio decomp;
     private VistaPrincipal vistaPrincipal;
 
     public IOUtils() {
-        this.st = new Statistics();
-        this.comp = new Compressio(st);
-        this.decomp = new Descompressio(st);
+        this.comp = new Compressio();
+        this.decomp = new Descompressio();
         this.vistaPrincipal = new VistaPrincipal(this);      
                                                                                            
     }
@@ -38,9 +36,8 @@ public class IOUtils {
         this.action = action;
         this.algoId = algo;
         setOutputFile(outfile);
-        this.st = new Statistics();
-        this.comp = new Compressio(st);
-        this.decomp = new Descompressio(st);
+        this.comp = new Compressio();
+        this.decomp = new Descompressio();
 
     }
 
@@ -56,11 +53,11 @@ public class IOUtils {
 
             case 0:
                 comp.setAlgorithm(this.algoId);
-                comp.compress(infile, outfile, 0); // 0  o 1 => fitxer o carpeta
+                comp.compress(infile.getName(), outfile, 0); // 0  o 1 => fitxer o carpeta
                 break;
             case 1:
                 decomp.setAlgorithm(this.algoId);
-                decomp.decompress(infile, outfile, 0); // 0  o 1 => fitxer o carpeta
+                decomp.decompress(infile.getName(), outfile, 0); // 0  o 1 => fitxer o carpeta
                 break;
 
             // case 2:
@@ -107,35 +104,5 @@ public class IOUtils {
     public void setAlgorithm(int algo) {
         this.algoId = algo;
     }
-
-
-    public void getStats(){ 
-        st.printHeader();
-        System.out.println(st.getStats());
-    }
-
-    public void getNomArxiu(){
-        return ;
-    }
-    
-    public void getPesIni(){
-        return ;
-    }
-
-    public void getPesFin(){
-        return ;
-    }
-
-    public void getGrau(){
-        return ;
-    }
-
-    public void getTemps(){
-        return ;
-    }
-
-
-
-
     
 }
