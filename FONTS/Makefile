@@ -2,7 +2,7 @@
 JAVA := $(wildcard */*.java)
 CLASS := $(wildcard */*.class)
 FILES := $(shell echo '$(CLASS)' | sed 's/\$$/\\$$/g')
-NOM := entrega2.jar
+NOM := icetaton.jar
 
 build:
 	@javac   $(JAVA)
