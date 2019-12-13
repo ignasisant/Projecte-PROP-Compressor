@@ -5,12 +5,13 @@ import java.io.File;
 public class Compressio {
     private Algorithm algo;
 
-
+    private Fitxer f;
     private Statistics st;
     private String ext_comp;
 
     public Compressio() {
         this.st = Statistics.getStatistics();
+        this.f = Fitxer.getFitxer();
     };
 
     public void compress(String infile,  String outfile, Integer type) {
@@ -25,10 +26,10 @@ public class Compressio {
 
     public void compressFile(String infile,  String outfile) {
         try {
-            // data = Files.readAllBytes(this.path);
+        
             String outf = getCompressOutputFile(infile, outfile);
-            Fitxer f = new Fitxer();
-            String payload = f.llegirFitxer(infile);
+         
+            String payload = this.f.llegirFitxer(infile);
                 
    
             this.algo.setData(payload);
@@ -39,7 +40,7 @@ public class Compressio {
 
     
             // ext_comp = f.getExt(infile);
-            f.writeToFile(algo.getId()+compress, outf);
+            this.f.writeToFile(algo.getId()+compress, outf);
 
 
         } catch (Exception e) {
@@ -50,7 +51,7 @@ public class Compressio {
 
 
 
-    public void setAlgorithm(int algo) throws Exception {
+    public void setAlgorithm(int algo) /*throws Exception*/ {
         switch (algo) {
             case 0:
                 this.algo = new LZ78();
@@ -62,7 +63,7 @@ public class Compressio {
                 // this.algo = new jpeg();
                 break;
             default:
-                throw new InvalidAlgorithm();
+               // throw new InvalidAlgorithm();
         }
 
     }

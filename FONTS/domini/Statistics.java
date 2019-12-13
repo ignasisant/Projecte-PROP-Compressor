@@ -11,11 +11,14 @@ public class Statistics {
     private long start;
     private long end;
     private long duration;
+    private Fitxer f;
 
     private static Statistics singleton = new Statistics();
 
 
-    private Statistics() {}
+    private Statistics() {
+        this.f = Fitxer.getFitxer();
+    }
     
     public static Statistics getStatistics() {
         return singleton;
@@ -32,7 +35,7 @@ public class Statistics {
         double compress = 100 - ((float) outSize/ (float) inSize*100.0);
 
 
-        Fitxer.saveStatistic(nomFitxer, algoId, compress, duration);
+        this.f.saveStatistic(nomFitxer, algoId, compress, duration);
       
     }
    

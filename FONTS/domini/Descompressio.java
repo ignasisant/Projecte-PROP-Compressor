@@ -4,12 +4,13 @@ import java.util.Vector;
 
 public class Descompressio {
     private Algorithm algo;
-
+    private Fitxer f;
     private Statistics st;
     //private String ext_comp;
 
     public Descompressio( ) {
         this.st = Statistics.getStatistics();
+        this.f = Fitxer.getFitxer();
     };
 
     public void decompress(String infile,  String outfile, Integer type) {
@@ -26,10 +27,10 @@ public class Descompressio {
         try {
             // data = Files.readAllBytes(this.path);
            
-            Fitxer f = new Fitxer();
+           
             Vector<String> info;
 
-            info = f.llegirDescomp(infile);
+            info = this.f.llegirDescomp(infile);
             //this.ext_comp = getExtFromId(info.get(0)); aixo ena anira be per quan haguem d'endevinar el algo
             String outf = getDecompressOutputFile(infile, outfile);
             String payload = info.get(1);
@@ -44,7 +45,7 @@ public class Descompressio {
             this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
             
-            f.writeToFile(compress, outf);
+            this.f.writeToFile(compress, outf);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -65,7 +66,7 @@ public class Descompressio {
 
 
 
-    public void setAlgorithm(int algo) throws Exception {
+    public void setAlgorithm(int algo) /*throws Exception */{
         switch (algo) {
             case 0:
                 this.algo = new LZ78();
@@ -77,7 +78,7 @@ public class Descompressio {
                 // this.algo = new jpeg();
                 break;
             default:
-                throw new InvalidAlgorithm();
+              //  throw new InvalidAlgorithm();
         }
 
 

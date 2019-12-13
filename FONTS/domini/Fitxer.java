@@ -7,8 +7,32 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Fitxer {
+    
+    private static Fitxer singleton = new Fitxer();
+    private Compressio comp;
+    private Descompressio decomp;
+    
+    private Fitxer(){
+        this.comp = new Compressio();
+        this.decomp = new Descompressio();
+    }
 
-    public Fitxer(){}
+    public static Fitxer getFitxer() {
+        return singleton;
+    }
+
+
+    public void compress(String infile, String outfile, int type, int algoId) {
+       this.comp.setAlgorithm(algoId);
+       this.comp.compress(infile, outfile, type);
+
+    }
+
+    public void decompress(String infile, String outfile, int type, int algoId) {
+        this.decomp.setAlgorithm(algoId);
+        this.decomp.decompress(infile, outfile, type);
+
+    }
 
     public String llegirFitxer(String name)  {
         try {
@@ -61,7 +85,7 @@ public class Fitxer {
     }
 
 
-    static public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) {
+    public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) {
         try(
             
             FileWriter fw = new FileWriter("/tmp/stats" ,true);
