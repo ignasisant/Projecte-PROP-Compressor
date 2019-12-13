@@ -2,13 +2,17 @@ package domini;
 
 import java.io.*;
 import java.util.Vector;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Fitxer {
 
     public Fitxer(){}
 
-    public String llegirFitxer(File f)  {
+    public String llegirFitxer(String name)  {
         try {
+            File f = new File(name);
             FileReader fr = new FileReader(f);
 
 
@@ -31,8 +35,8 @@ public class Fitxer {
 
     }
 
-    public Vector<String> llegirDescomp(File f) throws IOException {
-
+    public Vector<String> llegirDescomp(String name) throws IOException {
+        File f = new File(name);
         FileReader fr = new FileReader(f);
         Vector<String> r = new Vector<>();
         int i;

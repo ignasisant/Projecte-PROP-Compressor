@@ -8,11 +8,11 @@ public class Descompressio {
     private Statistics st;
     //private String ext_comp;
 
-    public Descompressio( Statistics st) {
-        this.st = st;
+    public Descompressio( ) {
+        this.st = Statistics.getStatistics();
     };
 
-    public void decompress(File infile,  String outfile, Integer type) {
+    public void decompress(String infile,  String outfile, Integer type) {
         if (type==0) {
             decompressFile(infile, outfile);
         }
@@ -22,7 +22,7 @@ public class Descompressio {
 
     }
 
-    public void decompressFile(File infile,  String outfile) {
+    public void decompressFile(String infile,  String outfile) {
         try {
             // data = Files.readAllBytes(this.path);
            
@@ -36,26 +36,24 @@ public class Descompressio {
 
             
 
-            this.st.setInputSize(payload.length());
-            this.st.setType(1); // Descompressio
             algo.setData(payload);
-            this.st.startTimer();
+           
 
-            payload = algo.decompress();
+            this.st.initStats();
+            String compress = algo.decompress();
+            this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
-            this.st.endTimer();
-            this.st.setOutputSize(payload.length());
-            this.st.updateStats(infile.getName() , algo.getId());
-            f.writeToFile(payload, outf);
+            
+            f.writeToFile(compress, outf);
 
         } catch (Exception e) {
             System.out.println(e);
         }
 
     }
-    public String getDecompressOutputFile(File infile, String outfile) {
+    public String getDecompressOutputFile(String infile, String outfile) {
         if(outfile == "") {
-            outfile = infile.getName().replaceFirst("[.][^.]+$", "")  ;
+            outfile = infile.replaceFirst("[.][^.]+$", "")  ;
         } else {
            // outfile +=  "."+ ext_comp; // no cal pasar el ext_comp ja que guardem el fitxer aqui
         }

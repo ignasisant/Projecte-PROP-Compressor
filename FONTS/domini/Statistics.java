@@ -4,9 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 
 public class Statistics {
@@ -17,7 +15,8 @@ public class Statistics {
     private static Statistics singleton = new Statistics();
 
 
-    }
+    private Statistics() {}
+    
     public static Statistics getStatistics() {
         return singleton;
     }

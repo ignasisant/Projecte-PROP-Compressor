@@ -9,11 +9,11 @@ public class Compressio {
     private Statistics st;
     private String ext_comp;
 
-    public Compressio( Statistics st) {
-        this.st = st;
+    public Compressio() {
+        this.st = Statistics.getStatistics();
     };
 
-    public void compress(File infile,  String outfile, Integer type) {
+    public void compress(String infile,  String outfile, Integer type) {
         if (type==0) {
             compressFile(infile, outfile);
         }
@@ -23,25 +23,23 @@ public class Compressio {
 
     }
 
-    public void compressFile(File infile,  String outfile) {
+    public void compressFile(String infile,  String outfile) {
         try {
             // data = Files.readAllBytes(this.path);
             String outf = getCompressOutputFile(infile, outfile);
             Fitxer f = new Fitxer();
             String payload = f.llegirFitxer(infile);
+                
+   
+            this.algo.setData(payload);
+     
+            this.st.initStats();
+            String compress = algo.compress();
+            this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
-            this.st.setInputSize(payload.length());
-            this.st.setType(0); 
-            algo.setData(payload);
-            this.st.startTimer();
-
-            payload = algo.compress();
-            
-            this.st.endTimer();
-            this.st.setOutputSize(payload.length());
-            this.st.updateStats(infile.getName() , algo.getId());
+    
             // ext_comp = f.getExt(infile);
-            f.writeToFile(algo.getId()+payload, outf);
+            f.writeToFile(algo.getId()+compress, outf);
 
 
         } catch (Exception e) {
@@ -69,10 +67,10 @@ public class Compressio {
 
     }
     
-    public String getCompressOutputFile(File infile, String outfile) {
+    public String getCompressOutputFile(String infile, String outfile) {
 
         if(outfile == "") {
-           outfile = infile.getName().replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
+           outfile = infile.replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
         } else {
             //outfile += "."+algo.getExtension();
         }

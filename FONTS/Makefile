@@ -3,10 +3,11 @@ JAVA := $(wildcard */*.java)
 CLASS := $(wildcard */*.class)
 NOM := entrega2.jar
 
-
+ini:
+	javac $(JAVA)
 
 jar:
-	javac $(JAVA)
+	
 	jar -cvf ../EXE/$(NOM) $(CLASS)  
 	@chmod +x ../EXE/$(NOM)
 	@echo -e "\n\nL'executable $(NOM) es troba al directori EXE/"
