@@ -8,15 +8,10 @@ import domini.*;
 class Driver {
     public  static void main(String[] args)  {
         IOUtils test = new IOUtils();
-        if(args.length == 0) test.getStats();
-        else {
-            try {
-                test.run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-     
+        try {
+            test.run();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }    
 }
