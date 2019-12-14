@@ -13,17 +13,19 @@ class Descompressio {
         this.f = f;
     };
 
-    public void decompress(String infile,  String outfile, Integer type) {
+    public String[] decompress(String infile,  String outfile, Integer type) {
         if (type==0) {
-            decompressFile(infile, outfile);
+            String[] info =  decompressFile(infile, outfile);
+            return info;
         }
         else { //decompressio de carpeta
 
         }
+        return null;
 
     }
 
-    public void decompressFile(String infile,  String outfile) {
+    public String[] decompressFile(String infile,  String outfile) {
         try {
             // data = Files.readAllBytes(this.path);
            
@@ -42,14 +44,16 @@ class Descompressio {
 
             this.st.initStats();
             String compress = algo.decompress();
-            this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
+            String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
             
             this.f.writeToFile(compress, outf);
+            return stat;
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        return null;
 
     }
     public String getDecompressOutputFile(String infile, String outfile) {

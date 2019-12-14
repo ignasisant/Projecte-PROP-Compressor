@@ -14,19 +14,21 @@ class Compressio {
         this.f = f;//Fitxer.getFitxer();
     };
 
-    public void compress(String infile,  String outfile, Integer type) {
+    public  String[]  compress(String infile,  String outfile, Integer type) {
         if (type==0) {
-            compressFile(infile, outfile);
+            String[] info = compressFile(infile, outfile);
+            return info;
         }
         else { //compressio de carpeta
 
         }
+        return null;
 
     }
 
-    public void compressFile(String infile,  String outfile) {
+    public String[] compressFile(String infile,  String outfile) {
         try {
-        
+         
             String outf = getCompressOutputFile(infile, outfile);
             
             String payload = this.f.llegirFitxer(infile);
@@ -36,18 +38,18 @@ class Compressio {
      
             this.st.initStats();
             String compress = algo.compress();
-            this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
+            String[] info =  this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
             
             // ext_comp = f.getExt(infile);
      
             this.f.writeToFile(algo.getId()+compress, outf);
-            
+           return info;
 
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        return null;
     }
 
 

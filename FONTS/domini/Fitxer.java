@@ -20,15 +20,15 @@ public class Fitxer {
 
 
 
-    public void compress(String infile, String outfile, int type, int algoId) {
+    public String[] compress(String infile, String outfile, int type, int algoId) {
        this.comp.setAlgorithm(algoId);
-       this.comp.compress(infile, outfile, type);
+       return this.comp.compress(infile, outfile, type);
 
     }
 
-    public void decompress(String infile, String outfile, int type, int algoId) {
+    public String[] decompress(String infile, String outfile, int type, int algoId) {
         this.decomp.setAlgorithm(algoId);
-        this.decomp.decompress(infile, outfile, type);
+       return  this.decomp.decompress(infile, outfile, type);
 
     }
 
