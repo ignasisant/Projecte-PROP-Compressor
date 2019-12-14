@@ -79,7 +79,9 @@ public class Fitxer {
 
     }
 
-    public String getExt(File f){
+    public String getExt(String file){
+        File f = new File(file);
+        if (f.getName().lastIndexOf(".") == -1) return "";
         return f.getName().substring(f.getName().lastIndexOf(".") + 1);
     }
 
@@ -111,4 +113,18 @@ public class Fitxer {
         }
         return stats;
     }
+
+    public String getHierarchy(String fold) {
+        File folder = new File(fold);
+        File[] list = folder.listFiles();
+        String all = "";
+        for(int i = 0; i < list.length; ++i ) {
+            if(list[i].isDirectory()) all += getHierarchy(list[i].getAbsolutePath());
+            else all += list[i].getAbsolutePath()+"//";
+
+        }
+        return all;
+
+    }
+
 }

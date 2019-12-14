@@ -16,17 +16,17 @@ class Compressio {
 
     public  String[]  compress(String infile,  String outfile, Integer type) {
         if (type==0) {
-            String[] info = compressFile(infile, outfile);
+            String[] info = this.compressFile(infile, outfile);
             return info;
         }
         else { //compressio de carpeta
-
+            this.compressFolder(infile, outfile);
         }
         return null;
 
     }
 
-    public String[] compressFile(String infile,  String outfile) {
+    private String[] compressFile(String infile,  String outfile) {
         try {
          
             String outf = getCompressOutputFile(infile, outfile);
@@ -37,7 +37,7 @@ class Compressio {
             
      
             this.st.initStats();
-            String compress = algo.compress();
+            String compress = this.run();
             String[] info =  this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
             
@@ -52,7 +52,45 @@ class Compressio {
         return null;
     }
 
+    private void compressFolder(String infile,  String outfile) {
+        try {
+            String outf = getCompressOutputFile(infile, outfile);
+            String[] dirs = infile.split("/");
+            String inici = dirs[dirs.length -1];
+            int ini = infile.length()-inici.length();
+            String files = f.getHierarchy(infile);
+            String out = "";
+            String[] all= files.split("//");
+            int inSize = 0, outSize = 0;
+            this.st.initStats();
+            for(int i=0; i < all.length; ++i) {
+                out += "\n"+all[i].substring(ini);
+                System.out.println(all[i]);
 
+                String payload = this.f.llegirFitxer(all[i]);
+                inSize += payload.length();
+                this.algo.setData(payload);
+                String compress = this.run();
+                out+= "\n"+compress.length()+"\n";
+                out+=compress;
+            
+                
+            }
+            outSize = out.length();
+            String[] info =  this.st.saveStats(infile,algo.getId(), inSize, outSize);
+            //outfile=infile+this.algo.getExtension();
+            this.f.writeToFile(algo.getId()+out, outf);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+
+    }
+
+    private String run() {
+        return this.algo.compress();
+
+    }
 
     public void setAlgorithm(int algo) /*throws Exception*/ {
         switch (algo) {
@@ -74,7 +112,8 @@ class Compressio {
     public String getCompressOutputFile(String infile, String outfile) {
 
         if(outfile == "") {
-           outfile = infile.replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
+           if(f.getExt(infile) != "") outfile = infile.replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
+           else outfile = infile+"."+this.algo.getExtension();
         } else {
             outfile += "."+algo.getExtension();
         }
