@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import javafx.scene.control.RadioButton;
+
 import presentacio.IOUtils;
 import presentacio.*;
 
@@ -142,7 +142,7 @@ public class VistaPrincipal {
     public void actionPerformed_fileChooser(ActionEvent event){
         if (selection == JFileChooser.APPROVE_OPTION){
             try{
-            iIOUtils.setInputFile(fileChooser.getSelectedFile().getName());
+            iIOUtils.setInputFile(fileChooser.getSelectedFile().getAbsolutePath());
             if(fileChooser.getSelectedFile().isDirectory()) iIOUtils.setType(1);
             else iIOUtils.setType(0);
             }catch(Exception e){

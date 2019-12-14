@@ -53,6 +53,7 @@ public class Fitxer {
     }
 
     public void writeToFile(String data, String fileName) throws IOException{
+        System.out.println("VAIG A ESCRIURE EL FITXER!!!! "+fileName);
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         writer.write(data);
         writer.close();

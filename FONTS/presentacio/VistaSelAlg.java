@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.event.*;
 
-//import javafx.scene.control.RadioButton;
 import presentacio.IOUtils;
 import presentacio.VistaInfo;
 import presentacio.*;
