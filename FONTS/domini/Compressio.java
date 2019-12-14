@@ -73,7 +73,7 @@ class Compressio {
         if(outfile == "") {
            outfile = infile.replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
         } else {
-            //outfile += "."+algo.getExtension();
+            outfile += "."+algo.getExtension();
         }
         return outfile;
     }
