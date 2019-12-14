@@ -18,7 +18,7 @@ public class IOUtils {
     public IOUtils() {
 
         this.vistaPrincipal = new VistaPrincipal(this);      
-        this.ctrlDom = Fitxer.getFitxer();                                                                 
+        this.ctrlDom = new Fitxer();//Fitxer.getFitxer();                                                                 
     }
 
 

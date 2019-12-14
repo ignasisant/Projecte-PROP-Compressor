@@ -8,9 +8,9 @@ class Descompressio {
     private Statistics st;
     //private String ext_comp;
 
-    public Descompressio( ) {
+    public Descompressio(Fitxer f ) {
         this.st = Statistics.getStatistics();
-        this.f = Fitxer.getFitxer();
+        this.f = f;
     };
 
     public void decompress(String infile,  String outfile, Integer type) {

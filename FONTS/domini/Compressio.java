@@ -9,9 +9,9 @@ class Compressio {
     private Statistics st;
     private String ext_comp;
 
-    public Compressio() {
+    public Compressio(Fitxer f) {
         this.st = Statistics.getStatistics();
-        this.f = Fitxer.getFitxer();
+        this.f = f;//Fitxer.getFitxer();
     };
 
     public void compress(String infile,  String outfile, Integer type) {
@@ -28,20 +28,21 @@ class Compressio {
         try {
         
             String outf = getCompressOutputFile(infile, outfile);
-         
+            
             String payload = this.f.llegirFitxer(infile);
-                
    
             this.algo.setData(payload);
+            
      
             this.st.initStats();
             String compress = algo.compress();
             this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
-    
+            
             // ext_comp = f.getExt(infile);
+     
             this.f.writeToFile(algo.getId()+compress, outf);
-
+            
 
         } catch (Exception e) {
             System.out.println(e);

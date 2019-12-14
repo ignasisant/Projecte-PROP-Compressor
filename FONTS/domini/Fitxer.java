@@ -8,18 +8,16 @@ import java.nio.file.Paths;
 
 public class Fitxer {
     
-    private static Fitxer singleton = new Fitxer();
+   // private static Fitxer singleton = new Fitxer();
     private Compressio comp;
     private Descompressio decomp;
     
-    private Fitxer(){
-        this.comp = new Compressio();
-        this.decomp = new Descompressio();
+    public Fitxer(){
+        this.comp = new Compressio(this);
+        this.decomp = new Descompressio(this);
     }
 
-    public static Fitxer getFitxer() {
-        return singleton;
-    }
+
 
 
     public void compress(String infile, String outfile, int type, int algoId) {

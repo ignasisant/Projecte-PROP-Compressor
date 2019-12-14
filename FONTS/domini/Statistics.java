@@ -12,7 +12,7 @@ class Statistics {
 
 
     private Statistics() {
-        this.f = Fitxer.getFitxer();
+        this.f = new Fitxer();//Fitxer.getFitxer();
     }
     
     public static Statistics getStatistics() {
