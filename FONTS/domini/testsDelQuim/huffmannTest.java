@@ -14,19 +14,36 @@ public class huffmannTest {
 //        return getString(in);
 //    }
 //
-//    private static Integer charsToInteger(String in){
-//        byte[] array = new byte[in.length()];
-//        for (int i = 0; i < in.length(); i++ ){
-//            array[i] = (byte) in.toCharArray()[i];
-//        }
-//        BigInteger big = new BigInteger(array);
-//        return big.intValue();
-//    }
+private static String intToChars(Integer in){
+    StringBuilder res = new StringBuilder();
+    BigInteger big = BigInteger.valueOf(in);
+    byte[] array = big.toByteArray();
+    System.out.println("El byte array te una llargada de " + array.length);
+    for (byte i : array){
+        res.append((char) i);
+    }
+    return res.toString();
+}
 //
 //
 //    private static String donamString(String in){
 //        return getString(in);
 //    }
+
+    private static Integer charsToInteger(String in){
+//        byte[] array = new byte[in.length()];
+////        for (int i = 0; i < in.length(); i++ ){
+////            array[i] = (byte) in.toCharArray()[i];
+////        }
+////        BigInteger big = new BigInteger(array);
+////        return big.intValue();
+        char[] numbers = in.toCharArray();
+        int result = 0;
+        for(int i=numbers.length - 1; i>=0; i--)
+            if(numbers[i]=='1')
+                result += Math.pow(2, (numbers.length-i - 1));
+        return result;
+    }
 
     public static void main(String[] args) {
 //        String a = "hhhhoollllllla";
@@ -108,7 +125,9 @@ public class huffmannTest {
         System.out.println("El vector té una llargada de " + tot.size());
         String result = huff.encode(tot);
         System.out.println("L'String comprimit te una llargada de " + result.length());
-        Vector<Integer> stalin = huff.decode(result,7);
+        Vector<Integer> stalin = huff.decode(result);
+        //System.out.println(intToChars(32));
+        System.out.println("Ha de printar el nombre 759 " + charsToInteger("1011110111"));
         for (int i = 0; i < tot.size(); i++){
             if (stalin.get(i) != tot.get(i)){
                 System.out.println("A l'element " + i + "no coincideixen els vectors. Todo Mal");
