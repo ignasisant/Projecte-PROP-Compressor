@@ -116,8 +116,6 @@ public class VistaPrincipal {
         if (i > 0) {
             extension = fileChooser.getSelectedFile().getName().substring(i+1);
         }
-        System.out.println(extension);
-        System.out.println(extension.length());
         if (extension.equals("lz78")) iIOUtils.setAlgorithm(0);
         else if(extension.equals("lzw")) iIOUtils.setAlgorithm(1);
         else if(extension.equals("jpeg")) iIOUtils.setAlgorithm(2);
@@ -204,9 +202,6 @@ public class VistaPrincipal {
                 }
             }
         );
-
-       
-
         // Listeners para el resto de componentes
 
     }
@@ -254,14 +249,12 @@ public class VistaPrincipal {
     contentPane.add(panelContenidos);
   }
 
- 
-
   private void inicializar_panelMenuPrincipal() {
     // Layout
     panelMenuPrincipal.setLayout(new BorderLayout());
     // Paneles
     panelMenuPrincipal.add(new JLabel("Selecciona una opció"), BorderLayout.NORTH);
-    panelMenuPrincipal.add(panelCenter, BorderLayout.CENTER);
+    panelMenuPrincipal.add(panelRadioButton, BorderLayout.CENTER);
     panelMenuPrincipal.add(buttonContinuar, BorderLayout.SOUTH);
   }
 

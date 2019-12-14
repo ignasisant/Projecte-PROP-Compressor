@@ -36,8 +36,10 @@ public class IOUtils {
         this.action = action;
         this.algoId = algo;
         setOutputFile(outfile);
-        this.comp = new Compressio();
-        this.decomp = new Descompressio();
+        this.comp = new Compressio();  //borrar
+        this.decomp = new Descompressio();//borrar
+        //Fitxer f = Fitxer.getfitxer();
+
 
     }
 
@@ -52,9 +54,9 @@ public class IOUtils {
         switch (this.action+(this.type*2)) {
 
             case 0:
-                comp.setAlgorithm(this.algoId);
+                comp.setAlgorithm(this.algoId); // passar amb parametre compress (algoid, )
                 comp.compress(infile.getName(), outfile, 0); // 0  o 1 => fitxer o carpeta
-                break;
+                break; // lo de dalt amb algoID
             case 1:
                 decomp.setAlgorithm(this.algoId);
                 decomp.decompress(infile.getName(), outfile, 0); // 0  o 1 => fitxer o carpeta
@@ -68,6 +70,7 @@ public class IOUtils {
             //     decomp.setAlgorithm(this.algoId);
             //     decomp.decompress(infile, outfile, 1); // 0  o 1 => fitxer o carpeta
             //     break;
+
  
         }
     }
