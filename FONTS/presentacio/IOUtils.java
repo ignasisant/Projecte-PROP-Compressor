@@ -56,15 +56,12 @@ public class IOUtils {
                 stats = ctrlDom.decompress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
 
-            // case 2:
-            //     comp.setAlgorithm(this.algoId);
-            //     comp.compress(infile, outfile, 1); // 0  o 1 => fitxer o carpeta
-            //     break;
-            // case 3:
-            //     decomp.setAlgorithm(this.algoId);
-            //     decomp.decompress(infile, outfile, 1); // 0  o 1 => fitxer o carpeta
-            //     break;
-
+            case 2:
+                ctrlDom.compress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                break;
+            case 3:
+                ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                break;
  
         }
     }
