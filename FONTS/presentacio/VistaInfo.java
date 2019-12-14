@@ -25,6 +25,8 @@ public class VistaInfo {
   private JPanel panelInformacio = new JPanel();
   private JButton buttonHome = new JButton("Menu Home");
   private JPanel panelLabels = new JPanel();
+  private JPanel panelButtons = new JPanel();
+  private JButton buttonCompare = new JButton("Comparar Abans/Després");
   
 
   // Resto de atributos
@@ -56,6 +58,9 @@ public class VistaInfo {
       vistaPrincipal.volverHome();
   }
 
+  public void actionPerformed_buttonCompare(ActionEvent event){
+    VistaCompare vistaCompare = new VistaCompare();
+  }
 
 //////////////////////// Asignacion de listeners
 
@@ -70,6 +75,14 @@ public class VistaInfo {
         }
     );
 
+    buttonCompare.addActionListener(
+      new ActionListener(){
+        public void actionPerformed (ActionEvent event){
+          actionPerformed_buttonCompare(event);
+        }
+      }
+    );
+
 
     // Listeners para el resto de componentes
 
@@ -82,6 +95,7 @@ public class VistaInfo {
   private void inicializarComponentes() {
 
     incializar_panelLabels();
+    inicializar_panelButtons();
     inicializar_panelInformacio();
     asignar_listenersComponentes();
   }
@@ -109,8 +123,13 @@ public class VistaInfo {
     if(comprimir) panelInformacio.add(new JLabel("ARXIU COMPRIMIT AMB ÈXIT!"), BorderLayout.NORTH);
     else panelInformacio.add(new JLabel("ARXIU DESCOMPRIMIT AMB ÈXIT!"), BorderLayout.NORTH);
     panelInformacio.add(panelLabels, BorderLayout.CENTER);
-    panelInformacio.add(buttonHome, BorderLayout.SOUTH);   
+    panelInformacio.add(panelButtons, BorderLayout.SOUTH);   
 
+  }
+  private void inicializar_panelButtons(){
+    panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.PAGE_AXIS));
+    if(comprimir) panelButtons.add(buttonCompare);
+    panelButtons.add(buttonHome);
   }
   
 

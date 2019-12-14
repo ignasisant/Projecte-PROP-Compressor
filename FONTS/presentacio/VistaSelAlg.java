@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import javafx.scene.control.RadioButton;
+//import javafx.scene.control.RadioButton;
 import presentacio.IOUtils;
 import presentacio.VistaInfo;
 import presentacio.*;
@@ -27,6 +27,7 @@ public class VistaSelAlg {
   private JButton buttonComprimir = new JButton("Comprimir");
   private JRadioButton[] alg = new JRadioButton[3];
   private JPanel panelRadioButton = new JPanel();
+  private JPanel panelCenter = new JPanel();
   private ButtonGroup grupo2 = new ButtonGroup();
   private JTextField jtextfield = new JTextField();
 
@@ -45,11 +46,15 @@ public class VistaSelAlg {
     System.out.println
       ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
     iIOUtils = pIOUtils;
-    vistaPrincipal = vp;
-    inicializarComponentes();   
+    vistaPrincipal = vp;  
   }
 
   public JPanel getPanelComprimir(){
+    panelComprimir.removeAll();
+    panelCenter.removeAll();
+    panelRadioButton.removeAll();
+    grupo2.clearSelection();
+    inicializarComponentes(); 
     return panelComprimir;
  }
 
@@ -57,17 +62,25 @@ public class VistaSelAlg {
 //////////////////////// Metodos de las interfaces Listener
 
   public void actionPerformed_buttonComprimir(ActionEvent event){
-      vistaInfo = new VistaInfo(iIOUtils , true , vistaPrincipal);
-      panelComprimir.removeAll();
-      panelComprimir.add(vistaInfo.getPanelInformacio());
-      iIOUtils.setOutputFile(jtextfield.getText());
-      vistaPrincipal.update();
+    if(!jtextfield.getText().equals("Escriu el nom de sortida que desitges(opcional)")) {
+        iIOUtils.setOutputFile(jtextfield.getText());
+      }
+    else iIOUtils.setOutputFile("");
+
     try{
-      iIOUtils.run();
-    }catch(Exception e){
-        e.printStackTrace();
-    }
+        iIOUtils.run();
+      }catch(Exception e){
+          e.printStackTrace();
+      }
+
+    vistaInfo = new VistaInfo(iIOUtils , true , vistaPrincipal);
+    panelComprimir.removeAll();
+    panelComprimir.add(vistaInfo.getPanelInformacio());     
+    vistaPrincipal.update();
+
+    
     System.out.println("boto Comprimir");
+    
   }
 
   public void actionPerformed_RadioButtonAlg0(ActionEvent event){
@@ -160,11 +173,21 @@ public void actionPerformed_jtextfield(FocusEvent event){
 
 
   private void inicializarComponentes() {
+    
     inicializar_radioButtonComp();
     inicialitzar_panelRadioButtonComp();
+    inicializar_panelCenter();
     inicializar_jtextfield();
     inicializar_panelComprimir();
     asignar_listenersComponentes();
+  }
+
+  private void inicializar_panelCenter(){
+
+    panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
+    panelCenter.add(panelRadioButton);
+    panelCenter.add(jtextfield);
+    panelCenter.add(Box.createRigidArea(new Dimension(0,500)));
   }
 
   private void inicializar_radioButtonComp(){
@@ -187,16 +210,17 @@ public void actionPerformed_jtextfield(FocusEvent event){
     panelComprimir.setLayout(new BorderLayout());
     // Paneles
     panelComprimir.add(new JLabel("Selecciona Algoritme de Compressió"), BorderLayout.NORTH);
-    panelComprimir.add(panelRadioButton, BorderLayout.CENTER);
-    panelComprimir.add(jtextfield, BorderLayout.CENTER);
+    panelComprimir.add(panelCenter, BorderLayout.CENTER);
     panelComprimir.add(buttonComprimir, BorderLayout.SOUTH);   
 
   }
   private void inicializar_jtextfield(){
-    jtextfield.setText("Escriu el nom de sortida que desitges");
+    jtextfield.setText("Escriu el nom de sortida que desitges(opcional)");
     jtextfield.setMaximumSize(new Dimension(250, 50));
 
   }
+
+
   
 
 }
