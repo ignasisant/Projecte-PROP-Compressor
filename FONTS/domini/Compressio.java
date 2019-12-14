@@ -15,20 +15,18 @@ class Compressio {
     };
 
     public  String[]  compress(String infile,  String outfile, Integer type) {
-        if (type==0) {
-            String[] info = this.compressFile(infile, outfile);
-            return info;
-        }
-        else { //compressio de carpeta
-            this.compressFolder(infile, outfile);
-        }
-        return null;
+        String[] info = null;
+        if (type==0)   info = this.compressFile(infile, outfile); 
+        else info = this.compressFolder(infile, outfile);
+        
+        return info;
 
     }
 
     private String[] compressFile(String infile,  String outfile) {
         try {
-         
+            String all[] = infile.split("/");
+            String auxname = all[all.length -1];
             String outf = getCompressOutputFile(infile, outfile);
             
             String payload = this.f.llegirFitxer(infile);
@@ -43,7 +41,7 @@ class Compressio {
             
             // ext_comp = f.getExt(infile);
      
-            this.f.writeToFile(algo.getId()+compress, outf);
+            this.f.writeToFile(algo.getId()+"\n"+auxname+"\n"+compress, outf);
            return info;
 
         } catch (Exception e) {
@@ -52,7 +50,7 @@ class Compressio {
         return null;
     }
 
-    private void compressFolder(String infile,  String outfile) {
+    private String[] compressFolder(String infile,  String outfile) {
         try {
             String outf = getCompressOutputFile(infile, outfile);
             String[] dirs = infile.split("/");
@@ -64,8 +62,9 @@ class Compressio {
             int inSize = 0, outSize = 0;
             this.st.initStats();
             for(int i=0; i < all.length; ++i) {
-                out += "\n"+all[i].substring(ini);
-                System.out.println(all[i]);
+                if(i != 0 ) out+= "\n";
+                out += all[i].substring(ini);
+               // System.out.println(all[i]);
 
                 String payload = this.f.llegirFitxer(all[i]);
                 inSize += payload.length();
@@ -79,9 +78,11 @@ class Compressio {
             outSize = out.length();
             String[] info =  this.st.saveStats(infile,algo.getId(), inSize, outSize);
             //outfile=infile+this.algo.getExtension();
-            this.f.writeToFile(algo.getId()+out, outf);
+            this.f.writeToFile(algo.getId()+"1\n"+out, outf);
+            return info;
         } catch (Exception e) {
             System.out.println(e);
+            return null;
         }
         
 

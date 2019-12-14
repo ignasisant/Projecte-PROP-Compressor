@@ -14,37 +14,45 @@ class Descompressio {
     };
 
     public String[] decompress(String infile,  String outfile, Integer type) {
-        if (type==0) {
-            String[] info =  decompressFile(infile, outfile);
-            return info;
+        String[] info;
+        try {
+        info = this.f.llegirDescomp(infile);
+
+  
+        if (info[0].length()==1) {
+            String[] stats =  this.decompressFile(infile, outfile, info[1], info[2]);
+            return stats;
         }
         else { //decompressio de carpeta
+       
+            String[] stats = this.decompressFolder(infile, outfile, info[0]+"\n"+info[1]+"\n"+info[2]);
+            return stats;
 
         }
-        return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+       
 
     }
 
-    public String[] decompressFile(String infile,  String outfile) {
+    private String[] decompressFile(String infile,  String outfile, String origName, String data) {
         try {
-            // data = Files.readAllBytes(this.path);
-           
-            
-            Vector<String> info;
 
-            info = this.f.llegirDescomp(infile);
             //this.ext_comp = getExtFromId(info.get(0)); aixo ena anira be per quan haguem d'endevinar el algo
-            String outf = getDecompressOutputFile(infile, outfile);
-            String payload = info.get(1);
+            //String outf = getDecompressOutputFile(infile, outfile);
+            if(outfile == "") outfile = origName;
+            String payload =data;
             
             algo.setData(payload);
 
             this.st.initStats();
             
-            String compress = algo.decompress();
-            String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
+            String decompress = this.run();
+            String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),decompress.length());
 
-            this.f.writeToFile(compress, outf);
+            this.f.writeToFile(decompress, outfile);
             return stat;
 
         } catch (Exception e) {
@@ -53,7 +61,50 @@ class Descompressio {
         return null;
 
     }
-    public String getDecompressOutputFile(String infile, String outfile) {
+
+    private String[] decompressFolder(String infile, String outfile, String all) {
+       
+        int ini =  all.indexOf("\n");
+        System.out.println("DESCOMPRESIO!!!!"+ini);
+        all = all.substring(ini+1);
+        int totini=0, totend=0;
+        int fin = all.length();
+        this.st.initStats();
+        
+        while(true) {
+
+            ini =  all.indexOf("\n");
+           
+            String nom = all.substring(0, ini);
+           
+            all = all.substring(ini+1);
+            ini =  all.indexOf("\n");
+            int max = Integer.parseInt(all.substring(0,ini));
+            all = all.substring(ini+1);
+            String payload = all.substring(0,max);
+            totini += payload.length();
+            algo.setData(payload);
+            String decompress = this.run();
+            totend += decompress.length();
+            try {
+            this.f.writeToFile(decompress, "/tmp/"+nom);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            if (max == all.length()) break;
+            all = all.substring(max+1);
+
+            fin = all.length();      
+
+        }
+        String[] stat = this.st.saveStats(infile,algo.getId(),totini,totend);
+        return stat;
+        //String nom = all.substring(0, ini-1);
+
+    }
+
+    private String getDecompressOutputFile(String infile, String outfile) {
         if(outfile == "") {
             outfile = infile.replaceFirst("[.][^.]+$", "")  ;
         } else {
@@ -62,6 +113,9 @@ class Descompressio {
         return outfile;
     }
 
+    private String run() {
+        return this.algo.decompress();
+    }
 
 
 
