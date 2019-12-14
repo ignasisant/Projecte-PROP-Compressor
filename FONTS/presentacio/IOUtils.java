@@ -14,6 +14,7 @@ public class IOUtils {
     private int type;
     private Fitxer ctrlDom;
     private VistaPrincipal vistaPrincipal;
+    private String[] stats;
 
     public IOUtils() {
 
@@ -35,17 +36,24 @@ public class IOUtils {
 
     public void run() throws Exception {
         vistaPrincipal.hacerVisible();
-       // if(this.infile.getName() == "") throw new FileNotSelected();
+        //if(this.infile.getName() == "") throw new FileNotSelected();
         //if(this.algoId != 0 && this.algoId != 1 && this.algoId != 2) throw new AlgorithmNotSelected();
         //if(this.action == -1) throw new ActionNotSelected();
 
+
+
+        System.out.println(infile);
+            System.out.println(outfile);
+            System.out.println(type);
+            System.out.println(algoId);
         switch (this.action+(this.type*2)) {
+    
 
             case 0:
-                ctrlDom.compress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.compress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
             case 1:
-                ctrlDom.decompress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.decompress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
 
             // case 2:
@@ -82,5 +90,10 @@ public class IOUtils {
     public void setAlgorithm(int algo) {
         this.algoId = algo;
     }
+
+    public String[] getStats(){
+        return stats;
+    }
+
     
 }

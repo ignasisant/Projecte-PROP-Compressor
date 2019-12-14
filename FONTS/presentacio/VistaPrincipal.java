@@ -45,8 +45,6 @@ public class VistaPrincipal {
 
 
   public VistaPrincipal (IOUtils pIOUtils) {
-    System.out.println
-      ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
     iIOUtils = pIOUtils;
     inicializarComponentes();
     vistaSelAlg = new VistaSelAlg(iIOUtils, this);
@@ -57,8 +55,6 @@ public class VistaPrincipal {
   }
 
   public void hacerVisible() {
-    System.out.println
-      ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
     frameVista.pack();
     frameVista.setVisible(true);
   }
@@ -100,7 +96,6 @@ public class VistaPrincipal {
         VistaStatistics vistaStatistics = new VistaStatistics(iIOUtils, this);
         panelContenidos.add(vistaStatistics.getPanelStatistics() );
       }
-      System.out.println("boto continuar");
       update();
   }
 
@@ -128,6 +123,7 @@ public class VistaPrincipal {
             volverHome();
             return ;
         }
+        iIOUtils.setOutputFile("");
         try{
             iIOUtils.run();
         }catch(Exception e){
@@ -151,7 +147,6 @@ public class VistaPrincipal {
             
             System.out.print(fileChooser.getSelectedFile().getName());
         }
-        System.out.println("file chooser");
     }
 
    

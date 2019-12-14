@@ -29,8 +29,6 @@ public class VistaCompare {
 
 
   public VistaCompare () {
-    System.out.println
-      ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
     inicializarComponentes();
   }
   

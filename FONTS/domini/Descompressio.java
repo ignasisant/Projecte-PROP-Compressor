@@ -29,24 +29,21 @@ class Descompressio {
         try {
             // data = Files.readAllBytes(this.path);
            
-           
+            
             Vector<String> info;
 
             info = this.f.llegirDescomp(infile);
             //this.ext_comp = getExtFromId(info.get(0)); aixo ena anira be per quan haguem d'endevinar el algo
             String outf = getDecompressOutputFile(infile, outfile);
             String payload = info.get(1);
-
             
-
             algo.setData(payload);
-           
 
             this.st.initStats();
+            
             String compress = algo.decompress();
             String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
-            
             this.f.writeToFile(compress, outf);
             return stat;
 

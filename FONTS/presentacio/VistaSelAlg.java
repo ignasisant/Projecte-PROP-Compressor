@@ -71,7 +71,7 @@ public class VistaSelAlg {
       }catch(Exception e){
           e.printStackTrace();
       }
-
+      System.out.println("fins aqui va be");
     vistaInfo = new VistaInfo(iIOUtils , true , vistaPrincipal);
     panelComprimir.removeAll();
     panelComprimir.add(vistaInfo.getPanelInformacio());     

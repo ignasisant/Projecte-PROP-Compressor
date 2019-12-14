@@ -73,6 +73,7 @@ public class VistaStatistics {
   }
 
   private void incializar_panelLabels(){
+    
       panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.PAGE_AXIS));
       panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
       panelLabels.add(new JLabel("Nom Arxiu: "));

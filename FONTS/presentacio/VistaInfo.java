@@ -31,15 +31,13 @@ public class VistaInfo {
   // Resto de atributos
  
   private VistaPrincipal vistaPrincipal;
-
+  private String[] stats;
   Boolean comprimir;
 
 //////////////////////// Constructor y metodos publicos
 
 
   public VistaInfo (IOUtils pIOUtils, Boolean c, VistaPrincipal vp) {
-    System.out.println
-      ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
     comprimir=c;
     iIOUtils = pIOUtils;
     vistaPrincipal = vp;
@@ -100,18 +98,22 @@ public class VistaInfo {
   }
 
   private void incializar_panelLabels(){
-      panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.PAGE_AXIS));
-      panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
-      panelLabels.add(new JLabel("Nom Arxiu: "));
-      panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
-      panelLabels.add(new JLabel("Pes Inicial:  "));
-      panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
-      panelLabels.add(new JLabel("Pes Final: "));
-      panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
-      if(comprimir) panelLabels.add(new JLabel("Grau Compressió: "));
-      else panelLabels.add(new JLabel("Augment Pes: "));
-      panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
-      panelLabels.add(new JLabel("Temps: "));
+    stats = iIOUtils.getStats();
+    System.out.println(stats[0]);
+    panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.PAGE_AXIS));
+    panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
+    panelLabels.add(new JLabel("Nom Arxiu: " + stats[0]));
+    panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
+    if(stats[1].equals("0"))panelLabels.add(new JLabel("Algoritme: LZ78" ));
+    else if(stats[1].equals("1"))panelLabels.add(new JLabel("Algoritme: LZW" ));
+    else panelLabels.add(new JLabel("Algoritme: JPEG" ));
+    panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
+    panelLabels.add(new JLabel("Pes Inicial:  "+stats[2]));
+    panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
+    panelLabels.add(new JLabel("Pes Final: "+stats[3]));
+    panelLabels.add(new JLabel("Grau : "+stats[4]));
+    panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
+    panelLabels.add(new JLabel("Temps: "+stats[5]));
   }
 
 

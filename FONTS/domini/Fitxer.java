@@ -28,7 +28,7 @@ public class Fitxer {
 
     public String[] decompress(String infile, String outfile, int type, int algoId) {
         this.decomp.setAlgorithm(algoId);
-       return  this.decomp.decompress(infile, outfile, type);
+        return  this.decomp.decompress(infile, outfile, type);
 
     }
 
