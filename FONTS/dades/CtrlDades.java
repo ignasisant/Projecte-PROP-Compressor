@@ -34,15 +34,17 @@ public class CtrlDades {
 
         public void write(String payload,  String fileName) throws Exception{ 
 
-            File file = new File(fileName);
-            file.getParentFile().mkdirs();
-        
+            if(fileName.indexOf("/")!= -1 ){
+                File file = new File(fileName);              
+                file.getParentFile().mkdirs();
+            }
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(payload);
             writer.close();
      
 
         }
+        
 
         public String getExt(String file){
             File f = new File(file);

@@ -50,8 +50,9 @@ class Descompressio {
             this.st.initStats();
             
             String decompress = this.run();
+            
             String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),decompress.length());
-
+           
             this.f.writeToFile(decompress, outfile);
             return stat;
 
@@ -65,7 +66,6 @@ class Descompressio {
     private String[] decompressFolder(String infile, String outfile, String all) {
        
         int ini =  all.indexOf("\n");
-        System.out.println("DESCOMPRESIO!!!!"+ini);
         all = all.substring(ini+1);
         int totini=0, totend=0;
         int fin = all.length();
