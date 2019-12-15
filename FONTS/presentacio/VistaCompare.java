@@ -20,6 +20,11 @@ public class VistaCompare {
   private JFrame frameVista = new JFrame();
   private JPanel panelContenidos = new JPanel();
   private JButton buttonVolver = new JButton("Volver");
+  private JTextArea jtextOriginal = new JTextArea();
+  private JTextArea jtextTractat = new JTextArea();
+  JScrollPane jscrollOriginal = new JScrollPane(jtextOriginal);
+  JScrollPane jscrollTractat = new JScrollPane(jtextOriginal);
+
     
 
 
@@ -69,6 +74,12 @@ private void actionPerformed_buttonVolver(ActionEvent event){
 
   private void inicializar_panelContenidos(){
       panelContenidos.setLayout(new BorderLayout());
+      panelContenidos.add(new JLabel("Original vs Tractat:"),BorderLayout.NORTH);
+      JPanel panelCentre = new JPanel();
+      panelCentre.setLayout(new BoxLayout(panelCentre, BoxLayout.X_AXIS));
+      panelCentre.add(jscrollOriginal);
+      panelCentre.add(jscrollTractat);
+      panelContenidos.add(panelCentre, BorderLayout.CENTER);
       panelContenidos.add(buttonVolver, BorderLayout.SOUTH);
   }
 

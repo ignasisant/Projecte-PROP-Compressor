@@ -18,7 +18,7 @@ import java.util.*;
 public class VistaPrincipal {
 
 
-  // Controlador de presentacion
+  // Controlador de presentacJScrollPane sp = new JScrollPane(ta);
   private IOUtils iIOUtils;
 
   // Componentes de la interficie grafica
@@ -29,17 +29,21 @@ public class VistaPrincipal {
   private JPanel panelRadioButton = new JPanel();
   private JButton buttonContinuar = new JButton("Continuar");
   private JFileChooser fileChooser = new JFileChooser();
+  private JFileChooser fileChooser2 = new JFileChooser();
   private JPanel panelMenuPrincipal = new JPanel();
   private JPanel panelCenter = new JPanel();
+  private JButton buttonInput = new JButton("Seleccionar arxiu");
+  private JButton buttonOutput = new JButton("Selecciona ubicació sortida");
+  private JLabel labelInput = new JLabel("Input no seleccionat");
+  private JLabel labelOutput = new JLabel("Output no seleccionat");
+  private JPanel panel1 = new JPanel();
+  private JPanel panel2 = new JPanel();
 
   //Cmprimir
   private VistaSelAlg vistaSelAlg;
   
-
   // Resto de atributos
   int selection;
-
-
 
 //////////////////////// Constructor y metodos publicos
 
@@ -47,7 +51,7 @@ public class VistaPrincipal {
   public VistaPrincipal (IOUtils pIOUtils) {
     iIOUtils = pIOUtils;
     inicializarComponentes();
-    vistaSelAlg = new VistaSelAlg(iIOUtils, this);
+    
     
   }
 
@@ -87,8 +91,16 @@ public class VistaPrincipal {
   public void actionPerformed_buttonContinuar(ActionEvent event){
 
       panelContenidos.removeAll();
-      if(opcio[0].isSelected()) panelContenidos.add(vistaSelAlg.getPanelComprimir());
+      if(opcio[0].isSelected()) {
+          vistaSelAlg = new VistaSelAlg(iIOUtils, this);
+          panelContenidos.add(vistaSelAlg.getPanelComprimir());
+      }
       else if (opcio[1].isSelected()) {
+        try{
+            iIOUtils.run();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         VistaInfo vistaInfo = new VistaInfo(iIOUtils, false, this);
         panelContenidos.add(vistaInfo.getPanelInformacio() );
       }
@@ -101,35 +113,9 @@ public class VistaPrincipal {
 
     public void actionPerformed_RadioButtonOpcio0(ActionEvent event){
         iIOUtils.setAction(0);
-        selection = fileChooser.showOpenDialog(null);
     }
     public void actionPerformed_RadioButtonOpcio1(ActionEvent event){
         iIOUtils.setAction(1);
-        selection = fileChooser.showOpenDialog(null);
-        String extension = "";
-        int i = fileChooser.getSelectedFile().getName().lastIndexOf('.');
-        if (i > 0) {
-            extension = fileChooser.getSelectedFile().getName().substring(i+1);
-        }
-        if (extension.equals("lz78")) iIOUtils.setAlgorithm(0);
-        else if(extension.equals("lzw")) iIOUtils.setAlgorithm(1);
-        else if(extension.equals("jpeg")) iIOUtils.setAlgorithm(2);
-        else {
-            String message;
-            if(!extension.equals("") ) message = "no es pot descomprimir l'arxiu amb extensió " + extension;
-            else message = "no es pot descomprimir el que has seleccionat";
-            JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
-            JOptionPane.ERROR_MESSAGE);
-            volverHome();
-            return ;
-        }
-        iIOUtils.setOutputFile("");
-        try{
-            iIOUtils.run();
-        }catch(Exception e){
-            e.printStackTrace();
-
-        }
     }
     public void actionPerformed_RadioButtonOpcio2(ActionEvent event){
         
@@ -138,15 +124,57 @@ public class VistaPrincipal {
     public void actionPerformed_fileChooser(ActionEvent event){
         if (selection == JFileChooser.APPROVE_OPTION){
             try{
-            iIOUtils.setInputFile(fileChooser.getSelectedFile().getAbsolutePath());
-            if(fileChooser.getSelectedFile().isDirectory()) iIOUtils.setType(1);
-            else iIOUtils.setType(0);
+                iIOUtils.setInputFile(fileChooser.getSelectedFile().getAbsolutePath());
+                if(fileChooser.getSelectedFile().isDirectory()) iIOUtils.setType(1);
+                else iIOUtils.setType(0);
+                labelInput.setText(fileChooser.getSelectedFile().getAbsolutePath());
+                if(opcio[1].isSelected()){
+                    String extension = "";
+                    int i = fileChooser.getSelectedFile().getName().lastIndexOf('.');
+                    if (i > 0) {
+                        extension = fileChooser.getSelectedFile().getName().substring(i+1);
+                    }
+                    if (extension.equals("lz78")) iIOUtils.setAlgorithm(0);
+                    else if(extension.equals("lzw")) iIOUtils.setAlgorithm(1);
+                    else if(extension.equals("jpeg")) iIOUtils.setAlgorithm(2);
+                    else {
+                        String message;
+                        if(!extension.equals("") ) message = "no es pot descomprimir l'arxiu amb extensió " + extension;
+                        else message = "no es pot descomprimir el que has seleccionat";
+                        JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                        JOptionPane.ERROR_MESSAGE);
+                        volverHome();
+                        return ;
+                    }
+                }
+        
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            buttonContinuar.setEnabled(true);
+            System.out.print(fileChooser.getSelectedFile().getName());
+        }
+    }
+    public void actionPerformed_fileChooser2(ActionEvent event){
+        if (selection == JFileChooser.APPROVE_OPTION){
+            try{
+            iIOUtils.setOutputFile(fileChooser2.getSelectedFile().getAbsolutePath());
+            labelOutput.setText(fileChooser2.getSelectedFile().getAbsolutePath());
+            
             }catch(Exception e){
                 e.printStackTrace();
             }
             
-            System.out.print(fileChooser.getSelectedFile().getName());
+            System.out.print(fileChooser2.getSelectedFile().getName());
         }
+    }
+
+    public void actionPerformed_buttonInput(ActionEvent event){
+        if(!opcio[2].isSelected()) selection = fileChooser.showOpenDialog(null);
+    }
+
+    public void actionPerformed_buttonOutput(ActionEvent event){
+        if(!opcio[2].isSelected()) selection = fileChooser2.showOpenDialog(null);
     }
 
    
@@ -155,7 +183,6 @@ public class VistaPrincipal {
 
     private void asignar_listenersComponentes() {
 
-        // Listeners para los botones
         buttonContinuar.addActionListener(
             new ActionListener(){
                 public void actionPerformed (ActionEvent event){
@@ -187,8 +214,6 @@ public class VistaPrincipal {
                 }
             }
         );
-    
-        // Listeners para el selector de archivo
 
         fileChooser.addActionListener(
             new ActionListener(){
@@ -197,7 +222,30 @@ public class VistaPrincipal {
                 }
             }
         );
-        // Listeners para el resto de componentes
+
+        fileChooser2.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    actionPerformed_fileChooser2(event);
+                }
+            }
+        );
+         
+        buttonInput.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    actionPerformed_buttonInput(event);
+                }
+            }
+        );
+
+        buttonOutput.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    actionPerformed_buttonOutput(event);
+                }
+            }
+        );
 
     }
 
@@ -207,7 +255,6 @@ public class VistaPrincipal {
     
     inicializar_radioButton();
     inicializar_panelRadioButton();
-    inicializar_panelCenter();
     inicializar_panelMenuPrincipal();
     inicializar_panelContenidos();
     inicializar_fileChooser();
@@ -215,9 +262,8 @@ public class VistaPrincipal {
     asignar_listenersComponentes();
   }
   private void inicializarComponentes2() {
-    inicializar_radioButton(); //per defecte veure estadistiques
+    inicializar_radioButton(); 
     inicializar_panelRadioButton();
-    inicializar_panelCenter();
     inicializar_panelMenuPrincipal();
     inicializar_panelContenidos();
     inicializar_fileChooser();
@@ -225,16 +271,13 @@ public class VistaPrincipal {
     asignar_listenersComponentes();
   }
 
+
   private void inicializar_frameVista() {
-    // Tamanyo
     frameVista.setMinimumSize(new Dimension(700,400));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
     frameVista.setResizable(false);
-    // Posicion y operaciones por defecto
     frameVista.setLocationRelativeTo(null);
     frameVista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    // Se agrega panelContenidos al contentPane (el panelContenidos se
-    // podria ahorrar y trabajar directamente sobre el contentPane)
     JPanel contentPane = (JPanel) frameVista.getContentPane();
     contentPane.add(panelContenidos);
   }
@@ -245,11 +288,11 @@ public class VistaPrincipal {
   }
 
   private void inicializar_panelMenuPrincipal() {
-    // Layout
+    buttonContinuar.setEnabled(false);
     panelMenuPrincipal.setLayout(new BorderLayout());
-    // Paneles
     panelMenuPrincipal.add(new JLabel("Selecciona una opció"), BorderLayout.NORTH);
-    panelMenuPrincipal.add(panelRadioButton, BorderLayout.CENTER);
+    inicializar_panelCenter();
+    panelMenuPrincipal.add(panelCenter, BorderLayout.CENTER);
     panelMenuPrincipal.add(buttonContinuar, BorderLayout.SOUTH);
   }
 
@@ -273,15 +316,34 @@ public class VistaPrincipal {
   }
 
   private void inicializar_fileChooser(){
+    iIOUtils.setOutputFile("");
     fileChooser.setSelectedFile(null);
     fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    fileChooser2.setSelectedFile(null);
+    fileChooser2.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
   }
 
   private void inicializar_panelCenter(){
-    panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
+    panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.PAGE_AXIS));
     panelCenter.add(panelRadioButton);
+    panelCenter.add(Box.createRigidArea(new Dimension(0,5)));
+
+    panel1.setLayout(new BoxLayout(panel1,BoxLayout.X_AXIS )  );
+    panel1.add(buttonInput);
+    panel1.add(Box.createRigidArea(new Dimension(5,0)));
+    panel1.add(labelInput);
+
+    panelCenter.add(panel1);
+    panelCenter.add(Box.createRigidArea(new Dimension(0,5)));
+
+    panel2.setLayout(new BoxLayout(panel2,BoxLayout.X_AXIS )  );
+    panel2.add(buttonOutput);
+    panel2.add(Box.createRigidArea(new Dimension(5,0)));
+    panel2.add(labelOutput);
+    panelCenter.add(panel2);
     panelCenter.add(Box.createRigidArea(new Dimension(0,500)));
-    
+
+  
 
   }
 
