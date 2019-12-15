@@ -43,9 +43,9 @@ public class IOUtils {
 
 
         System.out.println(infile);
-            System.out.println(outfile);
-            System.out.println(type);
-            System.out.println(algoId);
+        System.out.println(outfile);
+        System.out.println(type);
+        System.out.println(algoId);
         switch (this.action+(this.type*2)) {
     
 
@@ -57,10 +57,10 @@ public class IOUtils {
                 break;
 
             case 2:
-                ctrlDom.compress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.compress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
             case 3:
-                ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
  
         }
