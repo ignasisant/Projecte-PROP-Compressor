@@ -24,10 +24,14 @@ private String magicNum;
    private Vector<Color> imatge;
 
    public Imatge(){
-
-   }
+       imatge = new Vector<Color>(); // Colorets
+    }
+    public Imatge(int size){
+        imatge = new Vector<Color>(size); // Colorets
+    }
 
    public Imatge (String path) throws IOException {
+       imatge = new Vector<Color>(); // Colorets
        creaImatge(path);
    }
 
@@ -67,7 +71,6 @@ private String magicNum;
        // System.out.println(maxVal);
 
        DataInputStream din = new DataInputStream(fin); // Inicialitzo per als shortsprivate  String magicNum;
-       imatge = new Vector<Color>(); // Colorets
        imatge.setSize(alt * ample);
        if (maxVal >= 256) { // Cada valor de Color son dos bytes
            int R, G, B; // Els bytes entren per triades
@@ -137,5 +140,9 @@ private String magicNum;
     }
     public Vector<Color> getImatge(){
         return this.imatge;
+    }
+
+    public void setImatge(Vector<Color> im) {
+        this.imatge = im;
     }
 }

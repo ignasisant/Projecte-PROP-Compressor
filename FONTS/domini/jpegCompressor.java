@@ -137,7 +137,6 @@ public class jpegCompressor extends jpeg {
        }
    }
 
-   @Override
    protected void huffman() {
        Y = new Vector<Integer>();
        Cr = new Vector<Integer>();
@@ -347,7 +346,7 @@ public class jpegCompressor extends jpeg {
        // this.DCTilu = imatge.getDTCblocks("Y");
        // this.DCTcr = imatge.getDCTblocks("Cr");
        // this.DCTcb = imatge.getDCTblocks("Cb");
-       return  +  huffcoder.encode(bigVector);
+       return imatge.getAmple() + " " + imatge.getAlt() + '\n' +  huffcoder.encode(bigVector); //cacho string
 
    }
 

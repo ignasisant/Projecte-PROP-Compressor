@@ -26,7 +26,7 @@ public class jpegDecompressor extends jpeg {
             al += aux[it];
             it++;
         }
-        imatge = new Imatge();
+        imatge = new Imatge(Integer.parseInt(am)*Integer.parseInt(al));
         imatge.setAmple(Integer.parseInt(am));
         imatge.setAlt(Integer.parseInt(al));
         HuffmanTree huff = new HuffmanTree();
@@ -56,14 +56,14 @@ public class jpegDecompressor extends jpeg {
 
    @Override
    protected void operaYCbCr(){
-      for (Color c : imatge) {
-           double Y = (double) c.r;
-           double Cb = (double) c.g;
-           double Cr = (double) c.b;
+      for (Color c : imatge.getImatge()) {
+           double Y = (double) c.getR();
+           double Cb = (double) c.getG();
+           double Cr = (double) c.getB();
 
-           c.r = (int) (Y + 1.40200 * (Cr - 0x80));
-           c.g = (int) (Y - 0.34414 * (Cb - 0x80) - 0.71414 * (Cr - 0x80));
-           c.b = (int) (Y + 1.77200 * (Cb - 0x80));
+           c.setR((int) (Y + 1.40200 * (Cr - 0x80)));
+           c.setG((int) (Y - 0.34414 * (Cb - 0x80) - 0.71414 * (Cr - 0x80)));
+           c.setB((int) (Y + 1.77200 * (Cb - 0x80)));
        }
 
    }
@@ -92,17 +92,17 @@ public class jpegDecompressor extends jpeg {
    }
 
 
-   private Vector<jpeg.Color> getImageArray(){ //Falta repassar aqui.
-       Vector <jpeg.Color> res = new Vector<jpeg.Color>();
-       res.setSize(alt*ample);
+   private Vector<Color> getImageArray(){ //Falta repassar aqui.
+       Vector <Color> res = new Vector<Color>();
+       res.setSize(imatge.getAlt()*imatge.getAmple());
        int i = 0;
        int j = 0;
-       int ms = ample/8; //nombre de matrius que hi ha per fila
+       int ms = imatge.getAmple()/8; //nombre de matrius que hi ha per fila
        int matriu = 0;// matriu a la que accedeixo
        int salt = 0; // per poder omplir les matrius de baix
-       for (int fila = 0; fila < alt; fila++) {
-           for (int col = 0; col < ample; col++) {
-               jpeg.Color coloret = new jpeg.Color(0,0,0);
+       for (int fila = 0; fila < imatge.getAlt(); fila++) {
+           for (int col = 0; col < imatge.getAmple(); col++) {
+               Color coloret = new Color(0,0,0);
                // if (col >= ample || fila >= alt) {
                //     coloret = lastColoret; // Per tenir l'ultim color si no coincideix
                // } else {
@@ -119,10 +119,10 @@ public class jpegDecompressor extends jpeg {
                // DCTilu[matriu + salt][i][j] = coloret.r - 127;
                // DCTcr[matriu + salt][i][j] = coloret.g - 127;
                // DCTcb[matriu + salt][i][j] = coloret.b - 127;
-               coloret.r = DCTilu[matriu + salt][i][j] + 127; //Y
-               coloret.g = DCTilu[matriu + salt][i][j] + 127; //Cb
-               coloret.b = DCTilu[matriu + salt][i][j] + 127; //Cr
-               res.set(fila*ample + col, coloret);
+               coloret.setR(DCTilu[matriu + salt][i][j] + 127);  //Y
+               coloret.setG(DCTilu[matriu + salt][i][j] + 127); //Cb
+               coloret.setB(DCTilu[matriu + salt][i][j] + 127); //Cr
+               res.set(fila*imatge.getAmple() + col, coloret);
                DCTilu[matriu+salt][i][j] = 0; //Això és per comprovar que funciona bé l'algoritme.
                j++;
                if (j == 8) {
@@ -139,8 +139,8 @@ public class jpegDecompressor extends jpeg {
 
    @Override
    protected void transformBlocks(){
-       imatge = new Vector<jpeg.Color>();
-       imatge.setSize(ample*alt); //formato el tamany del vector de colors
+//       imatge = new Imatge();
+//       imatge.setSize(ample*alt); //formato el tamany del vector de colors
        DCTilu = new int[DCTiluTrans.length][8][8];
        DCTcb = new int[DCTiluTrans.length][8][8];
        DCTcr = new int[DCTiluTrans.length][8][8];
@@ -172,7 +172,7 @@ public class jpegDecompressor extends jpeg {
            System.out.println();
        }
        //Aquí ja tenim les matrius transformades. Procedim a la suma i a colocar
-       imatge = getImageArray(); //Obtinc la imatge, només em falta parsejarla a PPM
+       imatge.setImatge(getImageArray()); //Obtinc la imatge, només em falta parsejarla a PPM
 
 
    }
@@ -299,7 +299,7 @@ public class jpegDecompressor extends jpeg {
        operaYCbCr();
        String fin = "";
        try {
-           fin = creaImatge("out.ppm");
+           creaImatge("out.ppm");
        } catch (IOException e) {
            e.printStackTrace();
        }
@@ -307,7 +307,7 @@ public class jpegDecompressor extends jpeg {
    }
 
     @Override
-    protected String creaImatge(String path) throws IOException {
+    protected void creaImatge(String path) throws IOException {
         //Tot aixo cal canviar-ho encara que va bé pel debugging
         String header = "P6\n" + Integer.toString(imatge.getAmple()) + " " + Integer.toString(imatge.getAlt()) + "\n255\n";
         FileOutputStream Hd = null;  //cal canviar-ho perque no estigui hardcoded
@@ -321,9 +321,9 @@ public class jpegDecompressor extends jpeg {
         }
         Hf.close();
 
-        String result = "";
-        result += header;
-        
+//        String result = "";
+//        result += header;
+//        return result;
 
     }
 
