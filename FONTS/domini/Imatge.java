@@ -35,8 +35,62 @@ private String magicNum;
        creaImatge(path);
    }
 
+    public void creaImatgeDePPM(String img){
+       System.out.println(img.length());
+       int it = 0;
+       char[] imag = img.toCharArray();
+       String aux = "";
+       while(imag[it] != '\n'){  //obtinc el magic nombre
+           aux += imag[it];
+           it++;
+       }
+       it ++; //posat l primer int de despres
+        magicNum = aux;
+        if (magicNum != "P6"){
+            //llança excepció
+        }
+        aux = "";
+        while (imag[it] != ' '){
+            aux += imag[it];
+            it ++;
+        }
+        it++;
+        ample = Integer.parseInt(aux);
+        aux = "";
+        while(imag[it] != '\n'){  //obtinc el magic nombre
+            aux += imag[it];
+            it++;
+        }
+        it ++; //posat l primer int de despres
+        alt = Integer.parseInt(aux);
+        aux = "";
+        while(imag[it] != '\n'){  //obtinc el magic nombre
+            aux += imag[it];
+            it++;
+        }
+        it ++; //posat l primer int de despres
+        if (aux != "255"){
+            //llança excepcio
+        }
+        String contingut = img.substring(it);
+        System.out.println(magicNum);
+        System.out.println(alt);
+        System.out.println(ample);
+        System.out.println(aux);
+        System.out.println(it);
+        System.out.println("Printo Imatge \n" + contingut);
+        char[] bytes = contingut.toCharArray();
+        System.out.println("Nombre de chars de la imatge: " + bytes.length); //Aixo no dona i no se perquè
+        imatge = new Vector<Color>(alt*ample);
+        for (int i = 0; i < bytes.length; i+=3){  //tenir molt en compte que un char son dos bytes!!!! jo només en vull un.
+            Color c = new Color(byte[i], )
+             imatge.setElementAt();
+        }
 
-   private void creaImatge(String path) throws IOException {
+    }
+
+
+   public void creaImatge(String path) throws IOException {
        // String path = "./boxes_1.ppm";
        File image = new File(path);
        if (!image.exists()) {
@@ -96,7 +150,7 @@ private String magicNum;
        }
        din.close();
        br.close();
-
+        System.out.println(imatge.size());
    }
 
    public Color getColorPerIndex(int index){

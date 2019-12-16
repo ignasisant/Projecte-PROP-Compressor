@@ -14,7 +14,12 @@ public class Fitxer {
 
             String payload = "";
             int i;
-            while ((i = fr.read()) != -1) payload += (char) i;
+            int cont = 0;
+            while ((i = fr.read()) != -1){
+                payload += (char) i;
+                cont++;
+                System.out.println((int)i);
+            }
             fr.close();
 
             return payload;
