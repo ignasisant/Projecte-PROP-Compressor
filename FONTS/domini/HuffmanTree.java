@@ -116,7 +116,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
 
 
 
-    private Integer charsToInteger(String in){
+    private Integer charsToInteger(String in){ //EPA I ELS NEGATIUS KLK?
 //        byte[] array = new byte[in.length()];
 ////        for (int i = 0; i < in.length(); i++ ){
 ////            array[i] = (byte) in.toCharArray()[i];
@@ -127,8 +127,12 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         int result = 0;
         for(int i=numbers.length - 1; i>=0; i--)
             if(numbers[i]=='1')
-                result += Math.pow(2, (numbers.length-i - 1));
-        return result;
+                result += Math.pow(2, (numbers.length-i - 1));       
+        if (in.length() <= 16){
+            return (int)(short)result; //es fa aquest triquinyelismo perque puguin contar bé els negatius.
+        } else {
+            return result;
+        }
     }
 
 
@@ -137,7 +141,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         if (n.getLeft() == null && n.getRight() == null) {
             //Estic en una fulla
             traductor.put(n.getNombre(), colocar); //Per cada nombre que hi ha tinc la seva traducció
-            System.out.println("Fulla!!");
+            //System.out.println("Fulla!!");
             //Coses a fer per guardar l'arbre
             Arbre = Arbre + '1'; //Guardo que es una fulla
             String numero = intToChars(n.getNombre(), 16); //el creo amb un tamany de 16 bits
@@ -153,11 +157,11 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         }
         Arbre = Arbre+'0';  //Guardo que es una arrel
         if (n.getLeft() != null) {
-            System.out.println("Esquerra");
+            //System.out.println("Esquerra");
             creatraductor(n.getLeft(), colocar + '0'); //Shifto. He ficat un zero
         }
         if (n.getRight() != null) {
-            System.out.println("Dreta");
+            //System.out.println("Dreta");
             creatraductor(n.getRight(), colocar + '1'); //Shifto i he fet la or amb un 1 per tant he ficat un u al final
         }
     }
@@ -213,14 +217,14 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         int control = 0;
         String pedazoString = creaPedazoString(input);
         llarg = pedazoString.length();
-        System.out.println("Aquest es només el contingut traduit: " + pedazoString);
+        //System.out.println("Aquest es només el contingut traduit: " + pedazoString);
         String l = intToChars(llarg,32);
         StringBuilder result = new StringBuilder(l + creaPedazoString(input) + Arbre); //He obtingut un string ja amb el codi de huffmann, li sumo l'arbre i al davant el sey tamany en 32 bits
         while (result.length()%8 != 0){  //en aquets cas
             result.append('0');
-            System.out.println("Ara l'string te " + result.length() + " caracters");
+            //System.out.println("Ara l'string te " + result.length() + " caracters");
         }
-        System.out.println("Aquest es el contingut traduit més l'arbre més relleno " + result);
+        //System.out.println("Aquest es el contingut traduit més l'arbre més relleno " + result);
         //Això em passa un string a una colla de bytes
         //D'aquí a baix està comprovat el seu funcionament
         //String debugging = ""; //Aixo es pel debugging i caldrà borrar-ho q flipes
@@ -236,7 +240,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
                     a = (char) ((a << 1) | 1);
                 }
 //                debugging += res[x];
-//                System.out.println("Acabo d'afegir l'element " + x +"/159");
+//                //System.out.println("Acabo d'afegir l'element " + x +"/159");
 //                System.out.println(debugging);
 //                System.out.println("Ara l'string te " + debugging.length() + " caracters");
             }
@@ -244,32 +248,33 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
             //System.out.println("Això és debugging " + debugging);
             comprimit+=a; //vaig fincant els chars
         }
-        System.out.println("Acabo el codificador ficant  " + comprimit.length() + " bytes.");
+        //System.out.println("Acabo el codificador ficant  " + comprimit.length() + " bytes.");
         return comprimit;  // Y+Cb+Cr+Arbre+relleno
 
     }
 
     private Node muntArbre(char[] arbre, int[] n){  //he de fer triquinyeles per passar el valor com a referencia
         Node node = new Node();
-        System.out.println(arbre[n[0]]);
-        System.out.println(n[0]);
+        //System.out.println(arbre[n[0]]);
+        //System.out.println(n[0]);
         if (arbre[n[0]] == '1'){ //és una fulla
-            System.out.println("Fulla!!");
+            //System.out.println("Fulla!!");
             n[0] ++;
             //Aqui comença el nombre a col.locar
             StringBuilder nombre = new StringBuilder();
             int ini = n[0];
-            for (;n[0]<ini+17;n[0]++) {
+            for (;n[0]<ini+16;n[0]++) {
                 nombre.append(arbre[n[0]]);
             }
             node.setNombre(charsToInteger(nombre.toString()));
+            //System.out.println("he aconseguit el nombre " + node.getNombre());
 
 
         } else {  //vigilar aqui, java torna a comparar? com arreglar això
-            System.out.println("Esquerra");
+            //System.out.println("Esquerra");
             n[0]++;
             node.setLeft(muntArbre(arbre,n));
-            System.out.println("Dreta");
+            //System.out.println("Dreta");
             n[0]++;
             node.setRight(muntArbre(arbre,n));
 
@@ -303,29 +308,55 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
     }
 
 
-    public Vector<Integer> muntaStrucura(){
+    public Vector<Integer> muntaStrucura( ){
         Vector<Integer> result = new Vector<Integer>();
-        Node lab = root;
+        Node node = root;
         char[] joc = comprimit.toCharArray();
-        for (int i = 0; i < joc.length; i++){
-            if (lab.getLeft() == null && lab.getRight() == null){
-                //Estic a una fulla
-                result.add(lab.getNombre());
-                lab = root;
-            } else { //estic en una branca
-                if (joc[i] == 0){ //cal anar a l'esquerra
-                    lab = lab.getLeft();
-                } else { //cal anar a la dreta
-                    lab = lab.getRight();
+        for (char i : joc ){
+            if (i == '0'){ //cal mirar a l'esquerra
+                if (node.getLeft().getLeft() == null && node.getLeft().getRight() == null){ //és una fulla
+                    result.add(node.getLeft().getNombre());
+                    //System.out.println("Introdueixo " + result);
+                    node = root;
+                } else {
+                    node = node.getLeft();
+                }
+            } else { //cal mirar a la dreta 
+                if (node.getRight().getLeft() == null && node.getRight().getRight() == null){ //comprovo si el de la dreta es una fulla
+                    result.add(node.getRight().getNombre());
+                    node = root;
+                    //System.out.println("Introdueixo " + result);
+                } else {
+                    node = node.getRight();
                 }
             }
         }
-
         return result;
+    
+        
+        // int elqtoca = joc[it[0]];
+        // if (elqtoca == 0){ //toca mirar a l'esquerra
+        //     if (node.getLeft().getLeft() == null && node.getLeft().getRight() == null){ //comprovo si el de l'esquerra es una fulla
+        //         result.add(node.getLeft().getNombre()); //obtinc el nombre
+        //         it[0]++;
+        //     } else {
+        //         it[0]++;
+        //         muntaStrucura(node.getLeft(), joc, it, result);
+        //     }
+        // } else { //toca mirar a la dreta
+        //     if (node.getRight().getLeft() == null && node.getLeft().getRight() == null){ //comprovo si el de la dreta es una fulla
+        //         result.add(node.getRight().getNombre()); //obtinc el nombre
+        //         it[0]++;
+        //     } else {
+        //         it[0]++;
+        //         muntaStrucura(node.getRight(), joc, it, result);
+        //     }
+        // }
+        
     }
 
     public Vector<Integer> decode (String in){ //Cal saber la llargda de cada vector
-        System.out.println("Inicio el decoder: m'arriba una string de " + in.length() + " bytes.");
+        //System.out.println("Inicio el decoder: m'arriba una string de " + in.length() + " bytes.");
         frequencies = new HashMap<Integer, Integer>();  //nombre de valors que té una DCT amb un maxval de 255
         traductor = new HashMap<Integer, String>();
         root = null;
@@ -333,14 +364,15 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         Arbre = "";
 
         String res = donamString(in);//Està comprovat el seu funcionament.
-        System.out.println("Printo el comprimit + l'arbre " + res);
+        //System.out.println("Printo el comprimit + l'arbre " + res);
         int llarg = charsToInteger(res.substring(0,32));
         comprimit = res.substring(32,32 + llarg);
-        System.out.println("Printo el que he compimit. Això és el codificat " + comprimit);
+        //System.out.println("Printo el que he compimit. Això és el codificat " + comprimit);
         Arbre = res.substring(32 + llarg);
-        System.out.println("Printo l'arbre " + Arbre);
+        //System.out.println("Printo l'arbre " + Arbre);
         int[] a = {0};
-        root = muntArbre(Arbre.toCharArray(), a); //ja tinc l'arbre muntat
+        root = muntArbre(Arbre.toCharArray(), a); //ja tinc l'arbre muntat FINS AQUI FUNCIONA LA MAR DE BÉ.
+        // Vector<Integer> result = new Vector<Integer>();
         return muntaStrucura();
     }
 }

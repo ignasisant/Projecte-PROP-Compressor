@@ -85,55 +85,61 @@ private static String intToChars(Integer in){
 
         //A sobre tests parcials de funcions concretes
         //A sota, test de l'aplicatiu principal
-//        Vector <Integer> prova1 = new Vector<Integer>();
-//        Vector <Integer> prova3 = new Vector<Integer>();
-//        Vector <Integer> prova2 = new Vector<Integer>();
-//        for (int i = 0; i < 200; i++){
-//           for (int j = 0; j < i; j++) {
-//                prova1.add(i);
-//                prova2.add(i);
-//                prova3.add(i);
-//            }
-//        }
+       Vector <Integer> prova1 = new Vector<Integer>();
+       Vector <Integer> prova3 = new Vector<Integer>();
+       Vector <Integer> prova2 = new Vector<Integer>();
+       for (int i = 0; i < 2000; i++){
+           if(i%2 == 1){
+            prova1.add(0);
+            prova2.add(0);
+            prova3.add(0);
+           } else {
+               prova1.add(i);
+               prova2.add(i);
+               prova3.add(i);
+           }
+       }
 
         Vector<Integer> tot = new Vector<Integer>();
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(0);
-        tot.add(1);
-        tot.add(1);
-        tot.add(1);
-        tot.add(1);
-        tot.add(2);
-        tot.add(2);
-        tot.add(3);
-        tot.add(4);
-        tot.add(5);
-        tot.add(5);
-        tot.add(5);
-//        tot.addAll(prova1);
-//        tot.addAll(prova2);
-//        tot.addAll(prova3);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(0);
+        // tot.add(-244);
+        // tot.add(1);
+        // tot.add(1);
+        // tot.add(1);
+        // tot.add(2);
+        // tot.add(2);
+        // tot.add(3);
+        // tot.add(4);
+        // tot.add(5);
+        // tot.add(5);
+        // tot.add(5);
+       tot.addAll(prova1);
+       tot.addAll(prova2);
+       tot.addAll(prova3);
         HuffmanTree huff = new HuffmanTree();
         System.out.println("El vector té una llargada de " + tot.size());
         String result = huff.encode(tot);
         System.out.println("L'String comprimit te una llargada de " + result.length());
         Vector<Integer> stalin = huff.decode(result);
         //System.out.println(intToChars(32));
-        System.out.println("Ha de printar el nombre 759 " + charsToInteger("1011110111"));
+        System.out.println("Ha de printar el nombre 759: " + charsToInteger("1011110111"));
         for (int i = 0; i < tot.size(); i++){
-            if (stalin.get(i) != tot.get(i)){
+            if ((int)stalin.get(i) != (int)tot.get(i)){
                 System.out.println("A l'element " + i + "no coincideixen els vectors. Todo Mal");
+                System.out.println("l'original diu " + tot.get(i) + " el decodificat diu " + stalin.get(i));
                 exit(0);
             }
         }
         System.out.println("tot bé piratilla jejejeje");
     }
+
 }

@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - huffmannTest",
+            "request": "launch",
+            "mainClass": "domini.testsDelQuim.huffmannTest",
+            "projectName": "entrega2_b4b52779"
+        }
+    ]
+}
