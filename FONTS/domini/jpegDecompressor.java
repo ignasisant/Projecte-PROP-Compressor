@@ -46,7 +46,7 @@ public class jpegDecompressor extends jpeg {
 //            Hf.writeByte((byte)i.g);
 //            Hf.writeByte((byte)i.b);
 //        }
-//        Hf.close();
+//        Hf.close()
 //    }
 
 
@@ -289,7 +289,7 @@ public class jpegDecompressor extends jpeg {
     //        e.printStackTrace();
     // //    }
 
-       preparaMatrius();  //Desfem les matrius i queden les matrius transformades.
+       preparaMatrius();  //Desfem els zigzags i queden les matrius transformades.
        multiplica(); //Multipliquem les matrius per retornar el valor "Original"
        transformBlocks(); //Transformen les dctstrans a dcts matrius de YCbCr DCT3
        operaYCbCr();
