@@ -3,7 +3,7 @@ package domini;
 
 
 public class InvalidAlgorithm  extends Exception {
-    public InvalidAlgorithm() {
+    InvalidAlgorithm() {
         super("Algorithme no seleccionat invalid");
     }
 }

@@ -1,63 +1,80 @@
 package domini;
 
 import java.io.*;
-import java.util.Vector;
+
+import dades.CtrlDades;
 
 public class Fitxer {
-
-    public Fitxer(){}
-
-    public String llegirFitxer(File f)  {
-        try {
-            FileReader fr = new FileReader(f);
-
-
-            String payload = "";
-            int i;
-            int cont = 0;
-            while ((i = fr.read()) != -1){
-                payload += (char) i;
-                cont++;
-//                System.out.println((int)i);
-            }
-            fr.close();
-            System.out.println("la classe Fitxer ha obtingut un payload de " + payload.length() + " bytes. El bucle ha fet " + cont + " iteracions");
-            return payload;
-        } catch (Exception e) {
-            System.out.println(e);
-            return "";
-        }
+    
+    private Compressio comp;
+    private Descompressio decomp;
+    private CtrlDades ctrlDades;
+    
+    public Fitxer(){
+        this.comp = new Compressio(this);
+        this.decomp = new Descompressio(this);
+        this.ctrlDades = new CtrlDades();
     }
 
-    public void writeToFile(String data, String fileName) throws IOException{
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        writer.write(data);
-        writer.close();
+
+
+
+    public String[] compress(String infile, String outfile, int type, int algoId) {
+       this.comp.setAlgorithm(algoId);
+       return this.comp.compress(infile, outfile, type);
 
     }
 
-    public Vector<String> llegirDescomp(File f) throws IOException {
-
-        FileReader fr = new FileReader(f);
-        Vector<String> r = new Vector<>();
-        int i;
-        String ext_comp ="";
-        ext_comp += fr.read();
-        // while((i=fr.read())!=-1 ){
-        //     if((char)i == ':')break;  // 58 en ascii son ":"
-        //     ext_comp +=(char)i;
-        // }
-        r.add(ext_comp);
-
-        String payload =  "";
-        while((i=fr.read())!=-1) payload+=(char)i;
-        fr.close();
-        r.add(payload);
-        return r;
+    public String[] decompress(String infile, String outfile, int type, int algoId) {
+       
+        this.decomp.setAlgorithm(algoId);
+        return  this.decomp.decompress(infile, outfile, type);
 
     }
 
-    public String getExt(File f){
-        return f.getName().substring(f.getName().lastIndexOf(".") + 1);
+    public String llegirFitxer(String name)  {
+        return this.ctrlDades.read(name);
+
     }
+
+    public void writeToFile(String data, String fileName) throws Exception{
+        this.ctrlDades.write(data, fileName);
+
+
+    }
+
+    public String[] llegirDescomp(String name) throws IOException {
+        String all = this.ctrlDades.read(name);
+        String aux[] = all.split("\n");
+        String id = aux[0];
+        String nom = aux[1];
+        int i = id.length()+2+nom.length();
+        String data = all.substring(i);
+        String ret[] =  {id, nom, data};
+        return ret;
+
+
+    }
+
+    public String getExt(String file){
+        return this.ctrlDades.getExt(file);
+
+    }
+
+
+    public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) {
+       this.ctrlDades.appendStatistic(nomFitxer, algoId, compress, duration);
+
+    }
+
+    public String getStats(){
+        return this.ctrlDades.read("/tmp/stats");
+
+    }
+
+    public String getHierarchy(String fold) {
+      return this.ctrlDades.getChilds(fold);
+
+    }
+
 }

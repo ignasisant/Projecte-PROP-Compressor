@@ -49,7 +49,7 @@ public class LZW extends Algorithm{
 
         Integer codi = 256;
 
-        Vector<Integer> codis_sortida = new Vector<Integer>();
+        //Vector<Integer> codis_sortida = new Vector<Integer>();
 
         for (int i = 0; i < s.length() ; i++ ){
             if ( i < s.length() - 1) c += s.charAt(i+1);
@@ -73,18 +73,16 @@ public class LZW extends Algorithm{
     }
 
     public String decompress(){
+        
         String r="";
         String input= this.inData;
         java.util.HashMap<Integer, String> taula = new java.util.HashMap<Integer , String>();
         String[] parts = input.split(":");
         Vector<Integer> op = new Vector<Integer>();
-
+        
         for (int i = 0 ; i < parts.length ; i++ ){
             op.add(Integer.parseInt(parts[i]));
         }
-
-        
-        //coloquem al hashmap la taula ascii
         for (int i = 0; i < 256 ; i++ ){
             String aux = "";
             aux += (char)i;
@@ -98,7 +96,7 @@ public class LZW extends Algorithm{
         r+=s;
 
         int contador = 256;
-
+        
         for (int i = 0; i < op.size() - 1 ; i++){
             n = op.get(i+1);
             if(taula.containsKey(n) != true){

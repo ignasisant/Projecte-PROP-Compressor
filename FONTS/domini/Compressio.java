@@ -2,57 +2,98 @@ package domini;
 import java.io.File;
 
 
-public class Compressio {
+class Compressio {
     private Algorithm algo;
 
-
+    private Fitxer f;
     private Statistics st;
     private String ext_comp;
 
-    public Compressio( Statistics st) {
-        this.st = st;
+    public Compressio(Fitxer f) {
+        this.st = Statistics.getStatistics();
+        this.f = f;//Fitxer.getFitxer();
     };
 
-    public void compress(File infile,  String outfile, Integer type) {
-        if (type==0) {
-            compressFile(infile, outfile);
-        }
-        else { //compressio de carpeta
-
-        }
+    public  String[]  compress(String infile,  String outfile, Integer type) {
+        String[] info = null;
+        if (type==0)   info = this.compressFile(infile, outfile); 
+        else info = this.compressFolder(infile, outfile);
+        
+        return info;
 
     }
 
-    public void compressFile(File infile,  String outfile) {
+    private String[] compressFile(String infile,  String outfile) {
         try {
-            // data = Files.readAllBytes(this.path);
+            String all[] = infile.split("/");
+            String auxname = all[all.length -1];
             String outf = getCompressOutputFile(infile, outfile);
-            Fitxer f = new Fitxer();
-            String payload = f.llegirFitxer(infile);
-
-            this.st.setInputSize(payload.length());
-            this.st.setType(0); 
-            algo.setData(payload);
-            this.st.startTimer();
-
-            payload = algo.compress();
             
-            this.st.endTimer();
-            this.st.setOutputSize(payload.length());
-            this.st.updateStats(infile.getName() , algo.getId());
-            // ext_comp = f.getExt(infile);
-            f.writeToFile(algo.getId()+payload, outf);
+            String payload = this.f.llegirFitxer(infile);
+   
+            this.algo.setData(payload);
+            
+     
+            this.st.initStats();
+            String compress = this.run();
+            String[] info =  this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
+            
+            // ext_comp = f.getExt(infile);
+     
+            this.f.writeToFile(algo.getId()+"\n"+auxname+"\n"+compress, outf);
+           return info;
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        return null;
+    }
+
+    private String[] compressFolder(String infile,  String outfile) {
+        try {
+            String outf = getCompressOutputFile(infile, outfile);
+            String[] dirs = infile.split("/");
+            String inici = dirs[dirs.length -1];
+            int ini = infile.length()-inici.length();
+            String files = f.getHierarchy(infile);
+            String out = "";
+            String[] all= files.split("//");
+            int inSize = 0, outSize = 0;
+            this.st.initStats();
+            for(int i=0; i < all.length; ++i) {
+                if(i != 0 ) out+= "\n";
+                out += all[i].substring(ini);
+               // System.out.println(all[i]);
+
+                String payload = this.f.llegirFitxer(all[i]);
+                inSize += payload.length();
+                this.algo.setData(payload);
+                String compress = this.run();
+                out+= "\n"+compress.length()+"\n";
+                out+=compress;
+            
+                
+            }
+            outSize = out.length();
+            String[] info =  this.st.saveStats(infile,algo.getId(), inSize, outSize);
+            //outfile=infile+this.algo.getExtension();
+            this.f.writeToFile(algo.getId()+"1\n"+out, outf);
+            return info;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+        
 
     }
 
+    private String run() {
+        return this.algo.compress();
 
+    }
 
-    public void setAlgorithm(int algo) throws Exception {
+    public void setAlgorithm(int algo) /*throws Exception*/ {
         switch (algo) {
             case 0:
                 this.algo = new LZ78();
@@ -64,17 +105,18 @@ public class Compressio {
                 // this.algo = new jpeg();
                 break;
             default:
-                throw new InvalidAlgorithm();
+               // throw new InvalidAlgorithm();
         }
 
     }
     
-    public String getCompressOutputFile(File infile, String outfile) {
+    public String getCompressOutputFile(String infile, String outfile) {
 
         if(outfile == "") {
-           outfile = infile.getName().replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
+           if(f.getExt(infile) != "") outfile = infile.replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
+           else outfile = infile+"."+this.algo.getExtension();
         } else {
-            //outfile += "."+algo.getExtension();
+            outfile += "."+algo.getExtension();
         }
         return outfile;
     }

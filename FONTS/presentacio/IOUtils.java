@@ -1,92 +1,78 @@
 package presentacio;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import domini.*;
+import domini.Fitxer;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.*;
 
-class IOUtils {
+
+public class IOUtils {
     private int action = -1;
     private Integer algoId;
     private String outfile;
-    private File infile;
+    private String infile;
     private int type;
-    private Statistics st;
-    private Compressio comp;
-    private Descompressio decomp;
+    private Fitxer ctrlDom;
+    private VistaPrincipal vistaPrincipal;
+    private String[] stats;
 
     public IOUtils() {
-        this.st = new Statistics();
-        this.comp = new Compressio(st);
-        this.decomp = new Descompressio(st);
-                                                                                           
+
+        this.vistaPrincipal = new VistaPrincipal(this);      
+        this.ctrlDom = new Fitxer();//Fitxer.getFitxer();                                                                 
     }
+
 
     public IOUtils(String infile, String outfile, int action, int algo) throws Exception {
         setInputFile(infile);
         this.action = action;
         this.algoId = algo;
         setOutputFile(outfile);
-        this.st = new Statistics();
-        this.comp = new Compressio(st);
-        this.decomp = new Descompressio(st);
+
 
     }
+
+
+
     public void run() throws Exception {
+        vistaPrincipal.hacerVisible();
+        //if(this.infile.getName() == "") throw new FileNotSelected();
+        //if(this.algoId != 0 && this.algoId != 1 && this.algoId != 2) throw new AlgorithmNotSelected();
+        //if(this.action == -1) throw new ActionNotSelected();
 
-        if(this.infile.getName() == "") throw new FileNotSelected();
-        if(this.algoId != 0 && this.algoId != 1 && this.algoId != 2) throw new AlgorithmNotSelected();
-        if(this.action == -1) throw new ActionNotSelected();
 
+
+        System.out.println(infile);
+            System.out.println(outfile);
+            System.out.println(type);
+            System.out.println(algoId);
         switch (this.action+(this.type*2)) {
+    
 
             case 0:
-                comp.setAlgorithm(this.algoId);
-                comp.compress(infile, outfile, 0); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.compress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
             case 1:
-                decomp.setAlgorithm(this.algoId);
-                decomp.decompress(infile, outfile, 0); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.decompress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
 
-            // case 2:
-            //     comp.setAlgorithm(this.algoId);
-            //     comp.compress(infile, outfile, 1); // 0  o 1 => fitxer o carpeta
-            //     break;
-            // case 3:
-            //     decomp.setAlgorithm(this.algoId);
-            //     decomp.decompress(infile, outfile, 1); // 0  o 1 => fitxer o carpeta
-            //     break;
+            case 2:
+                ctrlDom.compress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                break;
+            case 3:
+                ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                break;
  
         }
     }
 
-    private void setType(int type) {
+    public void setType(int type) {
         this.type = type;
     }
 
     public void setInputFile(String file) throws Exception {
-        File in = new File(file);
-        if (in.isFile()) {
-            setType(0);
-            this.infile = in;
-        }
-        else if (in.isDirectory()) {
-            setType(1);
-            this.infile = in;
-        }
-        else {
+            this.infile = file;
 
-            throw new FileNotFoundException(); //tractem les excepcions el més aviat possible
-        }
     }
 
     public void setOutputFile(String file) {
@@ -102,13 +88,9 @@ class IOUtils {
         this.algoId = algo;
     }
 
-
-    public void getStats(){ 
-        st.printHeader();
-        System.out.println(st.getStats());}
-
-
-
+    public String[] getStats(){
+        return stats;
+    }
 
     
 }
