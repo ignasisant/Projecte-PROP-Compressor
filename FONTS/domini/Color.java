@@ -29,6 +29,12 @@ public class Color {  //cada imatge és una matriu de Colors
         this.b = b;
     }
 
+    public Color(){
+        r = 0;
+        g = 0;
+        b = 0;
+    }
+
     public Color(int r,int g,int b){
         this.r = r;
         this.g = g;

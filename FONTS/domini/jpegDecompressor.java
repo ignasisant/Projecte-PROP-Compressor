@@ -6,34 +6,30 @@ import java.util.*;
 import domini.testsDelQuim.huffmannTest;
 
 public class jpegDecompressor extends jpeg {
-   public jpegDecompressor(final String treta) {
+   public jpegDecompressor() {
        // Aqui anira la crida a la classe imatge comprimida que donarà d'una imatge
        // jpeg una cosa llegible
        // De moment això no està implememtat i esta "emulat" per la classe
        // llegeixdefitxer
        // llegeixdefitxe
        //imatge = new Vector<Color>();
-       String am = "";
-       String al = "";
-       int it = 0;
-       char[] aux = treta.toCharArray();
-        while (aux[it] != ' '){
-            am += aux[it];
-            it++;
-        }
-        it++;
-        while (aux[it] != '\n'){
-            al += aux[it];
-            it++;
-        }
-        imatge = new Imatge(Integer.parseInt(am)*Integer.parseInt(al));
-        imatge.setAmple(Integer.parseInt(am));
-        imatge.setAlt(Integer.parseInt(al));
-        HuffmanTree huff = new HuffmanTree();
-        Vector <Integer> tot = huff.decode(treta.substring(it));
-        Y.addAll(tot.subList(0, imatge.getAlt()*imatge.getAmple()));
-        Cb.addAll(tot.subList(imatge.getAlt()*imatge.getAmple(), imatge.getAlt()*imatge.getAmple()*2));
-        Cr.addAll(tot.subList(imatge.getAlt()*imatge.getAmple()*2, imatge.getAlt()*imatge.getAmple()*3));
+////       String am = "";
+////       String al = "";
+////       int it = 0;
+////       char[] aux = treta.toCharArray();
+////        while (aux[it] != ' '){
+////            am += aux[it];
+////            it++;
+////        }
+////        it++;
+////        while (aux[it] != '\n'){
+////            al += aux[it];
+////            it++;
+////        }
+//        imatge = new Imatge(Integer.parseInt(am)*Integer.parseInt(al));
+//        imatge.setAmple(Integer.parseInt(am));
+//        imatge.setAlt(Integer.parseInt(al));
+          imatge = new Imatge();
 
    }
 
@@ -307,7 +303,17 @@ public class jpegDecompressor extends jpeg {
    }
 
     @Override
-    protected void creaImatge(String path) throws IOException {
+    void setData(String data) {
+        String retall = imatge.retallaHeaders(data); //em posa els headers de alt i ample
+        HuffmanTree huff = new HuffmanTree();
+        Vector <Integer> tot = huff.decode(retall);
+        Y.addAll(tot.subList(0, imatge.getAlt()*imatge.getAmple()));
+        Cb.addAll(tot.subList(imatge.getAlt()*imatge.getAmple(), imatge.getAlt()*imatge.getAmple()*2));
+        Cr.addAll(tot.subList(imatge.getAlt()*imatge.getAmple()*2, imatge.getAlt()*imatge.getAmple()*3));
+
+    }
+
+    private void creaImatge(String path) throws IOException {  //aixo ho canviarem aquesta tarda per un mètode de la classe imatge
         //Tot aixo cal canviar-ho encara que va bé pel debugging
         String header = "P6\n" + Integer.toString(imatge.getAmple()) + " " + Integer.toString(imatge.getAlt()) + "\n255\n";
         FileOutputStream Hd = null;  //cal canviar-ho perque no estigui hardcoded

@@ -5,7 +5,7 @@ import java.util.*;
 
 import domini.Imatge;
 
-abstract class jpeg extends Algorithm{
+abstract class jpeg extends Algorithm {
 	protected Vector<Integer> Y; //Aquests vectors són per fer les huffman encodings
 	protected Vector<Integer> Cr;
 	protected Vector<Integer> Cb;
@@ -43,12 +43,12 @@ abstract class jpeg extends Algorithm{
 	protected int[][][] DCTcbTrans;
 
 	//funcions d'imatge
-	abstract protected void creaImatge(String path) throws IOException; //O crea la matriu o crea la imatge ppm des de la matriu
+//	abstract protected void creaImatge(String path) throws IOException; //O crea la matriu o crea la imatge ppm des de la matriu
 
 
 	//Funcions de compressió/descompressió
-	abstract public String compress();//Comprimeix o descoprimeix.
-	abstract public String decompress();//Comprimeix o descoprimeix.
+//	abstract public String compress();//Comprimeix o descoprimeix.
+//	abstract public String decompress();//Comprimeix o descoprimeix.
 
 	abstract protected void operaYCbCr(); //De YCbCr a JPEG o viceversa
 	abstract protected void transformBlocks(); //crea els blocs de 8x8 i aplica la transformació o desfà la transformació fins a tornar a crear la imatge
@@ -64,10 +64,5 @@ abstract class jpeg extends Algorithm{
 		return ".jpeg";
 	}
 
-	@Override
-	public void setData(String Data){
-		path = Data;
-
-	}
 
 }

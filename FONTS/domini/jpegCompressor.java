@@ -31,13 +31,15 @@ public class jpegCompressor extends jpeg {
 
    public jpegCompressor(String uncompressedPath) throws IOException {
        // Iniciar estructures de dades.
-       this.creaImatge(uncompressedPath);
+       imatge = new Imatge();
 
    }
 
-   protected void creaImatge(String path) throws IOException {
-       imatge = new Imatge(path);
-   }
+    @Override
+    void setData(String data) {
+        imatge.creaImatgeDePPM(data);
+    }
+
 
 
    public void print() { // mostra tota la image per cada unitat rgb que tenim per les proves
@@ -297,7 +299,8 @@ public class jpegCompressor extends jpeg {
        return null;
    }
 
-   @Override
+
+    @Override
    public String compress() {
        if (imatge.getMaxVal() != 255) {
            System.out.println("Atenció que ho farà malament");//cal llançar aquí una nova excepcio creada.

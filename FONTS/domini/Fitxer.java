@@ -18,10 +18,10 @@ public class Fitxer {
             while ((i = fr.read()) != -1){
                 payload += (char) i;
                 cont++;
-                System.out.println((int)i);
+//                System.out.println((int)i);
             }
             fr.close();
-
+            System.out.println("la classe Fitxer ha obtingut un payload de " + payload.length() + " bytes. El bucle ha fet " + cont + " iteracions");
             return payload;
         } catch (Exception e) {
             System.out.println(e);
