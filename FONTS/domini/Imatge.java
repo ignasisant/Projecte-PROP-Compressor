@@ -5,12 +5,7 @@
 
 package domini;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -201,6 +196,31 @@ private String magicNum;
         alt = Integer.parseInt(al);
         it++;
         return data.substring(it);
+    }
+
+    public String creaImatgeFinal(){  //aixo ho canviarem aquesta tarda per un mètode de la classe imatge
+        //Tot aixo cal canviar-ho encara que va bé pel debugging
+        String header = "P6\n" + Integer.toString(ample) + " " + Integer.toString(alt) + "\n255\n";
+        StringBuilder result = new StringBuilder();
+        for (Color i : imatge){
+            result.append((char) i.getR()).append((char) i.getG()).append((char) i.getB());
+        }
+        return header + result; //la imatge ve per aquí.
+//        FileOutputStream Hd = null;  //cal canviar-ho perque no estigui hardcoded
+//        Hd = new FileOutputStream("out.ppm");
+//        DataOutputStream Hf = new DataOutputStream(Hd);
+//        Hf.writeBytes(header);
+//        for (Color i : imatge.getImatge()){
+//            Hf.writeByte((byte)i.getR());
+//            Hf.writeByte((byte)i.getG());
+//            Hf.writeByte((byte)i.getB());
+//        }
+//        Hf.close();
+
+//        String result = "";
+//        result += header;
+//        return result;
+
     }
 
 

@@ -293,13 +293,13 @@ public class jpegDecompressor extends jpeg {
        multiplica(); //Multipliquem les matrius per retornar el valor "Original"
        transformBlocks(); //Transformen les dctstrans a dcts matrius de YCbCr DCT3
        operaYCbCr();
-       String fin = "";
-       try {
-           creaImatge("out.ppm");
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       return fin; //Això canviarà de cara a la segona entrega.
+       //String fin = "";
+//       try {
+//           creaImatge("out.ppm");
+//       } catch (IOException e) {
+//           e.printStackTrace();
+//       }
+       return imatge.creaImatgeFinal();
    }
 
     @Override
@@ -313,24 +313,6 @@ public class jpegDecompressor extends jpeg {
 
     }
 
-    private void creaImatge(String path) throws IOException {  //aixo ho canviarem aquesta tarda per un mètode de la classe imatge
-        //Tot aixo cal canviar-ho encara que va bé pel debugging
-        String header = "P6\n" + Integer.toString(imatge.getAmple()) + " " + Integer.toString(imatge.getAlt()) + "\n255\n";
-        FileOutputStream Hd = null;  //cal canviar-ho perque no estigui hardcoded
-        Hd = new FileOutputStream("out.ppm");
-        DataOutputStream Hf = new DataOutputStream(Hd);
-        Hf.writeBytes(header);
-        for (Color i : imatge.getImatge()){
-            Hf.writeByte((byte)i.getR());
-            Hf.writeByte((byte)i.getG());
-            Hf.writeByte((byte)i.getB());
-        }
-        Hf.close();
 
-//        String result = "";
-//        result += header;
-//        return result;
-
-    }
 
 }
