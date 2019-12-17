@@ -26,9 +26,7 @@ public class VistaSelAlg {
   private JButton buttonComprimir = new JButton("Comprimir");
   private JRadioButton[] alg = new JRadioButton[3];
   private JPanel panelRadioButton = new JPanel();
-  private JPanel panelCenter = new JPanel();
   private ButtonGroup grupo2 = new ButtonGroup();
-  private JTextField jtextfield = new JTextField();
 
   // Resto de atributos
 
@@ -50,65 +48,42 @@ public class VistaSelAlg {
 
   public JPanel getPanelComprimir(){
     panelComprimir.removeAll();
-    panelCenter.removeAll();
     panelRadioButton.removeAll();
     grupo2.clearSelection();
     inicializarComponentes(); 
     return panelComprimir;
  }
 
-
 //////////////////////// Metodos de las interfaces Listener
 
   public void actionPerformed_buttonComprimir(ActionEvent event){
-    if(!jtextfield.getText().equals("Escriu el nom de sortida que desitges(opcional)")) {
-        iIOUtils.setOutputFile(jtextfield.getText());
-      }
-    else iIOUtils.setOutputFile("");
-
     try{
         iIOUtils.run();
-      }catch(Exception e){
-          e.printStackTrace();
-      }
-      System.out.println("fins aqui va be");
+    }catch(Exception e){
+        e.printStackTrace();
+    }
     vistaInfo = new VistaInfo(iIOUtils , true , vistaPrincipal);
     panelComprimir.removeAll();
     panelComprimir.add(vistaInfo.getPanelInformacio());     
-    vistaPrincipal.update();
-
-    
-    System.out.println("boto Comprimir");
-    
+    vistaPrincipal.update();   
   }
 
   public void actionPerformed_RadioButtonAlg0(ActionEvent event){
     iIOUtils.setAlgorithm(0);
-    System.out.println("RB 0 comp");
   }
 
   public void actionPerformed_RadioButtonAlg1(ActionEvent event){
     iIOUtils.setAlgorithm(1);
-    System.out.println("RB 1 comp");
 }
 
 public void actionPerformed_RadioButtonAlg2(ActionEvent event){
     iIOUtils.setAlgorithm(2);
-    System.out.println("RB 2 comp");
 }
-
-public void actionPerformed_jtextfield(FocusEvent event){
-    System.out.print( jtextfield.getText());
-    System.out.print( "holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-}
-
-
 
 
 //////////////////////// Asignacion de listeners
 
-    private void asignar_listenersComponentes() {
+private void asignar_listenersComponentes() {
 
     // Listeners para los botones
     buttonComprimir.addActionListener(
@@ -142,30 +117,7 @@ public void actionPerformed_jtextfield(FocusEvent event){
             }
         }
     );
- 
-
-    // Listeners para el resto de componentes
-
-    jtextfield.addActionListener(
-        new ActionListener(){
-            public void actionPerformed(ActionEvent event){
-                //actionPerformed_jtextfield(event);
-            }
-        }
-    );
-    jtextfield.addFocusListener(new FocusAdapter() {
-        public void focusGained(FocusEvent e) {
-            actionPerformed_jtextfield(e);
-        }
-    });
-    jtextfield.addFocusListener(new FocusAdapter() {
-        public void focusGained(FocusEvent e) {
-            jtextfield.setText("");
-            jtextfield.removeFocusListener(this);
-        }
-    });
-
-    }
+}
 
 
 //////////////////////// Resto de metodos privados
@@ -175,18 +127,8 @@ public void actionPerformed_jtextfield(FocusEvent event){
     
     inicializar_radioButtonComp();
     inicialitzar_panelRadioButtonComp();
-    inicializar_panelCenter();
-    inicializar_jtextfield();
     inicializar_panelComprimir();
     asignar_listenersComponentes();
-  }
-
-  private void inicializar_panelCenter(){
-
-    panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
-    panelCenter.add(panelRadioButton);
-    panelCenter.add(jtextfield);
-    panelCenter.add(Box.createRigidArea(new Dimension(0,500)));
   }
 
   private void inicializar_radioButtonComp(){
@@ -209,17 +151,10 @@ public void actionPerformed_jtextfield(FocusEvent event){
     panelComprimir.setLayout(new BorderLayout());
     // Paneles
     panelComprimir.add(new JLabel("Selecciona Algoritme de Compressió"), BorderLayout.NORTH);
-    panelComprimir.add(panelCenter, BorderLayout.CENTER);
+    panelComprimir.add(panelRadioButton, BorderLayout.CENTER);
     panelComprimir.add(buttonComprimir, BorderLayout.SOUTH);   
 
   }
-  private void inicializar_jtextfield(){
-    jtextfield.setText("Escriu el nom de sortida que desitges(opcional)");
-    jtextfield.setMaximumSize(new Dimension(250, 50));
-
-  }
-
-
-  
+ 
 
 }

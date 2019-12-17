@@ -28,14 +28,14 @@ public class VistaPrincipal {
   private ButtonGroup grupo1 = new ButtonGroup();
   private JPanel panelRadioButton = new JPanel();
   private JButton buttonContinuar = new JButton("Continuar");
-  private JFileChooser fileChooser = new JFileChooser();
-  private JFileChooser fileChooser2 = new JFileChooser();
+  private JFileChooser fileChooser;
+  private JFileChooser fileChooser2;
   private JPanel panelMenuPrincipal = new JPanel();
   private JPanel panelCenter = new JPanel();
   private JButton buttonInput = new JButton("Seleccionar arxiu");
   private JButton buttonOutput = new JButton("Selecciona ubicació sortida");
-  private JLabel labelInput = new JLabel("Input no seleccionat");
-  private JLabel labelOutput = new JLabel("Output no seleccionat");
+  private JLabel labelInput = new JLabel();
+  private JLabel labelOutput = new JLabel();
   private JPanel panel1 = new JPanel();
   private JPanel panel2 = new JPanel();
 
@@ -43,7 +43,7 @@ public class VistaPrincipal {
   private VistaSelAlg vistaSelAlg;
   
   // Resto de atributos
-  int selection;
+  int selection = -1;
 
 //////////////////////// Constructor y metodos publicos
 
@@ -105,6 +105,7 @@ public class VistaPrincipal {
         panelContenidos.add(vistaInfo.getPanelInformacio() );
       }
       else  {
+        System.out.println("hola");
         VistaStatistics vistaStatistics = new VistaStatistics(iIOUtils, this);
         panelContenidos.add(vistaStatistics.getPanelStatistics() );
       }
@@ -113,22 +114,42 @@ public class VistaPrincipal {
 
     public void actionPerformed_RadioButtonOpcio0(ActionEvent event){
         iIOUtils.setAction(0);
+        if(selection != JFileChooser.APPROVE_OPTION){
+            buttonContinuar.setEnabled(false);
+        }
     }
     public void actionPerformed_RadioButtonOpcio1(ActionEvent event){
         iIOUtils.setAction(1);
+        if(selection != JFileChooser.APPROVE_OPTION){
+            buttonContinuar.setEnabled(false);
+        }
     }
     public void actionPerformed_RadioButtonOpcio2(ActionEvent event){
+        buttonContinuar.setEnabled(true);
         
     }
 
     public void actionPerformed_fileChooser(ActionEvent event){
         if (selection == JFileChooser.APPROVE_OPTION){
             try{
+                labelInput.setText(fileChooser.getSelectedFile().getAbsolutePath());
                 iIOUtils.setInputFile(fileChooser.getSelectedFile().getAbsolutePath());
                 if(fileChooser.getSelectedFile().isDirectory()) iIOUtils.setType(1);
                 else iIOUtils.setType(0);
-                labelInput.setText(fileChooser.getSelectedFile().getAbsolutePath());
-                if(opcio[1].isSelected()){
+                if(opcio[0].isSelected()){
+                    String extension = "";
+                    int i = fileChooser.getSelectedFile().getName().lastIndexOf('.');
+                    if (i > 0) {
+                        extension = fileChooser.getSelectedFile().getName().substring(i+1);
+                    }
+                    if (extension.equals("lz78") ||  extension.equals("lzw") || extension.equals("jpeg") ) {
+                        String message = "Aquest arxiu ja está comprimit!";
+                        JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
+                        volverHome();
+                        return ;
+                    } 
+                }
+                else if(opcio[1].isSelected()){
                     String extension = "";
                     int i = fileChooser.getSelectedFile().getName().lastIndexOf('.');
                     if (i > 0) {
@@ -267,6 +288,7 @@ public class VistaPrincipal {
     inicializar_panelMenuPrincipal();
     inicializar_panelContenidos();
     inicializar_fileChooser();
+    selection = -1;
     update_frameVista();
     asignar_listenersComponentes();
   }
@@ -288,7 +310,7 @@ public class VistaPrincipal {
   }
 
   private void inicializar_panelMenuPrincipal() {
-    buttonContinuar.setEnabled(false);
+    buttonContinuar.setEnabled(true);
     panelMenuPrincipal.setLayout(new BorderLayout());
     panelMenuPrincipal.add(new JLabel("Selecciona una opció"), BorderLayout.NORTH);
     inicializar_panelCenter();
@@ -317,10 +339,14 @@ public class VistaPrincipal {
 
   private void inicializar_fileChooser(){
     iIOUtils.setOutputFile("");
+    labelInput.setText("Input no seleccionat");
+    labelOutput.setText("Ubicació output no seleccionada");
+    fileChooser  = new JFileChooser();
     fileChooser.setSelectedFile(null);
     fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    fileChooser2 = new JFileChooser();
     fileChooser2.setSelectedFile(null);
-    fileChooser2.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    fileChooser2.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
   }
 
   private void inicializar_panelCenter(){

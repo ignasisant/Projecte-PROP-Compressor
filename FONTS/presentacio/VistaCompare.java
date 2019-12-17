@@ -19,7 +19,7 @@ public class VistaCompare {
 
   private JFrame frameVista = new JFrame();
   private JPanel panelContenidos = new JPanel();
-  private JButton buttonVolver = new JButton("Volver");
+  private JButton buttonVolver = new JButton("Tornar");
   private JTextArea jtextOriginal = new JTextArea();
   private JTextArea jtextTractat = new JTextArea();
   JScrollPane jscrollOriginal = new JScrollPane(jtextOriginal);
@@ -32,7 +32,6 @@ public class VistaCompare {
 
 //////////////////////// Constructor y metodos publicos
 
-
   public VistaCompare () {
     inicializarComponentes();
   }
@@ -43,9 +42,6 @@ private void actionPerformed_buttonVolver(ActionEvent event){
     frameVista.dispatchEvent(new WindowEvent(frameVista, WindowEvent.WINDOW_CLOSING));
 }
  
-
-
-
 //////////////////////// Asignacion de listeners
 
     private void asignar_listenersComponentes() {
@@ -57,13 +53,9 @@ private void actionPerformed_buttonVolver(ActionEvent event){
                 }
             }
         );
-  
-
     }
 
-
 //////////////////////// Resto de metodos privados
-
 
   private void inicializarComponentes() {
 

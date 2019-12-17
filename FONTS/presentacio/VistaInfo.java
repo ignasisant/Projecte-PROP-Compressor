@@ -127,7 +127,7 @@ public class VistaInfo {
 
   }
   private void inicializar_panelButtons(){
-    panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.PAGE_AXIS));
+    panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.Y_AXIS));
     if(comprimir) panelButtons.add(buttonCompare);
     panelButtons.add(buttonHome);
   }
