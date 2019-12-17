@@ -48,7 +48,7 @@ private String magicNum;
         alt = Integer.parseInt(aux);
         img = img.substring(img.indexOf('\n')+1);
         while (img.charAt(0) == '#'){ //retallo la string
-            it = img.indexOf('\n') + 0;
+            it = img.indexOf('\n') + 1;
             img = img.substring(it);
         }
         maxVal = Integer.parseInt(img.substring(0, img.indexOf('\n')));
