@@ -50,7 +50,7 @@ abstract class jpeg extends Algorithm {
 //	abstract public String compress();//Comprimeix o descoprimeix.
 //	abstract public String decompress();//Comprimeix o descoprimeix.
 
-	abstract protected void operaYCbCr(); //De YCbCr a JPEG o viceversa
+	//abstract protected void operaYCbCr(); //De YCbCr a JPEG o viceversa
 	abstract protected void transformBlocks(); //crea els blocs de 8x8 i aplica la transformació o desfà la transformació fins a tornar a crear la imatge
 	//abstract protected void huffman(); //Fa el huffman encoding o decoding.
 

@@ -12,8 +12,16 @@ import java.util.Vector;
 
 public class jpegDriver {
     public static void main(String[] args) throws Exception {
+//
+//        byte[] b = {'a',(byte)0x00,'c'};
+//        String i = new String(b);
+//        System.out.println(i.length());
+//        System.out.println(i);
+
+
         Fitxer f = new Fitxer();
-        String fitxer = f.llegirFitxer("./ppms/stalin.ppm");
+        String fitxer = f.llegirFitxer("./ppms/blanc.ppm");
+        System.out.println("Començo a comprimir");
         System.out.println("Començo a comprimir");
         jpegCompressor j = new jpegCompressor();
         j.setData(fitxer);

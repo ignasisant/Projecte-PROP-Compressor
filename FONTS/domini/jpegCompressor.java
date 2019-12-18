@@ -54,21 +54,8 @@ public class jpegCompressor extends jpeg {
    }
 
    // Funcions de la presentació.
-   @Override
-   protected void operaYCbCr() { // done
-       for (Color i : imatge.getImatge()){
-           int R = i.getR();
-           int G = i.getG();
-           int B = i.getB();
-           int y =  (int) ( 16 + ((65.738/256) * R) + ((129.057/256) * G) + ((25.064/256) * B));//16 + (((R << 6) + (R << 1) + (G << 7) + G + (B << 4) + (B << 3) + B) >> 8);
-           int  Cb =  (int) ( 128 - ((37.945/256) * R) - ((74.494/256) * G) + ((112.439/256) * B) ); //128 + ((-((R << 5) + (R << 2) + (R << 1)) - ((G << 6) + (G << 3) + (G << 1)) + (B << 7)
-           // - (B << 4)) >> 8);
-           int Cr = (int) ( 128 + ((112.439/256) * R) - ((94.154/256) * G) - ((18.285/256) * B ) );//128 + (((R << 7) - (R << 4) - ((G << 6) + (G << 5) - (G << 1)) - ((B << 4) + (B << 1))
-           i.setR(y);
-           i.setG(Cb);
-           i.setB(Cr);
-       }
-   }
+
+
 
    @Override
    protected void transformBlocks() {
@@ -301,7 +288,7 @@ public class jpegCompressor extends jpeg {
            System.out.println("Atenció que ho farà malament");//cal llançar aquí una nova excepcio creada.
        }
        // this.print();
-       this.operaYCbCr(); //Ho he de fer a imatge
+       imatge.operaToYCbCr(); //Ho he de fer a imatge
        this.transformBlocks(); // Aquí tinc els blocs ja transformats.
        System.out.println("Printo la matriu DCTilu[0] abans de dividir:");
        for (int i = 0; i < 8; i++){
