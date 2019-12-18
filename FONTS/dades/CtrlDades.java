@@ -15,15 +15,10 @@ public class CtrlDades {
 
             try {
                 
-                File f = new File(name);
-                FileReader fr = new FileReader(f);
-    
-    
-                String payload = "";
-                int i;
-                while ((i = fr.read()) != -1) payload += (char) i;
-                fr.close();
-    
+                Path path = Paths.get(name);
+                byte[] data = Files.readAllBytes(path);
+                String payload = new String(data);
+
                 return payload;
             } catch (Exception e) {
                 System.out.println(e);
