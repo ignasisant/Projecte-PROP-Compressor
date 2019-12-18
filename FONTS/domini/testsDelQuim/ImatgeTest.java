@@ -10,7 +10,7 @@ public class ImatgeTest {
 
     public static void main(String[] args) throws IOException {
         Fitxer f = new Fitxer();
-        String img = (f.llegirFitxer(new File("./ppms/blanc.ppm")));
+        String img = (f.llegirFitxer("./ppms/blanc.ppm"));
         Imatge imatge = new Imatge();
         imatge.creaImatgeDePPM(img);
 

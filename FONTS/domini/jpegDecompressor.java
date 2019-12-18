@@ -1,9 +1,6 @@
 package domini;
 
-import java.io.*;
 import java.util.*;
-
-import domini.testsDelQuim.huffmannTest;
 
 public class jpegDecompressor extends jpeg {
    public jpegDecompressor() {
@@ -30,6 +27,11 @@ public class jpegDecompressor extends jpeg {
 //        imatge.setAmple(Integer.parseInt(am));
 //        imatge.setAlt(Integer.parseInt(al));
           imatge = new Imatge();
+
+       Y = new Vector<Integer>();
+       Cr = new Vector<Integer>();
+       Cb = new Vector<Integer>();
+
 
    }
 
@@ -303,7 +305,7 @@ public class jpegDecompressor extends jpeg {
    }
 
     @Override
-    void setData(String data) {
+    public void setData(String data) {
         String retall = imatge.retallaHeaders(data); //em posa els headers de alt i ample
         HuffmanTree huff = new HuffmanTree();
         Vector <Integer> tot = huff.decode(retall);
@@ -311,6 +313,14 @@ public class jpegDecompressor extends jpeg {
         Cb.addAll(tot.subList(imatge.getAlt()*imatge.getAmple(), imatge.getAlt()*imatge.getAmple()*2));
         Cr.addAll(tot.subList(imatge.getAlt()*imatge.getAmple()*2, imatge.getAlt()*imatge.getAmple()*3));
 
+    }
+
+    public void setDebugging(Vector<Integer> tot, int ample, int alt){
+       imatge.setAlt(alt);
+       imatge.setAmple(ample);
+        Y.addAll(tot.subList(0, imatge.getAlt()*imatge.getAmple()));
+        Cb.addAll(tot.subList(imatge.getAlt()*imatge.getAmple(), imatge.getAlt()*imatge.getAmple()*2));
+        Cr.addAll(tot.subList(imatge.getAlt()*imatge.getAmple()*2, imatge.getAlt()*imatge.getAmple()*3));
     }
 
 

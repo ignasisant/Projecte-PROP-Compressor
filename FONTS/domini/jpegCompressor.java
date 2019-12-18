@@ -4,9 +4,6 @@ import java.io.*;
 import java.util.*;
 //import java.awt.Desktop;
 
-import javax.print.DocFlavor.STRING;
-
-
 
 //Cal que consideri com ho tractaré quan el nombre del color sigui més gran
 //de 255 o més petit. El valor del RGB cal que estigui sempre entre 0 i 255
@@ -29,14 +26,16 @@ import javax.print.DocFlavor.STRING;
 
 public class jpegCompressor extends jpeg {
 
-   public jpegCompressor(String uncompressedPath) throws IOException {
+   public jpegCompressor() {
        // Iniciar estructures de dades.
        imatge = new Imatge();
 
    }
 
+
+
     @Override
-    void setData(String data) {
+    public void setData(String data) {
         imatge.creaImatgeDePPM(data);
     }
 
@@ -139,7 +138,7 @@ public class jpegCompressor extends jpeg {
        }
    }
 
-   protected void huffman() {
+   protected void preparaMatrius() {
        Y = new Vector<Integer>();
        Cr = new Vector<Integer>();
        Cb = new Vector<Integer>();
@@ -317,7 +316,7 @@ public class jpegCompressor extends jpeg {
            System.out.println();
        }
        this.divideix(); // divideix les matrius entre les valors de la taula.
-       
+       this.preparaMatrius();
     //    try {
     //        guardaenfitxer();
     //    } catch (IOException e) {
@@ -349,8 +348,21 @@ public class jpegCompressor extends jpeg {
        // this.DCTilu = imatge.getDTCblocks("Y");
        // this.DCTcr = imatge.getDCTblocks("Cr");
        // this.DCTcb = imatge.getDCTblocks("Cb");
+
+        //faig això pel debugging:
+//        String img = huffcoder.encode(bigVector);
        return imatge.getAmple() + " " + imatge.getAlt() + '\n' +  huffcoder.encode(bigVector); //cacho string
 
+
+   }
+
+   public Vector<Integer> getDebugging(){
+       Vector<Integer> bigVector = new Vector<Integer>();
+       bigVector.addAll(Y);
+       bigVector.addAll(Cb);
+       bigVector.addAll(Cr);
+
+       return bigVector;
    }
 
 }
