@@ -57,35 +57,6 @@ private String magicNum;
 //            llençar excepcio
         }
         System.out.println("La imatge en strinng te ara" + img.length() + " chars o bytes ni idea");
-//       while(imag[it] != '\n'){  //obtinc el magic nombre
-//           aux += imag[it];
-//           it++;
-//       }
-//       it ++; //posat l primer int de despres
-//        magicNum = aux;
-//        if (magicNum != "P6"){
-//            //llança excepció
-//        }
-//        aux = "";
-//        while (imag[it] != ' '){
-//            aux += imag[it];
-//            it ++;
-//        }
-//        it++;
-//        ample = Integer.parseInt(aux);
-//        aux = "";
-//        while(imag[it] != '\n'){  //obtinc el magic nombre
-//            aux += imag[it];
-//            it++;
-//        }
-//        it ++; //posat l primer int de despres
-//        alt = Integer.parseInt(aux);
-//        aux = "";
-//        while(imag[it] != '\n'){  //obtinc el magic nombre
-//            aux += imag[it];
-//            it++;
-//        }
-//        it ++; //posat l primer int de despres
         String contingut = img;
         System.out.println(magicNum);
         System.out.println(alt);

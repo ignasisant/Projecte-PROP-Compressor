@@ -56,17 +56,17 @@ public class jpegCompressor extends jpeg {
    // Funcions de la presentació.
    @Override
    protected void operaYCbCr() { // done
-       for (int i = 0; i < imatge.getAlt(); i++) {
-           for (int j = 0; j < imatge.getAmple(); j++) {
-               int R = this.imatge.getColorPerIndex(i * j + j).getR();
-               int G = this.imatge.getColorPerIndex(i * j + j).getG();
-               int B = this.imatge.getColorPerIndex(i * j + j).getB();
-               int y =  (int) ( 0.299 * R + 0.587 * G + 0.114 * B);//16 + (((R << 6) + (R << 1) + (G << 7) + G + (B << 4) + (B << 3) + B) >> 8);
-               int  Cr =  (int) ( -0.16874 * R - 0.33126 * G + 0.50000 * B); //128 + ((-((R << 5) + (R << 2) + (R << 1)) - ((G << 6) + (G << 3) + (G << 1)) + (B << 7)
-                      // - (B << 4)) >> 8);
-               int Cb = (int) ( 0.50000 * R - 0.41869 * G - 0.08131 * B);//128 + (((R << 7) - (R << 4) - ((G << 6) + (G << 5) - (G << 1)) - ((B << 4) + (B << 1))) >> 8);
-               imatge.setColorPerIndex(i * j + j, new Color(y, Cr, Cb));
-           }
+       for (Color i : imatge.getImatge()){
+           int R = i.getR();
+           int G = i.getG();
+           int B = i.getB();
+           int y =  (int) ( 16 + ((65.738/256) * R) + ((129.057/256) * G) + ((25.064/256) * B));//16 + (((R << 6) + (R << 1) + (G << 7) + G + (B << 4) + (B << 3) + B) >> 8);
+           int  Cb =  (int) ( 128 - ((37.945/256) * R) - ((74.494/256) * G) + ((112.439/256) * B) ); //128 + ((-((R << 5) + (R << 2) + (R << 1)) - ((G << 6) + (G << 3) + (G << 1)) + (B << 7)
+           // - (B << 4)) >> 8);
+           int Cr = (int) ( 128 + ((112.439/256) * R) - ((94.154/256) * G) - ((18.285/256) * B ) );//128 + (((R << 7) - (R << 4) - ((G << 6) + (G << 5) - (G << 1)) - ((B << 4) + (B << 1))
+           i.setR(y);
+           i.setG(Cb);
+           i.setB(Cr);
        }
    }
 
@@ -138,7 +138,7 @@ public class jpegCompressor extends jpeg {
        }
    }
 
-   protected void preparaMatrius() {
+   private void preparaMatrius() {
        Y = new Vector<Integer>();
        Cr = new Vector<Integer>();
        Cb = new Vector<Integer>();
@@ -187,11 +187,7 @@ public class jpegCompressor extends jpeg {
    }
 
    private void createDCTs() { // Cal repassar la lògica d'això.
-       // this.print();
-       // while ((this.imatge.size())%64 != 0){ //aixo esta mal
-       // this.imatge.add(this.imatge.get((alt-1)*(ample-1))); //Allargo amb l'ultim
-       // bit
-       // }
+
        int i = 0;
        int j = 0;
        int matriu = 0;// matriu a la que accedeixo
@@ -305,7 +301,7 @@ public class jpegCompressor extends jpeg {
            System.out.println("Atenció que ho farà malament");//cal llançar aquí una nova excepcio creada.
        }
        // this.print();
-       this.operaYCbCr(); // ara tinc la imatge en YCbCr
+       this.operaYCbCr(); //Ho he de fer a imatge
        this.transformBlocks(); // Aquí tinc els blocs ja transformats.
        System.out.println("Printo la matriu DCTilu[0] abans de dividir:");
        for (int i = 0; i < 8; i++){
