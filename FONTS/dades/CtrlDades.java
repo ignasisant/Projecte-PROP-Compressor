@@ -32,14 +32,12 @@ public class CtrlDades {
             System.out.println(fileName);
             
             File file = new File(fileName);  
-            File[] parents = {}; 
-            File parent = file;
-            while((parent = parent.getParentFile())!=null) {
-                System.out.println("PARENT: "+parent.getAbsolutePath());
-                if(parent.exists()) break;
-                else parent.mkdirs();
+           
+            File parent = file.getParentFile();
+               // System.out.println("PARENT: "+parent.getAbsolutePath());
+            if(!parent.exists()) parent.mkdirs();
 
-            }           
+                    
              
             //.mkdirs();
             

@@ -41,8 +41,9 @@ class Descompressio {
         try {
 
             //this.ext_comp = getExtFromId(info.get(0)); aixo ena anira be per quan haguem d'endevinar el algo
-            //String outf = getDecompressOutputFile(infile, outfile);
-            if(outfile == "") outfile = origName;
+            String outf = getDecompressOutputFile(infile, outfile, origName);
+            
+            //if(outfile == "") outfile = origName;
             String payload =data;
             
             algo.setData(payload);
@@ -53,7 +54,7 @@ class Descompressio {
             
             String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),decompress.length());
            
-            this.f.writeToFile(decompress, outfile);
+            this.f.writeToFile(decompress, outf);
             return stat;
 
         } catch (Exception e) {
@@ -104,12 +105,23 @@ class Descompressio {
 
     }
 
-    private String getDecompressOutputFile(String infile, String outfile) {
-        if(outfile == "") {
-            outfile = infile.replaceFirst("[.][^.]+$", "")  ;
+    private String getDecompressOutputFile(String infile, String outfile, String origName) {
+
+
+        if(outfile == "" ) {
+            int index = infile.lastIndexOf("/");
+            outfile = infile.substring(0, index+1) + origName;
+            
         } else {
-           // outfile +=  "."+ ext_comp; // no cal pasar el ext_comp ja que guardem el fitxer aqui
+            outfile += "/"+origName;
+            
         }
+        // if(outfile == "") {
+        //     outfile = infile.replaceFirst("[.][^.]+$", "")  ;
+        // } else {
+        //    // outfile +=  "."+ ext_comp; // no cal pasar el ext_comp ja que guardem el fitxer aqui
+        //}
+        System.out.println("OUTF: "+outfile);
         return outfile;
     }
 
