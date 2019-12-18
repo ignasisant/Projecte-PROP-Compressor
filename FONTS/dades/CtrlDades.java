@@ -29,10 +29,18 @@ public class CtrlDades {
 
         public void write(String payload,  String fileName) throws Exception{ 
 
-            if(fileName.indexOf("/")!= -1 ){
-                File file = new File(fileName);              
-                file.getParentFile().mkdirs();
-            }
+            System.out.println(fileName);
+            
+            File file = new File(fileName);  
+           
+            File parent = file.getParentFile();
+               // System.out.println("PARENT: "+parent.getAbsolutePath());
+            if(!parent.exists()) parent.mkdirs();
+
+                    
+             
+            //.mkdirs();
+            
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(payload);
             writer.close();

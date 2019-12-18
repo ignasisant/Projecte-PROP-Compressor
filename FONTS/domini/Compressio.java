@@ -112,12 +112,19 @@ class Compressio {
 
     public String getCompressOutputFile(String infile, String outfile) {
 
-        if(outfile == "") {
-           if(f.getExt(infile) != "") outfile = infile.replaceFirst("[.][^.]+$",  "."+algo.getExtension() ) ;
-           else outfile = infile+"."+this.algo.getExtension();
+        if(outfile != "" ) {
+            String[] parts = infile.split("/");
+            infile = parts[parts.length-1];
+            outfile = outfile+"/"+infile.replaceFirst("[.][^./]+$",  "."+algo.getExtension() ) ;
+            if(outfile == outfile+"/"+infile ) outfile = outfile+"/"+infile+"."+algo.getExtension() ;
+            
         } else {
-            outfile += "."+algo.getExtension();
+            outfile = infile.replaceFirst("[.][^./]+$",  "."+algo.getExtension() ) ;
+            if(outfile == infile) outfile = infile+"."+algo.getExtension() ;
+            
         }
+
+
         return outfile;
     }
 
