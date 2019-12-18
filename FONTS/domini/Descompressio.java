@@ -18,13 +18,13 @@ class Descompressio {
         try {
         info = this.f.llegirDescomp(infile);
 
-  
+
         if (info[0].length()==1) {
             String[] stats =  this.decompressFile(infile, outfile, info[1], info[2]);
             return stats;
         }
         else { //decompressio de carpeta
-       
+
             String[] stats = this.decompressFolder(infile, outfile, info[0]+"\n"+info[1]+"\n"+info[2]);
             return stats;
 
@@ -33,7 +33,7 @@ class Descompressio {
             e.printStackTrace();
             return null;
         }
-       
+
 
     }
 
@@ -44,15 +44,15 @@ class Descompressio {
             //String outf = getDecompressOutputFile(infile, outfile);
             if(outfile == "") outfile = origName;
             String payload =data;
-            
+
             algo.setData(payload);
 
             this.st.initStats();
-            
+
             String decompress = this.run();
-            
+
             String[] stat = this.st.saveStats(infile,algo.getId(), payload.length(),decompress.length());
-           
+
             this.f.writeToFile(decompress, outfile);
             return stat;
 
@@ -64,19 +64,19 @@ class Descompressio {
     }
 
     private String[] decompressFolder(String infile, String outfile, String all) {
-       
+
         int ini =  all.indexOf("\n");
         all = all.substring(ini+1);
         int totini=0, totend=0;
         int fin = all.length();
         this.st.initStats();
-        
+
         while(true) {
 
             ini =  all.indexOf("\n");
-           
+
             String nom = all.substring(0, ini);
-           
+
             all = all.substring(ini+1);
             ini =  all.indexOf("\n");
             int max = Integer.parseInt(all.substring(0,ini));
@@ -95,7 +95,7 @@ class Descompressio {
             if (max == all.length()) break;
             all = all.substring(max+1);
 
-            fin = all.length();      
+            fin = all.length();
 
         }
         String[] stat = this.st.saveStats(infile,algo.getId(),totini,totend);
@@ -153,7 +153,7 @@ class Descompressio {
                 break;
             default:
                  throw new InvalidAlgorithm();
-        
+
         }
         return al.getExtension();
 
