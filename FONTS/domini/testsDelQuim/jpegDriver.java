@@ -20,7 +20,7 @@ public class jpegDriver {
 
 
         Fitxer f = new Fitxer();
-        String fitxer = f.llegirFitxer("./ppms/blanc.ppm");
+        String fitxer = f.llegirFitxer("./ppms/stalin.ppm");
         System.out.println("Començo a comprimir");
         System.out.println("Començo a comprimir");
         jpegCompressor j = new jpegCompressor();
