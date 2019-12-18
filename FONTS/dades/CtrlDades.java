@@ -22,6 +22,7 @@ public class CtrlDades {
                 int dif = payload.length();
                 if (data.length != payload.length()) {
                     String aux = new String(Arrays.copyOfRange(data, payload.length(),data.length ));
+
                     payload += aux;
                 }
                 return payload;
