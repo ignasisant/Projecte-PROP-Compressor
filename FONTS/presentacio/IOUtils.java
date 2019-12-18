@@ -1,10 +1,7 @@
 package presentacio;
 import domini.Fitxer;
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
-
 
 public class IOUtils {
     private int action = -1;
@@ -17,7 +14,6 @@ public class IOUtils {
     private String[] stats;
 
     public IOUtils() {
-
         this.vistaPrincipal = new VistaPrincipal(this);      
         this.ctrlDom = new Fitxer();//Fitxer.getFitxer();                                                                 
     }
@@ -28,27 +24,11 @@ public class IOUtils {
         this.action = action;
         this.algoId = algo;
         setOutputFile(outfile);
-
-
     }
-
-
 
     public void run() throws Exception {
         vistaPrincipal.hacerVisible();
-        //if(this.infile.getName() == "") throw new FileNotSelected();
-        //if(this.algoId != 0 && this.algoId != 1 && this.algoId != 2) throw new AlgorithmNotSelected();
-        //if(this.action == -1) throw new ActionNotSelected();
-
-
-
-        System.out.println(infile);
-        System.out.println(outfile);
-        System.out.println(type);
-        System.out.println(algoId);
         switch (this.action+(this.type*2)) {
-    
-
             case 0:
                 stats = ctrlDom.compress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
@@ -62,7 +42,6 @@ public class IOUtils {
             case 3:
                 stats = ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
- 
         }
     }
 
@@ -72,7 +51,6 @@ public class IOUtils {
 
     public void setInputFile(String file) throws Exception {
             this.infile = file;
-
     }
 
     public void setOutputFile(String file) {

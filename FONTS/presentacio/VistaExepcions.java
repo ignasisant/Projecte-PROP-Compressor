@@ -12,50 +12,27 @@ import presentacio.VistaPrincipal;
 import java.util.*;
 
 
-////////////////////////
 
 public class VistaExepcions {
-
-
-
-  
 
 //////////////////////// Constructor y metodos publicos
 
 
-  public VistaExepcions () {
-    inicializarComponentes();
-  }
-  
-//////////////////////// Metodos de las interfaces Listener
+  public VistaExepcions () {}
 
+  public void jaComprimit(){ //exepcio per cuan volem comprimir un arxiu ja comprimit6
+    String message = "Aquest arxiu ja está comprimit!";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
+    return ;
 
- 
-
-
-
-//////////////////////// Asignacion de listeners
-
-    private void asignar_listenersComponentes() {
-
-       
-  
-
-    }
-
-
-//////////////////////// Resto de metodos privados
-
-
-  private void inicializarComponentes() {
-
-    inicializar_panelContenidos();
-    asignar_listenersComponentes();
   }
 
-  private void inicializar_panelContenidos(){
-      
+  public void noDescomprimir(String extension){ //exepcio per cuan no es pot descomprimir
+    String message;
+    if(!extension.equals("") ) message = "no es pot descomprimir l'arxiu amb extensió " + extension;
+    else message = "no es pot descomprimir el que has seleccionat";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+    JOptionPane.ERROR_MESSAGE);
+    return;
   }
-  
-
 }
