@@ -11,9 +11,6 @@ import presentacio.VistaPrincipal;
 
 import java.util.*;
 
-
-////////////////////////
-
 public class VistaInfo {
 
 
@@ -36,7 +33,6 @@ public class VistaInfo {
 
 //////////////////////// Constructor y metodos publicos
 
-
   public VistaInfo (IOUtils pIOUtils, Boolean c, VistaPrincipal vp) {
     comprimir=c;
     iIOUtils = pIOUtils;
@@ -46,8 +42,7 @@ public class VistaInfo {
 
   public JPanel getPanelInformacio(){
     return panelInformacio;
- }
-
+  }
 
 //////////////////////// Metodos de las interfaces Listener
 
@@ -56,12 +51,12 @@ public class VistaInfo {
   }
 
   public void actionPerformed_buttonCompare(ActionEvent event){
-    VistaCompare vistaCompare = new VistaCompare();
+    new VistaCompare(); //s'obre finestra per comparar
   }
 
 //////////////////////// Asignacion de listeners
 
-    private void asignar_listenersComponentes() {
+  private void asignar_listenersComponentes() {
 
     // Listeners para los botones
     buttonHome.addActionListener(
@@ -79,25 +74,18 @@ public class VistaInfo {
         }
       }
     );
-
-
-    // Listeners para el resto de componentes
-
-    }
-
-
+  }
+  
 //////////////////////// Resto de metodos privados
 
-
   private void inicializarComponentes() {
-
     incializar_panelLabels();
     inicializar_panelButtons();
     inicializar_panelInformacio();
     asignar_listenersComponentes();
   }
 
-  private void incializar_panelLabels(){
+  private void incializar_panelLabels(){ //tota la iformació de la compressió
     stats = iIOUtils.getStats();
     panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.PAGE_AXIS));
     panelLabels.add(Box.createRigidArea(new Dimension(0,5)));
@@ -115,17 +103,14 @@ public class VistaInfo {
     panelLabels.add(new JLabel("Temps: "+stats[5]+" ms"));
   }
 
-
-
-  private void inicializar_panelInformacio(){
+  private void inicializar_panelInformacio(){ //continguts finals
     panelInformacio.setLayout(new BorderLayout());
-    // Paneles
     if(comprimir) panelInformacio.add(new JLabel("ARXIU COMPRIMIT AMB ÈXIT!"), BorderLayout.NORTH);
     else panelInformacio.add(new JLabel("ARXIU DESCOMPRIMIT AMB ÈXIT!"), BorderLayout.NORTH);
     panelInformacio.add(panelLabels, BorderLayout.CENTER);
     panelInformacio.add(panelButtons, BorderLayout.SOUTH);   
-
   }
+
   private void inicializar_panelButtons(){
     panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.Y_AXIS));
     if(comprimir) panelButtons.add(buttonCompare);

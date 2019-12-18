@@ -11,11 +11,9 @@ import presentacio.VistaPrincipal;
 
 import java.util.*;
 
-
 ////////////////////////
 
 public class VistaCompare {
-
 
   private JFrame frameVista = new JFrame();
   private JPanel panelContenidos = new JPanel();
@@ -25,12 +23,7 @@ public class VistaCompare {
   JScrollPane jscrollOriginal = new JScrollPane(jtextOriginal);
   JScrollPane jscrollTractat = new JScrollPane(jtextOriginal);
 
-    
-
-
-  
-
-//////////////////////// Constructor y metodos publicos
+//////////////////////// Constructor 
 
   public VistaCompare () {
     inicializarComponentes();
@@ -58,7 +51,6 @@ private void actionPerformed_buttonVolver(ActionEvent event){
 //////////////////////// Resto de metodos privados
 
   private void inicializarComponentes() {
-
     inicializar_panelContenidos();
     inicializar_frameVista();
     asignar_listenersComponentes();
@@ -86,6 +78,4 @@ private void actionPerformed_buttonVolver(ActionEvent event){
     frameVista.pack();
     frameVista.setVisible(true);
   }
-  
-
 }
