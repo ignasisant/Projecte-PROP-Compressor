@@ -1,5 +1,6 @@
 package domini;
-abstract class Algorithm {
+
+public abstract class Algorithm {
 
     abstract String compress();
     abstract String decompress();

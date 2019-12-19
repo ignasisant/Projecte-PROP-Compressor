@@ -9,10 +9,8 @@ package domini;
 import java.util.HashMap;
 
 
-
-
 public class LZ78 extends Algorithm{
-    
+
     private String inData;
     private int ID = 0;
     private String ext = "lz78";
@@ -30,7 +28,7 @@ public class LZ78 extends Algorithm{
     }
 
     public LZ78() {
-      
+
 
     }
 
@@ -65,13 +63,13 @@ public class LZ78 extends Algorithm{
                 ant = "0";
             } else { // existeix
                 ant = map.get(key).toString();
-                
+
                 if (i + 1 == n)  carry += "0"+key; // actualitzem el carry amb ultim si ha quedat penjat
-                
+
             }
         }
 
-       
+
         return carry;
     }
 
@@ -94,7 +92,7 @@ public class LZ78 extends Algorithm{
             } else { // existeix
                 ant = map.get(key).getIndex();
                 if (i + 1 == n) tree.put(index, new Node(0, chari));
-                
+
             }
         }
         return tree;
@@ -108,7 +106,7 @@ public class LZ78 extends Algorithm{
         Integer index = 1;
         boolean last = false;
         for (int i = 0; i < n; i++) {
-            int size; 
+            int size;
            char val;
         //    System.out.println("ENTRO: "+parts[i]);
         //    System.out.println(parts[i]+"  "+parts[i].length()+"  "+(i+1));
@@ -120,7 +118,7 @@ public class LZ78 extends Algorithm{
                 if(size == 0){
                     tree.put(index++, new Node(Integer.parseInt(parts[i]),':'));
                     last = true;
-                } 
+                }
                 else{
                     size = parts[i].length();
                     tree.put(index++, new Node(Integer.parseInt((String)parts[i].subSequence(0, size-1)),parts[i].charAt(size-1)));
@@ -133,9 +131,9 @@ public class LZ78 extends Algorithm{
           // System.out.println(index);
         }
 
-       
+
         return build(tree);
-        
+
     }
 
     public static  String build(HashMap<Integer, Node> tree) {
@@ -153,7 +151,7 @@ public class LZ78 extends Algorithm{
             }
        }
 
-         return buff;   
+         return buff;
    }
 
 }

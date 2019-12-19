@@ -35,7 +35,7 @@ public class LZW extends Algorithm{
         String s= this.inData;
         String r="";
         java.util.HashMap<String, Integer> taula = new java.util.HashMap<String, Integer>();
-        
+
         //coloquem al hashmap la taula ascii
         for (int i = 0; i < 256 ; i++ ){
             String aux = "";
@@ -69,17 +69,17 @@ public class LZW extends Algorithm{
         r+= String.valueOf(taula.get(p));
         r+=":";
         return r;
-       
+
     }
 
     public String decompress(){
-        
+
         String r="";
         String input= this.inData;
         java.util.HashMap<Integer, String> taula = new java.util.HashMap<Integer , String>();
         String[] parts = input.split(":");
         Vector<Integer> op = new Vector<Integer>();
-        
+
         for (int i = 0 ; i < parts.length ; i++ ){
             op.add(Integer.parseInt(parts[i]));
         }
@@ -96,7 +96,7 @@ public class LZW extends Algorithm{
         r+=s;
 
         int contador = 256;
-        
+
         for (int i = 0; i < op.size() - 1 ; i++){
             n = op.get(i+1);
             if(taula.containsKey(n) != true){
@@ -116,5 +116,5 @@ public class LZW extends Algorithm{
         return r;
     }
 
-   
+
 }

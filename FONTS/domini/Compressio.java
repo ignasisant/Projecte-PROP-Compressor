@@ -16,9 +16,9 @@ class Compressio {
 
     public  String[]  compress(String infile,  String outfile, Integer type) {
         String[] info = null;
-        if (type==0)   info = this.compressFile(infile, outfile); 
+        if (type==0)   info = this.compressFile(infile, outfile);
         else info = this.compressFolder(infile, outfile);
-        
+
         return info;
 
     }
@@ -28,19 +28,19 @@ class Compressio {
             String all[] = infile.split("/");
             String auxname = all[all.length -1];
             String outf = getCompressOutputFile(infile, outfile);
-            
+
             String payload = this.f.llegirFitxer(infile);
-   
+
             this.algo.setData(payload);
-            
-     
+
+
             this.st.initStats();
             String compress = this.run();
             String[] info =  this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
-            
+
             // ext_comp = f.getExt(infile);
-     
+
             this.f.writeToFile(algo.getId()+"\n"+auxname+"\n"+compress, outf);
            return info;
 
@@ -72,8 +72,8 @@ class Compressio {
                 String compress = this.run();
                 out+= "\n"+compress.length()+"\n";
                 out+=compress;
-            
-                
+
+
             }
             outSize = out.length();
             String[] info =  this.st.saveStats(infile,algo.getId(), inSize, outSize);
@@ -84,7 +84,7 @@ class Compressio {
             System.out.println(e);
             return null;
         }
-        
+
 
     }
 
@@ -109,7 +109,7 @@ class Compressio {
         }
 
     }
-    
+
     public String getCompressOutputFile(String infile, String outfile) {
 
         if(outfile == "") {
