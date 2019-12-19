@@ -1,12 +1,9 @@
 package domini.testsDelQuim;
 
-import domini.Algorithm;
 import domini.Fitxer;
-import domini.jpegCompressor;
-import domini.jpegDecompressor;
+import domini.JPEGCompressor;
+import domini.JPEGDecompressor;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Vector;
 
 
@@ -24,7 +21,7 @@ public class jpegDriver {
         String fitxer = f.llegirFitxer("./out_sense_huffman.ppm");
         System.out.println("Començo a comprimir");
         System.out.println("Començo a comprimir");
-        jpegCompressor j = new jpegCompressor();
+        JPEGCompressor j = new JPEGCompressor();
         j.setData(fitxer);
 
         String comprimit = j.compress();
@@ -32,7 +29,7 @@ public class jpegDriver {
 
         Vector<Integer> debugging = j.getDebugging();
 
-        jpegDecompressor dj = new jpegDecompressor();
+        JPEGDecompressor dj = new JPEGDecompressor();
         dj.setDebugging(debugging, 56, 56);
         //dj.setData(comprimit);  //el huffmann es queda encallat aquí.
         String Descomprimit = dj.decompress();

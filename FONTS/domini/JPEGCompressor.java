@@ -24,11 +24,11 @@ import java.util.*;
 
 //TODO: Iniciar estructures de dades a la creadora.
 
-public class jpegCompressor extends jpeg {
+public class JPEGCompressor extends JPEG {
 
     private String data;
 
-   public jpegCompressor() {
+   public JPEGCompressor() {
        // Iniciar estructures de dades.
        imatge = new Imatge();
 
@@ -237,9 +237,9 @@ public class jpegCompressor extends jpeg {
        for (int matrix = 0; matrix < DCTiluTrans.length; matrix++) {
            for (int i = 0; i < 8; i++) {
                for (int j = 0; j < 8; j++) {
-                   DCTiluTrans[matrix][i][j] /= jpeg.QUANTY[i][j];
-                   DCTcrTrans[matrix][i][j] /= jpeg.QUANTC[i][j];
-                   DCTcbTrans[matrix][i][j] /= jpeg.QUANTC[i][j];
+                   DCTiluTrans[matrix][i][j] /= JPEG.QUANTY[i][j];
+                   DCTcrTrans[matrix][i][j] /= JPEG.QUANTC[i][j];
+                   DCTcbTrans[matrix][i][j] /= JPEG.QUANTC[i][j];
                }
            }
        }
