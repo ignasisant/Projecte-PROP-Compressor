@@ -196,6 +196,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         }
         //Aqui comença la magia del huffmann encoding
         while (cua.size() > 1) {  //mentre tingui algo am priotitat major de un nombre. Mai serà 1. Quan sigui 1 hauré acabat perque haué encuat la santa arrel de totes.
+
             Node n1 = cua.poll(); //tipic pop de tota la vida.
             Node n2 = cua.poll();
             //He obtingut els dos primers de menys prioritat   
@@ -363,7 +364,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
         comprimit = "";
         Arbre = "";
 
-        String res = donamString(in);//Està comprovat el seu funcionament.
+        String res = donamString(in);//Està comprovat el seu funcionament. //aqui tinc problema de temps
         //System.out.println("Printo el comprimit + l'arbre " + res);
         int llarg = charsToInteger(res.substring(0,32));
         comprimit = res.substring(32,32 + llarg);
