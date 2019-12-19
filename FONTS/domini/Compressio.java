@@ -115,6 +115,7 @@ class Compressio {
       
         if( infile.charAt(0) != '/') del = "\\"; // Filesystem windows!
         System.out.println("DEL: "+del);
+        System.out.println("REG: "+"[.][^.\\"+del+"]+$");
         if(outfile != "" ) {
             String[] parts = infile.split(del);
             infile = parts[parts.length-1];
