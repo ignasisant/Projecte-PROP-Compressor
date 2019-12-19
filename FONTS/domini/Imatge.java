@@ -115,12 +115,13 @@ private String magicNum;
         }
     }
 
-    public void creaImatgeDePPM(String img){
+    public void creaImatgeDePPM(String img) throws PPMBadFormatted {
         System.out.println(img.length());
         int it = 0;
         char[] imag = img.toCharArray();
         String aux = "";
         it = img.indexOf('P');
+        if (img.charAt(it+1) != '6') throw new PPMBadFormatted(); //No és p6 la imatge
         magicNum = img.substring(it, it+2);
         img = img.substring(it+3);
         while (img.charAt(0) == '#'){ //retallo la string
@@ -139,7 +140,7 @@ private String magicNum;
         maxVal = Integer.parseInt(img.substring(0, img.indexOf('\n')));
         img = img.substring(img.indexOf('\n')+1);
         if (maxVal != 255){
-//            llençar excepcio
+            throw new PPMBadFormatted();
         }
         System.out.println("La imatge en strinng te ara" + img.length() + " chars o bytes ni idea");
         String contingut = img;
@@ -154,6 +155,7 @@ private String magicNum;
         imatge = new Vector<Color>();
         imatge.setSize(ample*alt);
         int cont = 0;
+        if (bytes.length != alt*ample) throw new PPMBadFormatted();
         for (int i = 0; i < bytes.length; i+=3){  //tenir molt en compte que un char son dos bytes!!!! jo només en vull un.
             int r = (byte)bytes[i];
             int g = (byte)bytes[i+1];
@@ -171,68 +173,7 @@ private String magicNum;
     }
 
 
-//   public void creaImatge(String path) throws IOException {
-//       // String path = "./boxes_1.ppm";
-//       File image = new File(path);
-//       if (!image.exists()) {
-//           System.out.println("No existeix la imatge");
-//       }
 //
-//       BufferedReader br = new BufferedReader(new FileReader(image)); // permet llegir linies cosa que mola
-//       FileInputStream fin = new FileInputStream(path); // el necessitarem per llegir shorts
-//       this.magicNum = br.readLine();
-//       if (magicNum != "P6"){
-//           //llançó excepció.
-//       }
-//       String line = br.readLine();
-//       ArrayList<String> a = new ArrayList<String>();
-//       for (String s : line.split(" ")) {
-//           a.add(s);
-//       }
-//       this.ample = Integer.parseInt(a.get(0));
-//       this.alt = Integer.parseInt(a.get(1));
-//       a = null; // elimino l'objecte per no gastar memòria dinàmica.
-//       this.maxVal = Integer.parseInt(br.readLine()); // cardem el valor més alt de Color. En funció d'aquest hi ha
-//       // altres params
-//       if (maxVal < 0 || maxVal > 65536) { // Format incorrecte. Cal excepció?
-//           System.out.println("Quillo t'has colao");
-//           // no se que ficar-hi aqui
-//       }
-//
-//       // Xivatos zone
-//       // System.out.println(magicNum);
-//       // System.out.println(ample);
-//       // System.out.println(alt);
-//       // System.out.println(maxVal);
-//
-//       DataInputStream din = new DataInputStream(fin); // Inicialitzo per als shortsprivate  String magicNum;
-//       imatge.setSize(alt * ample);
-//       if (maxVal >= 256) { // Cada valor de Color son dos bytes
-//           int R, G, B; // Els bytes entren per triades
-//           for (int i = 0; i < alt; i++) {
-//               for (int j = 0; j < ample; j++) {
-//                   R = (int) din.readUnsignedShort();
-//                   G = (int) din.readUnsignedShort();
-//                   B = (int) din.readUnsignedShort();
-//                   imatge.set(i * j + j, new Color(R, G, B));
-//               }
-//           }
-//       } else { // un byte
-//           short R, G, B; // Els short entren per triades
-//           for (int i = 0; i < ample; i++) {
-//               for (int j = 0; j < ample; j++) {
-//                   R = (short) din.readUnsignedByte();
-//                   G = (short) din.readUnsignedByte();
-//                   B = (short) din.readUnsignedByte();
-//                   int pos = i * ample + j;
-//                   imatge.set(pos, new Color(R, G, B));
-//               }
-//           }
-//       }
-//       din.close();
-//       br.close();
-//        System.out.println(imatge.size());
-//   }
 
     public String retallaHeaders(String data){
         String am = "";
@@ -259,7 +200,7 @@ private String magicNum;
         String header = "P6\n" + Integer.toString(ample) + " " + Integer.toString(alt) + "\n255\n";
         StringBuilder result = new StringBuilder();
         for (Color i : imatge){
-            result.append((char) i.getR()).append((char) i.getG()).append((char) i.getB());
+            result.append((byte) i.getR()).append((byte) i.getG()).append((byte) i.getB());
         }
         return header + result; //la imatge ve per aquí.
 //        FileOutputStream Hd = null;  //cal canviar-ho perque no estigui hardcoded
