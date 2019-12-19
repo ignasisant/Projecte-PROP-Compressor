@@ -126,6 +126,7 @@ class Compressio {
         } else {
             //if(del == "\\") del = "\\\\";
             outfile = infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
+            System.out.println("OOUUTT: "+outfile);
             if(outfile == infile) outfile = infile+"."+algo.getExtension() ;
             
         }
