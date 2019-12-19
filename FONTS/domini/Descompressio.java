@@ -69,7 +69,8 @@ class Descompressio {
         int ini =  all.indexOf("\n");
         all = all.substring(ini+1);
         int totini=0, totend=0;
-        int fin = all.length();
+        String del = "/";
+        if(outfile.charAt(0)!= '/') del = "\\";
         this.st.initStats();
 
         while(true) {
@@ -88,7 +89,7 @@ class Descompressio {
             String decompress = this.run();
             totend += decompress.length();
             try {
-            this.f.writeToFile(decompress, "/tmp/"+nom);
+            this.f.writeToFile(decompress, outfile+del+nom);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -96,7 +97,6 @@ class Descompressio {
             if (max == all.length()) break;
             all = all.substring(max+1);
 
-            fin = all.length();
 
         }
         String[] stat = this.st.saveStats(infile,algo.getId(),totini,totend);

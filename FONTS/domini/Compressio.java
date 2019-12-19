@@ -25,8 +25,12 @@ class Compressio {
 
     private String[] compressFile(String infile,  String outfile) {
         try {
-            String all[] = infile.split("/");
+            
+            String del = "/";
+            if(infile.charAt(0)!= '/') del = "\\\\" ;
+            String all[] = infile.split(del);
             String auxname = all[all.length -1];
+            System.out.println("AUXN: "+auxname+" allsize: "+all.length);
             String outf = getCompressOutputFile(infile, outfile);
 
             String payload = this.f.llegirFitxer(infile);
@@ -38,8 +42,6 @@ class Compressio {
             String compress = this.run();
             String[] info =  this.st.saveStats(infile,algo.getId(), payload.length(),compress.length());
 
-
-            // ext_comp = f.getExt(infile);
 
             this.f.writeToFile(algo.getId()+"\n"+auxname+"\n"+compress, outf);
            return info;
@@ -53,7 +55,9 @@ class Compressio {
     private String[] compressFolder(String infile,  String outfile) {
         try {
             String outf = getCompressOutputFile(infile, outfile);
-            String[] dirs = infile.split("/");
+            String del = "/";
+            if(outf.charAt(0)!= '/') del = "\\\\" ;
+            String[] dirs = infile.split(del);
             String inici = dirs[dirs.length -1];
             int ini = infile.length()-inici.length();
             String files = f.getHierarchy(infile);
@@ -111,21 +115,28 @@ class Compressio {
     }
 
     public String getCompressOutputFile(String infile, String outfile) {
-        String del = "/";
-      
-        if( infile.charAt(0) != '/') del = "\\\\"; // Filesystem windows!
-        System.out.println("DEL: "+del);
-        System.out.println("REG: "+"[.][^."+del+"]+$");
+        String esc = "/", del = "/";
+        boolean win = false;
+        if( infile.charAt(0) != '/') {
+            del = "\\"; // Filesystem windows! 
+            esc = "\\\\"; // escapem el \ per la regex
+        } 
+       // System.out.println("DEL: "+del);
+       // System.out.println("REG: "+"[.][^."+del+"]+$");
         if(outfile != "" ) {
-            String[] parts = infile.split(del);
+            String[] parts = infile.split(esc);
             //if(del == "\\") del = "\\\\";
             infile = parts[parts.length-1];
-            outfile = outfile+del+infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
-            if(outfile == outfile+del+infile ) outfile = outfile+del+infile+"."+algo.getExtension() ;
+            String outf = outfile+del+infile.replaceFirst("[.][^."+esc+"]+$",  "."+algo.getExtension() ) ;
+           
+            if(outf.equals(outfile+del+infile) )  outfile = outfile+del+infile+"."+algo.getExtension() ;
+            
+            else outfile = outf;
             
         } else {
             //if(del == "\\") del = "\\\\";
-            outfile = infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
+            System.out.println("OOUUTT: "+outfile);
+            outfile = infile.replaceFirst("[.][^."+esc+"]+$",  "."+algo.getExtension() ) ;
             System.out.println("OOUUTT: "+outfile);
             if(outfile == infile) outfile = infile+"."+algo.getExtension() ;
             
