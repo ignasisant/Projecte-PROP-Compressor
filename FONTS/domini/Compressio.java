@@ -118,11 +118,11 @@ class Compressio {
         if(outfile != "" ) {
             String[] parts = infile.split(del);
             infile = parts[parts.length-1];
-            outfile = outfile+del+infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
+            outfile = outfile+del+infile.replaceFirst("[.][^.\\"+del+"]+$",  "."+algo.getExtension() ) ;
             if(outfile == outfile+del+infile ) outfile = outfile+del+infile+"."+algo.getExtension() ;
             
         } else {
-            outfile = infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
+            outfile = infile.replaceFirst("[.][^.\\"+del+"]+$",  "."+algo.getExtension() ) ;
             if(outfile == infile) outfile = infile+"."+algo.getExtension() ;
             
         }
