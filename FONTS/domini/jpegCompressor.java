@@ -26,6 +26,8 @@ import java.util.*;
 
 public class jpegCompressor extends jpeg {
 
+    private String data;
+
    public jpegCompressor() {
        // Iniciar estructures de dades.
        imatge = new Imatge();
@@ -34,24 +36,30 @@ public class jpegCompressor extends jpeg {
 
 
 
+
     @Override
-    public void setData(String data) {
+    public void setData(String data) throws PPMBadFormatted {
+        this.data = data;
         imatge.creaImatgeDePPM(data);
     }
 
+    public String getData () {
+       return this.data;
+    }
 
 
-   public void print() { // mostra tota la image per cada unitat rgb que tenim per les proves
-       for (int i = 0; i < imatge.getAlt(); i++) {
-           for (int j = 0; j < imatge.getAmple(); j++) {
-               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getR());
-               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getG());
-               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getB());
-               System.out.printf(" ");
-           }
-           System.out.printf("\n");
-       }
-   }
+//
+//   public void print() { // mostra tota la image per cada unitat rgb que tenim per les proves
+//       for (int i = 0; i < imatge.getAlt(); i++) {
+//           for (int j = 0; j < imatge.getAmple(); j++) {
+//               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getR());
+//               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getG());
+//               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getB());
+//               System.out.printf(" ");
+//           }
+//           System.out.printf("\n");
+//       }
+//   }
 
    // Funcions de la presentació.
 

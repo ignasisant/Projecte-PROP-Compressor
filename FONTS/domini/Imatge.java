@@ -123,22 +123,30 @@ private String magicNum;
         String aux = "";
         it = img.indexOf('P');
         if (img.charAt(it+1) != '6') throw new PPMBadFormatted(); //No és p6 la imatge
+        if (img.charAt(it+1) == '\r') it++;
         magicNum = img.substring(it, it+2);
         img = img.substring(it+3);
         while (img.charAt(0) == '#'){ //retallo la string
             it = img.indexOf('\n') + 1;
             img = img.substring(it);
         }
-        aux = img.substring(0,img.indexOf(' '));
+        int a;
+        if (img.charAt(0) == '\n') a = 1;
+        else a = 0;
+        aux = img.substring(a,img.indexOf(' '));
         ample = Integer.parseInt(aux);
+        if (img.charAt(0)=='\n') img = img.substring(1);
         aux = img.substring(img.indexOf(' ')+1, img.indexOf('\n'));
+        if (aux.charAt(aux.length()-1) == '\r') aux=aux.substring(0,aux.length()-1);
         alt = Integer.parseInt(aux);
         img = img.substring(img.indexOf('\n')+1);
         while (img.charAt(0) == '#'){ //retallo la string
             it = img.indexOf('\n') + 1;
             img = img.substring(it);
         }
-        maxVal = Integer.parseInt(img.substring(0, img.indexOf('\n')));
+        if (img.charAt(img.indexOf('\n')-1) == '\r') it = img.indexOf('\r');
+        else it = img.indexOf('\n');
+        maxVal = Integer.parseInt(img.substring(0, it));
         img = img.substring(img.indexOf('\n')+1);
         if (maxVal != 255){
             throw new PPMBadFormatted();
@@ -157,7 +165,7 @@ private String magicNum;
         imatge = new Vector<Color>();
         imatge.setSize(ample*alt);
         int cont = 0;
-        if (bytes.length != alt*ample) throw new PPMBadFormatted();
+        if (bytes.length != alt*ample*3) throw new PPMBadFormatted();
         for (int i = 0; i < bytes.length; i+=3){  //tenir molt en compte que un char son dos bytes!!!! jo només en vull un.
             int r = (byte)bytes[i];
             int g = (byte)bytes[i+1];
