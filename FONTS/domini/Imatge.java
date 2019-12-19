@@ -141,6 +141,7 @@ private String magicNum;
         img = img.substring(img.indexOf('\n')+1);
         if (maxVal != 255){
             throw new PPMBadFormatted();
+
         }
         System.out.println("La imatge en strinng te ara" + img.length() + " chars o bytes ni idea");
         String contingut = img;
