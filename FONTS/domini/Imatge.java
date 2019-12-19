@@ -86,6 +86,7 @@ private String magicNum;
 //    }
 
     public void operaFromYCbCr(){
+
         for (Color c : imatge) {
             double Y = (double) c.getR();
             double Cb = (double) c.getG();
