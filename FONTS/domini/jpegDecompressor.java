@@ -52,21 +52,7 @@ public class jpegDecompressor extends jpeg {
 //    }
 
 
-   @Override
-   protected void operaYCbCr(){
-      for (Color c : imatge.getImatge()) {
-           double Y = (double) c.getR();
-           double Cb = (double) c.getG();
-           double Cr = (double) c.getB();
-           double R = (Y + (1.402 * (Cr - 128)));
-           double G = (Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128));
-           double B = (Y + 1.772 * (Cb - 128));
-           c.setR((int)R+20);
-           c.setG((int)G+20);
-           c.setB((int)B+20);
-       }
 
-   }
 
    private static int[][] transformDCTs (final int DCT[][]){
        //Vector de coeficients
@@ -297,7 +283,7 @@ public class jpegDecompressor extends jpeg {
        multiplica(); //Multipliquem les matrius per retornar el valor "Original"
        transformBlocks(); //Transformen les dctstrans a dcts matrius de YCbCr DCT3
        imatge.setImatge(getImageArray()); //Obtinc la imatge, només em falta parsejarla a PPM
-       operaYCbCr();
+       imatge.operaFromYCbCr();
        //String fin = "";
 //       try {
 //           creaImatge("out.ppm");
