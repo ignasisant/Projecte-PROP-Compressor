@@ -113,17 +113,19 @@ class Compressio {
     public String getCompressOutputFile(String infile, String outfile) {
         String del = "/";
       
-        if( infile.charAt(0) != '/') del = "\\"; // Filesystem windows!
+        if( infile.charAt(0) != '/') del = "\\\\"; // Filesystem windows!
         System.out.println("DEL: "+del);
-        System.out.println("REG: "+"[.][^.\\"+del+"]+$");
+        System.out.println("REG: "+"[.][^."+del+"]+$");
         if(outfile != "" ) {
             String[] parts = infile.split(del);
+            //if(del == "\\") del = "\\\\";
             infile = parts[parts.length-1];
-            outfile = outfile+del+infile.replaceFirst("[.][^.\\"+del+"]+$",  "."+algo.getExtension() ) ;
+            outfile = outfile+del+infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
             if(outfile == outfile+del+infile ) outfile = outfile+del+infile+"."+algo.getExtension() ;
             
         } else {
-            outfile = infile.replaceFirst("[.][^.\\"+del+"]+$",  "."+algo.getExtension() ) ;
+            //if(del == "\\") del = "\\\\";
+            outfile = infile.replaceFirst("[.][^."+del+"]+$",  "."+algo.getExtension() ) ;
             if(outfile == infile) outfile = infile+"."+algo.getExtension() ;
             
         }
