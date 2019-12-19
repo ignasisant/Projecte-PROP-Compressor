@@ -148,23 +148,20 @@ class Descompressio {
         }
 
     }
-
-    public String getExtFromId(String i) throws Exception {
+    public String getExtFromId(String i)  {
         int id = Integer.parseInt(i);
         Algorithm al = null;
         switch (id) {
-        case 0:
-            al = new LZ78();
-            break;
-        case 1:
-            al = new LZW();
-            break;
-        case 2:
-            // this.algo = new jpeg();
-            break;
-        default:
-            throw new InvalidAlgorithm();
-
+            case 0:
+                al = new LZ78();
+                break;
+            case 1:
+                al = new LZW();
+                break;
+            case 2:
+                // this.algo = new jpeg();
+                break;
+           
         }
         return al.getExtension();
 

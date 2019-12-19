@@ -1,0 +1,21 @@
+INDEX DIRECTORI DOMINI
+
+Aquest directori conte les classes de la capa de domini, de les qual el controlador de capa es 'Fitxer.java':
+
+
+
+- Algorithm.java: Classe abstracta representant l'algoritme.
+-	Color.java:	Classe per tractar colors (RGB o YCbCr).
+-	Compressio.java:	Classe per tractar les crides als algoritmes a l'hora de comprimir
+-	Descompressio.java:	Classe per tractar les crides als algoritmes a l'hora de descomprimir
+-	Fitxer.java: Classe que actua com a controlador de la capa de domini
+-	HuffmanTree.java:	Classe per codificar i descodificar un Vector<int> usant l'algoritme de Huffman
+-	Imatge.java:	Classe que permet interpretar un fitxer en format PPM 
+-	JPEGCompressor.java:	Classe amb les funcionalitats de compressió de l'algoritme JPEG
+-	JPEGDecompressor.java:	Classe amb les funcionalitats de descompressió de l'algoritme JPEG
+-	JPEG.java: Classe Classe abstracta amb estructures de dades basiques per l'algoritme JPEG 	
+-	LZ78.java:	Classe que implementa l'algoritme de compressio i descompressio de LZ78
+-	LZW.java:	Classe que implementa l'algoritme de compressio i descompressio de LZW
+-	Node.java:	Classe per tractar parelles de valors de Integer-Integer o Integer-char usat a l'algortime LZ78
+-	PPMBadFormatted.java:	Excepcio per alertar de que el fitxer PPM no cumpleix amb els requeriments necesssaris per la classe Imatge
+-	Statistics.java:	Classe que permet generar les estadistiques de cada compressio i descompressio
