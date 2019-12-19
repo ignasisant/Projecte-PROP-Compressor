@@ -1,0 +1,16 @@
+ÍNDEX DIRECTORI FONT
+
+Aquest directori conté els packages del projecte i arxius per a la compilació:
+
+
+-	dades: 
+		Directori que conté les classes del package dades, corresponent a la capa de dades
+-	domini: 
+		Directori que conté les classes del package domini, corresponent a la capa de domini
+-	presentacio: 
+		Directori que conté les classes del package presentació, corresponent a la capa de presentació
+- Makefile: 
+		Makefile necessari per generar l'executable
+- MANIFEST.MF:
+		Fitxer necessari per generar el .jar; estableix la classe d'inici.
+
