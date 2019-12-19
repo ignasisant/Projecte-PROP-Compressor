@@ -106,14 +106,15 @@ class Descompressio {
     }
 
     private String getDecompressOutputFile(String infile, String outfile, String origName) {
-
+        String del = "/";
+        if(infile.substring(0,3)=="C:\\") del = "\\";
 
         if(outfile == "" ) {
-            int index = infile.lastIndexOf("/");
+            int index = infile.lastIndexOf(del);
             outfile = infile.substring(0, index+1) + origName;
             
         } else {
-            outfile += "/"+origName;
+            outfile += del+origName;
             
         }
         // if(outfile == "") {

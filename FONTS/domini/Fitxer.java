@@ -68,7 +68,7 @@ public class Fitxer {
     }
 
     public String getStats(){
-        return this.ctrlDades.read("/tmp/stats");
+        return this.ctrlDades.read("$HOME/.stats");
 
     }
 

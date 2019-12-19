@@ -65,7 +65,7 @@ public class CtrlDades {
         public void appendStatistic(String nomFitxer, int algoId, double compress, long duration ) {
             try(
                 
-                FileWriter fw = new FileWriter("/tmp/stats" ,true);
+                FileWriter fw = new FileWriter("$HOME/.stats" ,true);
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter out = new PrintWriter(bw)
                 ) {
