@@ -3,6 +3,9 @@ package domini;
 import java.util.*;
 
 public class jpegDecompressor extends jpeg {
+
+    private String data;
+
    public jpegDecompressor() {
        // Aqui anira la crida a la classe imatge comprimida que donarà d'una imatge
        // jpeg una cosa llegible
@@ -293,8 +296,13 @@ public class jpegDecompressor extends jpeg {
        return imatge.creaImatgeFinal();
    }
 
+   public String getData(){
+       return this.data;
+   }
+
     @Override
     public void setData(String data) {
+       this.data = data;
         String retall = imatge.retallaHeaders(data); //em posa els headers de alt i ample
         HuffmanTree huff = new HuffmanTree();
         Vector <Integer> tot = huff.decode(retall);
