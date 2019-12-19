@@ -1,0 +1,5 @@
+INDEX DIRECTORI DADES
+
+Aquest directori consta de les classes del package dades, corresponent a la capa de dades:
+
+-	CtrlDades.java: Controlador de la capa de dades, implementa totes les funcions que han de tractar amb el filesystem

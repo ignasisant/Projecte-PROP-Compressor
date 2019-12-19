@@ -70,7 +70,7 @@ class Descompressio {
         all = all.substring(ini+1);
         int totini=0, totend=0;
         String del = "/";
-        if(outfile.charAt(0)!= '/') del = "\\";
+        if(infile.charAt(0)!= '/') del = "\\";
         this.st.initStats();
 
         while(true) {
@@ -153,7 +153,7 @@ class Descompressio {
 
 
     }
-    public String getExtFromId(String i) throws Exception {
+    public String getExtFromId(String i)  {
         int id = Integer.parseInt(i);
         Algorithm al = null;
         switch (id) {
@@ -166,9 +166,7 @@ class Descompressio {
             case 2:
                 // this.algo = new jpeg();
                 break;
-            default:
-                 throw new InvalidAlgorithm();
-
+           
         }
         return al.getExtension();
 
