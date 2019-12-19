@@ -107,7 +107,8 @@ class Descompressio {
 
     private String getDecompressOutputFile(String infile, String outfile, String origName) {
         String del = "/";
-        if(infile.substring(0,3)=="C:\\") del = "\\";
+      
+        if( infile.charAt(0) != '/') del = "\\"; // Filesystem windows!
 
         if(outfile == "" ) {
             int index = infile.lastIndexOf(del);
@@ -117,11 +118,7 @@ class Descompressio {
             outfile += del+origName;
             
         }
-        // if(outfile == "") {
-        //     outfile = infile.replaceFirst("[.][^.]+$", "")  ;
-        // } else {
-        //    // outfile +=  "."+ ext_comp; // no cal pasar el ext_comp ja que guardem el fitxer aqui
-        //}
+       
         System.out.println("OUTF: "+outfile);
         return outfile;
     }

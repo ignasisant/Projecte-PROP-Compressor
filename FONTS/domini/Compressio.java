@@ -112,7 +112,9 @@ class Compressio {
 
     public String getCompressOutputFile(String infile, String outfile) {
         String del = "/";
-        if(infile.substring(0,3)=="C:\\") del = "\\";
+      
+        if( infile.charAt(0) != '/') del = "\\"; // Filesystem windows!
+        System.out.println("DEL: "+del);
         if(outfile != "" ) {
             String[] parts = infile.split(del);
             infile = parts[parts.length-1];
