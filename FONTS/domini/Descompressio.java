@@ -7,7 +7,7 @@ class Descompressio {
     private Algorithm algo;
     private Fitxer f;
     private Statistics st;
-    // private String ext_comp;
+    
 
     public Descompressio(Fitxer f) {
         this.st = Statistics.getStatistics();
@@ -128,9 +128,7 @@ class Descompressio {
         return this.algo.decompress();
     }
 
-    public String getAlgoData() {
-        return this.algo.getData();
-    }
+
 
     public void setAlgorithm(int algo) /* throws Exception */ {
         switch (algo) {

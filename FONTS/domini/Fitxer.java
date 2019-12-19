@@ -44,7 +44,7 @@ public class Fitxer {
     }
 
     public String[] compara() {
-        String[] ret = {decomp.getAlgoData(), decomp.run()};
+        String[] ret = {comp.getAlgoData(), decomp.run()};
         return ret;
     }
 

@@ -24,6 +24,9 @@ class Compressio {
         return info;
 
     }
+    public String getAlgoData() {
+        return this.algo.getData();
+    }
 
     private String[] compressFile(String infile, String outfile) {
         try {
