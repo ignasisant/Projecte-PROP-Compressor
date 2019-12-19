@@ -1,6 +1,6 @@
 package domini;
 
-public abstract class Algorithm {
+public abstract class Algorithm extends ActionNotSelected {
 
     abstract String compress();
     abstract String decompress();
