@@ -1,3 +1,8 @@
+/**
+ * Class: VistaPrincipal
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import java.awt.*;
 import java.awt.event.*;
@@ -41,7 +46,7 @@ private JPanel panel2 = new JPanel();
 private VistaSelAlg vistaSelAlg;
 private VistaExepcions vistaExepcions = new VistaExepcions();
 
-private int selection = -1;
+private Boolean jpeg= false;
 
 //////////////////////// Constructor y metodos publicos
 
@@ -84,14 +89,14 @@ public void volverHome(){
 public void actionPerformed_buttonContinuar(ActionEvent event){
     panelContenidos.removeAll();
     if(opcio[0].isSelected()) {
-        vistaSelAlg = new VistaSelAlg(iIOUtils, this);
+        vistaSelAlg = new VistaSelAlg(iIOUtils, this, jpeg);
         panelContenidos.add(vistaSelAlg.getPanelComprimir());
     }
     else if (opcio[1].isSelected()) {
     try{
         iIOUtils.run();
     }catch(Exception e){
-        e.printStackTrace();
+        vistaExepcions.error(e.getMessage());
     }
     VistaInfo vistaInfo = new VistaInfo(iIOUtils, false, this);
     panelContenidos.add(vistaInfo.getPanelInformacio() );
@@ -139,11 +144,18 @@ public void actionPerformed_fileChooser(ActionEvent event){
                 if (i > 0) {
                     extension = fileChooser.getSelectedFile().getName().substring(i+1);
                 }
+                if(extension.equals("ppm"))jpeg=true;
                 if (extension.equals("lz78") ||  extension.equals("lzw") || extension.equals("jpeg") ) {
                     vistaExepcions.jaComprimit(); //exepcio per no comprimir quan ja està comprimit
                     volverHome(); //reinicializem
                     return ;
                 } 
+                if(!fileChooser.getSelectedFile().isDirectory() && !extension.equals("txt") && !extension.equals("ppm")){
+                    vistaExepcions.noComprimir();
+                    volverHome();
+                    return;
+                }
+
             }
             else if(opcio[1].isSelected()){
                 String extension = "";
@@ -162,7 +174,7 @@ public void actionPerformed_fileChooser(ActionEvent event){
             }
     
         }catch(Exception e){
-            e.printStackTrace();
+            vistaExepcions.error(e.getMessage());
         }
         buttonContinuar.setEnabled(true);
     }
@@ -175,17 +187,17 @@ public void actionPerformed_fileChooser2(ActionEvent event){
         labelOutput.setText(fileChooser2.getSelectedFile().getAbsolutePath());
         
         }catch(Exception e){
-            e.printStackTrace();
+            vistaExepcions.error(e.getMessage());
         }
     }
 }
 
 public void actionPerformed_buttonInput(ActionEvent event){
-    if(!opcio[2].isSelected()) selection = fileChooser.showOpenDialog(null);
+    if(!opcio[2].isSelected()) fileChooser.showOpenDialog(null);
 }
 
 public void actionPerformed_buttonOutput(ActionEvent event){
-    if(!opcio[2].isSelected()) selection = fileChooser2.showOpenDialog(null);
+    if(!opcio[2].isSelected()) fileChooser2.showOpenDialog(null);
 }
 
    
@@ -278,7 +290,6 @@ private void asignar_listenersComponentes() {
     inicializar_panelMenuPrincipal();
     inicializar_panelContenidos();
     inicializar_fileChooser();
-    selection = -1;
     update_frameVista();
     asignar_listenersComponentes();
   }

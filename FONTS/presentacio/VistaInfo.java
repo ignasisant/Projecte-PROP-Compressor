@@ -1,3 +1,8 @@
+/**
+ * Class: VistaInfo
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +24,7 @@ public class VistaInfo {
 
   // Componentes de la interficie grafica
   private JPanel panelInformacio = new JPanel();
-  private JButton buttonHome = new JButton("Menu Home");
+  private JButton buttonHome = new JButton("Menú Home");
   private JPanel panelLabels = new JPanel();
   private JPanel panelButtons = new JPanel();
   private JButton buttonCompare = new JButton("Comparar Abans/Després");
@@ -51,14 +56,13 @@ public class VistaInfo {
   }
 
   public void actionPerformed_buttonCompare(ActionEvent event){
-    new VistaCompare(); //s'obre finestra per comparar
+    new VistaCompare(iIOUtils.getCompare()); //s'obre finestra per comparar
   }
 
 //////////////////////// Asignacion de listeners
 
   private void asignar_listenersComponentes() {
 
-    // Listeners para los botones
     buttonHome.addActionListener(
         new ActionListener(){
             public void actionPerformed (ActionEvent event){
@@ -113,6 +117,7 @@ public class VistaInfo {
 
   private void inicializar_panelButtons(){
     panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.Y_AXIS));
+    if(iIOUtils.getType() == 1) buttonCompare.setEnabled(false);
     if(comprimir) panelButtons.add(buttonCompare);
     panelButtons.add(buttonHome);
   }

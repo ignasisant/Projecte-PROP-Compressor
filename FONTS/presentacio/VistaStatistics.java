@@ -1,3 +1,8 @@
+/**
+ * Class: VistaStatisics
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import java.awt.*;
 import java.awt.event.*;

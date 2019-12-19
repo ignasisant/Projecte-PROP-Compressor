@@ -1,3 +1,8 @@
+/**
+ * Class: VistaCompare
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,10 +27,14 @@ public class VistaCompare {
   private JTextArea jtextTractat = new JTextArea(500, 200);
   private JScrollPane jscrollOriginal; 
   private JScrollPane jscrollTractat;
+  private String original;
+  private String tractat;
 
 //////////////////////// Constructor 
 
-  public VistaCompare () {
+  public VistaCompare (String[] s) {
+    original = s[0];
+    tractat = s[1];
     inicializarComponentes();
   }
   
@@ -58,48 +67,8 @@ private void actionPerformed_buttonVolver(ActionEvent event){
   }
 
   private void inicialitzar_jtext(){
-      jtextOriginal.setText("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-     " ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssss");
-      jtextTractat.setText("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-     " ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\n"+
-      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\n"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
-      "sssssssssssssssssssssssssssssssss");
+      jtextOriginal.setText(original);
+      jtextTractat.setText(tractat);
 
       jscrollOriginal = new JScrollPane(jtextOriginal);
       jscrollTractat = new JScrollPane(jtextTractat);

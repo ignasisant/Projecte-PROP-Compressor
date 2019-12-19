@@ -1,3 +1,8 @@
+/**
+ * Class: VistaSelAlg
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import java.awt.*;
 import java.awt.event.*;
@@ -28,13 +33,16 @@ public class VistaSelAlg {
 
     private VistaInfo vistaInfo;
     private VistaPrincipal vistaPrincipal;
+    private VistaExepcions vistaExepcions = new VistaExepcions();
+    private Boolean jpeg;
 
     //////////////////////// Constructor y metodos publicos
 
 
-    public VistaSelAlg (IOUtils pIOUtils, VistaPrincipal vp) {
+    public VistaSelAlg (IOUtils pIOUtils, VistaPrincipal vp, Boolean jpeg) {
         iIOUtils = pIOUtils;
         vistaPrincipal = vp;  
+        this.jpeg=jpeg;
     }
 
     public JPanel getPanelComprimir(){
@@ -51,7 +59,7 @@ public class VistaSelAlg {
         try{
             iIOUtils.run();
         }catch(Exception e){
-            e.printStackTrace();
+            vistaExepcions.error(e.getMessage());
         }
         vistaInfo = new VistaInfo(iIOUtils , true , vistaPrincipal);
         panelComprimir.removeAll();
@@ -68,7 +76,17 @@ public class VistaSelAlg {
     }
 
     public void actionPerformed_RadioButtonAlg2(ActionEvent event){
-        iIOUtils.setAlgorithm(2);
+        if(jpeg)iIOUtils.setAlgorithm(2);
+        else {
+            vistaExepcions.noJPeg();
+            panelComprimir.removeAll();
+            panelRadioButton.removeAll();
+            grupo2.clearSelection();
+            inicializarComponentes();
+            vistaPrincipal.update();
+            return;
+
+        }
     }
 
 
@@ -123,10 +141,18 @@ public class VistaSelAlg {
     }
 
     private void inicializar_radioButtonComp(){
-        alg[0]=new JRadioButton("LZ78", true);
-        iIOUtils.setAlgorithm(0);
-        alg[1]=new JRadioButton("LZW", false);
-        alg[2]=new JRadioButton("JPEG", false);
+        if(jpeg){
+            alg[0]=new JRadioButton("LZ78", false);
+            alg[1]=new JRadioButton("LZW", false);
+            alg[2]=new JRadioButton("JPEG", true);
+            iIOUtils.setAlgorithm(2);
+        }
+        else{
+            alg[0]=new JRadioButton("LZ78", false);
+            alg[1]=new JRadioButton("LZW", true);
+            iIOUtils.setAlgorithm(1);
+            alg[2]=new JRadioButton("JPEG", false);
+        }
         grupo2.add(alg[0]);
         grupo2.add(alg[1]);
         grupo2.add(alg[2]);

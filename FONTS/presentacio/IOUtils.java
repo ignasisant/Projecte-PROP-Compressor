@@ -1,3 +1,8 @@
+/**
+ * Class: IOUtils
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import domini.Fitxer;
 import java.io.File;
@@ -35,13 +40,13 @@ public class IOUtils {
             case 1:
                 stats = ctrlDom.decompress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
-
             case 2:
                 stats = ctrlDom.compress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
             case 3:
                 stats = ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
+
         }
     }
 
@@ -73,6 +78,16 @@ public class IOUtils {
     public String getAllStats(){
         return ctrlDom.getStats();
     }
+
+    public String[] getCompare(){
+        String[] s = {"Prova per manual d'ús", "Prova per manual d'ús"};
+        return s;
+    }
+
+    public int getType() {
+        return type;
+    }
+
 
     
 }

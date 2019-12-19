@@ -1,3 +1,8 @@
+/**
+ * Class: VisaExepcions
+ * Description:
+ * Author: Ignasi Sant Albors
+ */
 package presentacio;
 import java.awt.*;
 import java.awt.event.*;
@@ -35,4 +40,25 @@ public class VistaExepcions {
     JOptionPane.ERROR_MESSAGE);
     return;
   }
+
+  public void noComprimir(){ //exepcio per cuan no es pot comprimir l'arxiu
+    String message = "Aquest arxiu no es pot comprimir!";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
+    return ;
+
+  }
+
+  public void noJPeg(){ //exepcio per cuan l'arxiu no es pot comprimir amb jpeg
+    String message = "Aquest arxiu no es pot comprimir amb l'algoritme JPEG!";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
+    return;
+  }
+
+  public void error(String message){ //exepcio per cuan l'arxiu no es pot comprimir amb jpeg
+    String e = "Error inesperat: "+message;
+    JOptionPane.showMessageDialog(new JFrame(), e, "Dialog", JOptionPane.ERROR_MESSAGE);
+    return;
+  }
+
+
 }
