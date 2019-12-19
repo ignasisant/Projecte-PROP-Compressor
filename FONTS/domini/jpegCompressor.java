@@ -38,9 +38,8 @@ public class jpegCompressor extends jpeg {
 
 
     @Override
-    public void setData(String data) throws PPMBadFormatted {
+    public void setData(String data) {
         this.data = data;
-        imatge.creaImatgeDePPM(data);
     }
 
     public String getData () {
@@ -291,10 +290,8 @@ public class jpegCompressor extends jpeg {
 
 
     @Override
-   public String compress() {
-       if (imatge.getMaxVal() != 255) {
-           System.out.println("Atenció que ho farà malament");//cal llançar aquí una nova excepcio creada.
-       }
+   public String compress() throws Exception {
+        imatge.creaImatgeDePPM(this.data);
        // this.print();
        imatge.operaToYCbCr(); //Ho he de fer a imatge
        this.transformBlocks(); // Aquí tinc els blocs ja transformats.
