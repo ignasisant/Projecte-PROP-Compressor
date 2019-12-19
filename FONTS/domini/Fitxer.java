@@ -43,7 +43,7 @@ public class Fitxer {
 
     }
 
-    public String compara() {
+    public String[] compara() {
         String[] ret = {decomp.getAlgoData(), decomp.run()};
         return ret;
     }
@@ -67,7 +67,7 @@ public class Fitxer {
     }
 
 
-    public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) {
+    public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) throws IOException {
        this.ctrlDades.appendStatistic(nomFitxer, algoId, compress, duration);
 
     }

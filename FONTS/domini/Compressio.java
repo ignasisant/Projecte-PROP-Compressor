@@ -1,5 +1,5 @@
 package domini;
-import java.io.File;
+import java.io.*;
 
 
 class Compressio {
@@ -92,7 +92,7 @@ class Compressio {
 
     }
 
-    private String run() {
+    private String run() throws Exception {
         return this.algo.compress();
 
     }
