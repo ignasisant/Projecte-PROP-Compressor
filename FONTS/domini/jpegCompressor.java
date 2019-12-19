@@ -35,7 +35,7 @@ public class jpegCompressor extends jpeg {
 
 
     @Override
-    public void setData(String data) {
+    public void setData(String data) throws PPMBadFormatted {
         imatge.creaImatgeDePPM(data);
     }
 

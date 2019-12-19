@@ -64,7 +64,7 @@ class Descompressio {
 
     }
 
-    private String[] decompressFolder(String infile, String outfile, String all) {
+    private String[] decompressFolder(String infile, String outfile, String all) throws PPMBadFormatted {
 
         int ini =  all.indexOf("\n");
         all = all.substring(ini+1);
