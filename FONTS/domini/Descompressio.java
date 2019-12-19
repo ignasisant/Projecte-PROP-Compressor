@@ -123,9 +123,14 @@ class Descompressio {
         return outfile;
     }
 
-    private String run() {
+    public String run() {
         return this.algo.decompress();
     }
+
+    public String getAlgoData() {
+        return this.algo.getData();
+    }
+
 
 
 

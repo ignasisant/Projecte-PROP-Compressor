@@ -74,8 +74,8 @@ public class CtrlDades {
             return f.getName().substring(f.getName().lastIndexOf(".") + 1);
         }
 
-        public void appendStatistic(String nomFitxer, int algoId, double compress, long duration ) {
-            try {
+        public void appendStatistic(String nomFitxer, int algoId, double compress, long duration ) throws IOException {
+     
                 String name = "/tmp/stats";
                 if( winOS()) name = "C:\\Temp\\stats";
                 FileWriter fw = new FileWriter(name ,true);
@@ -84,9 +84,7 @@ public class CtrlDades {
                 
                 out.println(nomFitxer+"\t"+algoId+"\t"+duration+"\t"+String.format("%.2f", compress));
                 out.close();
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+
     
         }
 

@@ -43,6 +43,11 @@ public class Fitxer {
 
     }
 
+    public String compara() {
+        String[] ret = {decomp.getAlgoData(), decomp.run()};
+        return ret;
+    }
+
     public String[] llegirDescomp(String name) throws IOException {
         String all = this.ctrlDades.read(name);
         String aux[] = all.split("\n");
