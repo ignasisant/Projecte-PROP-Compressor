@@ -20,7 +20,8 @@ public class CtrlDades {
                 byte[] data = Files.readAllBytes(path);
                 String payload = new String(data);
                 int dif = payload.length();
-                if (data.length != payload.length()) {
+                //workaround d'un problema de trucament al llegir ppms
+                while (data.length > payload.length()) {
                     String aux = new String(Arrays.copyOfRange(data, payload.length(),data.length ));
 
                     payload += aux;
