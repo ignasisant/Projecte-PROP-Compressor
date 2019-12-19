@@ -41,7 +41,7 @@ private JPanel panel2 = new JPanel();
 private VistaSelAlg vistaSelAlg;
 private VistaExepcions vistaExepcions = new VistaExepcions();
 
-int selection = -1;
+private int selection = -1;
 
 //////////////////////// Constructor y metodos publicos
 
@@ -50,8 +50,6 @@ public VistaPrincipal (IOUtils pIOUtils) {
 iIOUtils = pIOUtils;
 inicializarComponentes();
 }
-
-public VistaPrincipal () {}
 
 public void hacerVisible() {
 frameVista.pack();
@@ -110,16 +108,21 @@ public void actionPerformed_RadioButtonOpcio0(ActionEvent event){
     if(fileChooser.getSelectedFile() == null){
         buttonContinuar.setEnabled(false);
     }
+    buttonInput.setEnabled(true);
+    buttonOutput.setEnabled(true);
 }
 public void actionPerformed_RadioButtonOpcio1(ActionEvent event){
     iIOUtils.setAction(1);
     if(fileChooser.getSelectedFile() == null){
         buttonContinuar.setEnabled(false);
     }
+    buttonInput.setEnabled(true);
+    buttonOutput.setEnabled(true);
 }
 public void actionPerformed_RadioButtonOpcio2(ActionEvent event){
     buttonContinuar.setEnabled(true);
-    
+    buttonInput.setEnabled(false);
+    buttonOutput.setEnabled(false);
 }
 
 public void actionPerformed_fileChooser(ActionEvent event){
@@ -342,6 +345,7 @@ private void asignar_listenersComponentes() {
     panelCenter.add(Box.createRigidArea(new Dimension(0,5)));
 
     panel1.setLayout(new BoxLayout(panel1,BoxLayout.X_AXIS )  );
+    buttonInput.setEnabled(false);
     panel1.add(buttonInput);
     panel1.add(Box.createRigidArea(new Dimension(5,0)));
     panel1.add(labelInput);
@@ -350,6 +354,7 @@ private void asignar_listenersComponentes() {
     panelCenter.add(Box.createRigidArea(new Dimension(0,5)));
 
     panel2.setLayout(new BoxLayout(panel2,BoxLayout.X_AXIS )  );
+    buttonOutput.setEnabled(false);
     panel2.add(buttonOutput);
     panel2.add(Box.createRigidArea(new Dimension(5,0)));
     panel2.add(labelOutput);

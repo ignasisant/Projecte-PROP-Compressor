@@ -29,7 +29,7 @@ public class VistaInfo {
  
   private VistaPrincipal vistaPrincipal;
   private String[] stats;
-  Boolean comprimir;
+  private Boolean comprimir;
 
 //////////////////////// Constructor y metodos publicos
 

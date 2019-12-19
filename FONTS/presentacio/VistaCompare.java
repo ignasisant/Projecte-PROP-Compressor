@@ -18,10 +18,10 @@ public class VistaCompare {
   private JFrame frameVista = new JFrame();
   private JPanel panelContenidos = new JPanel();
   private JButton buttonVolver = new JButton("Tornar");
-  private JTextArea jtextOriginal = new JTextArea();
-  private JTextArea jtextTractat = new JTextArea();
-  JScrollPane jscrollOriginal = new JScrollPane(jtextOriginal);
-  JScrollPane jscrollTractat = new JScrollPane(jtextOriginal);
+  private JTextArea jtextOriginal = new JTextArea(500,200);
+  private JTextArea jtextTractat = new JTextArea(500, 200);
+  private JScrollPane jscrollOriginal; 
+  private JScrollPane jscrollTractat;
 
 //////////////////////// Constructor 
 
@@ -51,9 +51,59 @@ private void actionPerformed_buttonVolver(ActionEvent event){
 //////////////////////// Resto de metodos privados
 
   private void inicializarComponentes() {
+    inicialitzar_jtext();
     inicializar_panelContenidos();
     inicializar_frameVista();
     asignar_listenersComponentes();
+  }
+
+  private void inicialitzar_jtext(){
+      jtextOriginal.setText("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+     " ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssss");
+      jtextTractat.setText("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+     " ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\n"+
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\n"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+
+      "sssssssssssssssssssssssssssssssss");
+
+      jscrollOriginal = new JScrollPane(jtextOriginal);
+      jscrollTractat = new JScrollPane(jtextTractat);
+
   }
 
   private void inicializar_panelContenidos(){
@@ -68,7 +118,7 @@ private void actionPerformed_buttonVolver(ActionEvent event){
   }
 
   private void inicializar_frameVista(){
-    frameVista.setMinimumSize(new Dimension(700,400));
+    frameVista.setMinimumSize(new Dimension(1000,600));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
     frameVista.setResizable(false);
     frameVista.setLocationRelativeTo(null);

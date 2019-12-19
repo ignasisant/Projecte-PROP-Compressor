@@ -70,5 +70,9 @@ public class IOUtils {
         return stats;
     }
 
+    public String getAllStats(){
+        return ctrlDom.getStats();
+    }
+
     
 }
