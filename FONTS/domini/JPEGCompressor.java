@@ -2,7 +2,7 @@ package domini;
 
 import java.io.*;
 import java.util.*;
-//import java.awt.Desktop;
+
 
 
 //Cal que consideri com ho tractaré quan el nombre del color sigui més gran
@@ -21,8 +21,6 @@ import java.util.*;
 
 
 */
-
-//TODO: Iniciar estructures de dades a la creadora.
 
 public class JPEGCompressor extends JPEG {
 

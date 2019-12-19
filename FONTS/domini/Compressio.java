@@ -88,7 +88,7 @@ class Compressio {
 
     }
 
-    private String run() {
+    private String run() throws Exception {
         return this.algo.compress();
 
     }

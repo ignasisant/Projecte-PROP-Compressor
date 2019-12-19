@@ -18,7 +18,8 @@ public class jpegDriver {
 
         Fitxer f = new Fitxer();
         //String fitxer = f.llegirFitxer("./ppms/blanc.ppm");
-        String fitxer = f.llegirFitxer("./out_sense_huffman.ppm");
+
+        String fitxer = f.llegirFitxer("./ppms/maons.ppm");
         System.out.println("Començo a comprimir");
         System.out.println("Començo a comprimir");
         JPEGCompressor j = new JPEGCompressor();
@@ -35,7 +36,7 @@ public class jpegDriver {
         String Descomprimit = dj.decompress();
         f = new Fitxer();
         //f.writeToFile(Descomprimit,"out_amb_huffman.ppm");
-        f.writeToFile(Descomprimit,"out_sense_huffman.ppm");
+        f.writeToFile(Descomprimit,"./outout.ppm");
 
     }
 
