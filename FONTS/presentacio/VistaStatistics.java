@@ -77,7 +77,11 @@ public class VistaStatistics {
 
   private void incializar_panelCenter(){
     panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.PAGE_AXIS));
-    stats = iIOUtils.getAllStats();
+    try{
+      stats = iIOUtils.getAllStats();
+    }catch(Exception e){
+      new VistaExepcions().error(e.getMessage());
+    }
     panelCenter.add(new JLabel("         Nom Arxiu                                     Acció        Algorisme usat        Grau"));
     jtextStats.setText(stats);
     jtextStats.setLineWrap(true);
