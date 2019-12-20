@@ -54,43 +54,38 @@ class Compressio {
 
     }
 
-    private String[] compressFolder(String infile, String outfile) {
-        try {
-            String outf = getCompressOutputFile(infile, outfile);
-            String del = "/";
-            if (outf.charAt(0) != '/')
-                del = "\\\\";
-            String[] dirs = infile.split(del);
-            String inici = dirs[dirs.length - 1];
-            int ini = infile.length() - inici.length();
-            String files = f.getHierarchy(infile);
-            String out = "";
-            String[] all = files.split("//");
-            int inSize = 0, outSize = 0;
-            this.st.initStats();
-            for (int i = 0; i < all.length; ++i) {
-                if (i != 0)
-                    out += "\n";
-                out += all[i].substring(ini);
-                // System.out.println(all[i]);
+    private String[] compressFolder(String infile, String outfile) throws Exception {
 
-                String payload = this.f.llegirFitxer(all[i]);
-                inSize += payload.length();
-                this.algo.setData(payload);
-                String compress = this.run();
-                out += "\n" + compress.length() + "\n";
-                out += compress;
+        String outf = getCompressOutputFile(infile, outfile);
+        String del = "/";
+        if (outf.charAt(0) != '/')
+            del = "\\\\";
+        String[] dirs = infile.split(del);
+        String inici = dirs[dirs.length - 1];
+        int ini = infile.length() - inici.length();
+        String files = f.getHierarchy(infile);
+        String out = "";
+        String[] all = files.split("//");
+        int inSize = 0, outSize = 0;
+        this.st.initStats();
+        for (int i = 0; i < all.length; ++i) {
+            if (i != 0)
+                out += "\n";
+            out += all[i].substring(ini);
 
-            }
-            outSize = out.length();
-            String[] info = this.st.saveStats(infile, algo.getId(), inSize, outSize);
-            // outfile=infile+this.algo.getExtension();
-            this.f.writeToFile(algo.getId() + "1\n" + out, outf);
-            return info;
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            String payload = this.f.llegirFitxer(all[i]);
+            inSize += payload.length();
+            this.algo.setData(payload);
+            String compress = this.run();
+            out += "\n" + compress.length() + "\n";
+            out += compress;
+
         }
+        outSize = out.length();
+        String[] info = this.st.saveStats(infile, algo.getId(), inSize, outSize);
+        // outfile=infile+this.algo.getExtension();
+        this.f.writeToFile(algo.getId() + "1\n" + out, outf);
+        return info;
 
     }
 

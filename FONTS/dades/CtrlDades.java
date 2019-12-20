@@ -42,12 +42,12 @@ public class CtrlDades {
 
     public void write(String payload, String fileName) throws Exception {
 
-        System.out.println(fileName);
+        System.out.println("S'ha escrit: "+fileName);
 
         File file = new File(fileName);
 
         File parent = file.getParentFile();
-        // System.out.println("PARENT: "+parent.getAbsolutePath());
+       
         if (!parent.exists())
             parent.mkdirs();
 
