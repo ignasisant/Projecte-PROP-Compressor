@@ -1,10 +1,11 @@
 package domini;
 
-public abstract class Algorithm extends ActionNotSelected {
+public abstract class Algorithm  {
 
     abstract String compress() throws Exception;
     abstract String decompress();
-    abstract void setData(String data) throws PPMBadFormatted;
+    abstract String getData();
+    abstract void setData(String data);
     abstract int getId();
     abstract String getExtension();
     

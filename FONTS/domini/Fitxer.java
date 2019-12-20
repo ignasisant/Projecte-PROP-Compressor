@@ -43,6 +43,11 @@ public class Fitxer {
 
     }
 
+    public String[] compara() {
+        String[] ret = {comp.getAlgoData(), decomp.run()};
+        return ret;
+    }
+
     public String[] llegirDescomp(String name) throws IOException {
         String all = this.ctrlDades.read(name);
         String aux[] = all.split("\n");
@@ -62,13 +67,14 @@ public class Fitxer {
     }
 
 
-    public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) {
+    public void saveStatistic(String nomFitxer, int algoId, double compress, long duration ) throws IOException {
        this.ctrlDades.appendStatistic(nomFitxer, algoId, compress, duration);
 
     }
 
     public String getStats(){
-        return this.ctrlDades.read("$HOME/.stats");
+       // return this.ctrlDades.read("$HOME/.stats");
+       return this.ctrlDades.readStats();
 
     }
 
@@ -78,3 +84,5 @@ public class Fitxer {
     }
 
 }
+
+

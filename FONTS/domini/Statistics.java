@@ -1,6 +1,6 @@
 package domini;
 
-
+import java.io.*;
 
 class Statistics {
     private long start;
@@ -23,7 +23,7 @@ class Statistics {
         this.start =  System.currentTimeMillis();
     }
 
-    public String[] saveStats(String nomFitxer, int algoId, int inSize, int outSize ) {
+    public String[] saveStats(String nomFitxer, int algoId, int inSize, int outSize ) throws IOException {
        //TODO: if (this.start == null) tira excepcio no sha inicialitzat el contador
         this.end =  System.currentTimeMillis();
         duration = this.end-this.start;

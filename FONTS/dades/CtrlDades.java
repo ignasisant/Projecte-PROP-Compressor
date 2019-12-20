@@ -35,6 +35,18 @@ public class CtrlDades {
 
         }
 
+        public String readStats() {
+            String os = System.getProperty("os.name");
+            System.out.println("OS: "+os);
+            if (winOS()) return read("C:\\Temp\\stats");
+            else return read("/tmp/stats");
+        }
+
+        private boolean winOS() {
+           return  System.getProperty("os.name").toLowerCase().indexOf("windows") != -1;
+        }
+
+
         public void write(String payload,  String fileName) throws Exception{ 
 
             System.out.println(fileName);
@@ -63,17 +75,17 @@ public class CtrlDades {
             return f.getName().substring(f.getName().lastIndexOf(".") + 1);
         }
 
-        public void appendStatistic(String nomFitxer, int algoId, double compress, long duration ) {
-            try(
-                
-                FileWriter fw = new FileWriter("$HOME/.stats" ,true);
+        public void appendStatistic(String nomFitxer, int algoId, double compress, long duration ) throws IOException {
+     
+                String name = "/tmp/stats";
+                if( winOS()) name = "C:\\Temp\\stats";
+                FileWriter fw = new FileWriter(name ,true);
                 BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw)
-                ) {
-                    out.println(nomFitxer+"\t"+algoId+"\t"+duration+"\t"+String.format("%.2f", compress));
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+                PrintWriter out = new PrintWriter(bw);
+                
+                out.println(nomFitxer+"\t"+algoId+"\t"+duration+"\t"+String.format("%.2f", compress));
+                out.close();
+
     
         }
 
