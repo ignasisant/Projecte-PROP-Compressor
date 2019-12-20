@@ -1,0 +1,16 @@
+INDEX DIRECTORI 'Jocs de proves'
+
+En aquest directori es troben els jocs de proves. Tots ells estan detallats a la documentació.
+
+-	Prova-1:	Fitxer per provar la funcionalitat de compressio (sense triar directori de sortida)
+-	Prova-10:	Prova la descompressio d'un directori comprimit usant LZW (sense triar directori de sortida) 
+-	Prova-11:	Prova la compressio d'un fitxer .ppm usant JPEG
+-	Prova-12:	Prova la descompressio d'un fitxer comprimit amb JPEG
+-	Prova-2:	Prova la funcionalitat de compressió triant un directori de sortida (output) 
+-	Prova-3:	Prova la descompressio d'un arxiu comprimit amb LZ78 sense triar directori de sortida
+-	Prova-4:		Prova la descompressio d'un arxiu comprimit amb LZ78 seleccionant un directori de sortida (output)
+-	Prova-5:	Prova la descompressio d'un arxiu comprimit amb LZW sense triar directori de sortida
+-	Prova-6:	Prova la descompressio d'un arxiu comprimit amb LZW seleccionant un directori de sortida (output)
+-	Prova-7:	Prova la compressio d'un directori sense seleccionar directori de sortida
+-	Prova-8:	Prova la compressio d'un directori seleccionant directori de sortida (output) 
+-	Prova-9:	Prova la descompressio d'un directori comprimit usant LZ78 (sense triar directori de sortida) 
