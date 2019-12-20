@@ -142,28 +142,13 @@ public class JPEGDecompressor extends JPEG {
        //1. DCT3
        //2. sumar 127 als valors per tenir bé les matrius.
        //////
-       System.out.println("Printo la matriu DCTiluTrans[0]:");
-       for (int i = 0; i < 8; i++){
-           for (int j = 0; j < 8; j++){
-               System.out.print(DCTiluTrans[0][i][j]);
-               System.out.print(" ");
-           }
-           System.out.println();
-       }
+
 
        /////////
        for (int i = 0; i < DCTiluTrans.length; i++){
            DCTilu[i] = transformDCTs(DCTiluTrans[i]);
            DCTcb[i] = transformDCTs(DCTcbTrans[i]);
            DCTcr[i] = transformDCTs(DCTcrTrans[i]);
-       }
-       System.out.println("Printo la matriu DCTilu[0]:");
-       for (int i = 0; i < 8; i++){
-           for (int j = 0; j < 8; j++){
-               System.out.print(DCTilu[0][i][j]);
-               System.out.print(" ");
-           }
-           System.out.println();
        }
        //Aquí ja tenim les matrius transformades. Procedim a la suma i a colocar
 
@@ -249,14 +234,7 @@ public class JPEGDecompressor extends JPEG {
        for (final int[][] matrix : DCTcbTrans) {
            desfeszigzag(matrix, Cb);
        }
-       System.out.println("Printo la matriu DCTiluTrans[0]:");
-       for (int i = 0; i < 8; i++){
-           for (int j = 0; j < 8; j++){
-             System.out.print(DCTiluTrans[0][i][j]);
-             System.out.print(" ");
-           }
-           System.out.println();
-       }
+
    }
 
    private void multiplica(){

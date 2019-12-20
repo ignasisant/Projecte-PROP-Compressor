@@ -56,7 +56,6 @@ private String magicNum;
     }
 
     public void creaImatgeDePPM(String img) throws Exception {
-        System.out.println(img.length());
         int it = 0;
         char[] imag = img.toCharArray();
         String aux = "";
@@ -91,16 +90,8 @@ private String magicNum;
             throw new PPMBadFormatted();
 
         }
-        System.out.println("La imatge en strinng te ara" + img.length() + " chars o bytes ni idea");
         String contingut = img;
-        System.out.println(magicNum);
-        System.out.println(alt);
-        System.out.println(ample);
-        System.out.println(aux);
-        System.out.println(it);
-        System.out.println("Printo Imatge \n" + contingut);
         char[] bytes = contingut.toCharArray();
-        System.out.println("Nombre de chars de la imatge: " + bytes.length); //Aixo no dona i no se perquè
         imatge = new Vector<Color>();
         imatge.setSize(ample*alt);
         int cont = 0;
@@ -119,7 +110,6 @@ private String magicNum;
             imatge.setElementAt(c, cont);  //Això m'ha d'omplir la imatge
             cont++;
         }
-        System.out.println("");
     }
 
 

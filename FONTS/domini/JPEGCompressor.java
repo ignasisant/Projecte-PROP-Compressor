@@ -54,12 +54,7 @@ public class JPEGCompressor extends JPEG {
 //   public void print() { // mostra tota la image per cada unitat rgb que tenim per les proves
 //       for (int i = 0; i < imatge.getAlt(); i++) {
 //           for (int j = 0; j < imatge.getAmple(); j++) {
-//               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getR());
-//               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getG());
-//               System.out.printf("%s", this.imatge.getColorPerIndex(i * j + j).getB());
-//               System.out.printf(" ");
 //           }
-//           System.out.printf("\n");
 //       }
 //   }
 
@@ -151,7 +146,6 @@ public class JPEGCompressor extends JPEG {
            creazigzag(matrix, Cb);
        }
 //        for (int i = 0; i < Y.size(); i++){
-//            System.out.println(Y.get(i));
 //        }
        // #####################################################
        // Aqui seguim aquesta tarda
@@ -215,10 +209,8 @@ public class JPEGCompressor extends JPEG {
                j = j % 8;
                matriu = matriu % ms;
                i %= 8;
-               // System.out.println("Z: " + z + " matriu: " + matriu + " i: " + i + " j: " + j
                // + " valor: " + this.imatge.get(z).r);
                // print();
-               // System.out.println("bchdsjla: " + this.imatge.get(z).r + " Amb z = " + z);
                DCTilu[matriu + salt][i][j] = coloret.getR() - 127;
                DCTcr[matriu + salt][i][j] = coloret.getG()- 127;
                DCTcb[matriu + salt][i][j] = coloret.getB()- 127;
@@ -250,12 +242,9 @@ public class JPEGCompressor extends JPEG {
        // Xivato zone
        // Xivato zone
 //        for (int matrix = 0; matrix < DCTiluTrans.length; matrix++) {
-//            System.out.println("Matriu numero " + matrix + ":");
 //            for (int i = 0; i < 8; i++) {
 //                for (int j = 0; j < 8; j++) {
-//                    System.out.printf("%d\t", DCTiluTrans[matrix][i][j]);
 //                }
-//                System.out.println();
 //            }
 //        }
    }
@@ -298,14 +287,7 @@ public class JPEGCompressor extends JPEG {
        // this.print();
        imatge.operaToYCbCr(); //Ho he de fer a imatge
        this.transformBlocks(); // Aquí tinc els blocs ja transformats.
-       System.out.println("Printo la matriu DCTilu[0] abans de dividir:");
-       for (int i = 0; i < 8; i++){
-           for (int j = 0; j < 8; j++){
-               System.out.print(DCTiluTrans[0][i][j]);
-               System.out.print(" ");
-           }
-           System.out.println();
-       }
+
        this.divideix(); // divideix les matrius entre les valors de la taula.
        this.preparaMatrius();
     //    try {
