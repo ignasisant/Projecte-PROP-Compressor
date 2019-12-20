@@ -1,14 +1,14 @@
-ÍNDEX DIRECTORI PRESENTACIÓ
+INDEX DIRECTORI PRESENTACIO
 
--Aquest directori conté totes les classes i vistes de la capa de Presentació:
+-Aquest directori conte totes les classes i vistes de la capa de Presentació:
 
 Entre elles hi trobem:
 
 -Driver: on hi ha el main
 -IOUtils: controlador presentacio
--VistaPrincipal: GUI tria d'acció
--VistaSelAlg: GUI selecció algorisme
+-VistaPrincipal: GUI tria d'accio
+-VistaSelAlg: GUI seleccio algorisme
 -VistaInfo: GUI informacio de la compressio/descompressio.
 -VistaCompare: GUI comparar arxiu original amb arxiu tractat
--VistaStatistics: GUI veure estadistiques històriques.
+-VistaStatistics: GUI veure estadistiques historiques.
 -VistaExepcions: GUI excepcions
