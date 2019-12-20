@@ -61,14 +61,6 @@ frameVista.pack();
 frameVista.setVisible(true);
 }
 
-public void activar() {
-frameVista.setEnabled(true);
-}
-
-public void desactivar() {
-frameVista.setEnabled(false);
-}
-
 public static void update(){
 frameVista.pack();
 frameVista.repaint();
@@ -86,7 +78,7 @@ public void volverHome(){
 
 //////////////////////// Metodos de las interfaces Listener
 
-public void actionPerformed_buttonContinuar(ActionEvent event){
+private void actionPerformed_buttonContinuar(ActionEvent event){
     panelContenidos.removeAll();
     if(opcio[0].isSelected()) {
         vistaSelAlg = new VistaSelAlg(iIOUtils, this, jpeg);
@@ -108,7 +100,7 @@ public void actionPerformed_buttonContinuar(ActionEvent event){
     update();
 }
 
-public void actionPerformed_RadioButtonOpcio0(ActionEvent event){
+private void actionPerformed_RadioButtonOpcio0(ActionEvent event){
     iIOUtils.setAction(0);
     if(fileChooser.getSelectedFile() == null){
         buttonContinuar.setEnabled(false);
@@ -116,7 +108,7 @@ public void actionPerformed_RadioButtonOpcio0(ActionEvent event){
     buttonInput.setEnabled(true);
     buttonOutput.setEnabled(true);
 }
-public void actionPerformed_RadioButtonOpcio1(ActionEvent event){
+private void actionPerformed_RadioButtonOpcio1(ActionEvent event){
     iIOUtils.setAction(1);
     if(fileChooser.getSelectedFile() == null){
         buttonContinuar.setEnabled(false);
@@ -124,13 +116,13 @@ public void actionPerformed_RadioButtonOpcio1(ActionEvent event){
     buttonInput.setEnabled(true);
     buttonOutput.setEnabled(true);
 }
-public void actionPerformed_RadioButtonOpcio2(ActionEvent event){
+private void actionPerformed_RadioButtonOpcio2(ActionEvent event){
     buttonContinuar.setEnabled(true);
     buttonInput.setEnabled(false);
     buttonOutput.setEnabled(false);
 }
 
-public void actionPerformed_fileChooser(ActionEvent event){
+private void actionPerformed_fileChooser(ActionEvent event){
     if (fileChooser.getSelectedFile() != null){
         try{
             labelInput.setText(fileChooser.getSelectedFile().getAbsolutePath());
@@ -180,7 +172,7 @@ public void actionPerformed_fileChooser(ActionEvent event){
     }
 }
 
-public void actionPerformed_fileChooser2(ActionEvent event){
+private void actionPerformed_fileChooser2(ActionEvent event){
     if (fileChooser2.getSelectedFile() != null){
         try{
         iIOUtils.setOutputFile(fileChooser2.getSelectedFile().getAbsolutePath());
@@ -192,11 +184,11 @@ public void actionPerformed_fileChooser2(ActionEvent event){
     }
 }
 
-public void actionPerformed_buttonInput(ActionEvent event){
+private void actionPerformed_buttonInput(ActionEvent event){
     if(!opcio[2].isSelected()) fileChooser.showOpenDialog(null);
 }
 
-public void actionPerformed_buttonOutput(ActionEvent event){
+private void actionPerformed_buttonOutput(ActionEvent event){
     if(!opcio[2].isSelected()) fileChooser2.showOpenDialog(null);
 }
 

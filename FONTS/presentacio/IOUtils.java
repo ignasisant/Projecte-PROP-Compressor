@@ -5,8 +5,6 @@
  */
 package presentacio;
 import domini.Fitxer;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class IOUtils {
     private int action = -1;
@@ -21,14 +19,6 @@ public class IOUtils {
     public IOUtils() {
         this.vistaPrincipal = new VistaPrincipal(this);      
         this.ctrlDom = new Fitxer();//Fitxer.getFitxer();                                                                 
-    }
-
-
-    public IOUtils(String infile, String outfile, int action, int algo) throws Exception {
-        setInputFile(infile);
-        this.action = action;
-        this.algoId = algo;
-        setOutputFile(outfile);
     }
 
     public void run() throws Exception {
@@ -80,8 +70,7 @@ public class IOUtils {
     }
 
     public String[] getCompare(){
-        String[] s = {"Prova per manual d'ús", "Prova per manual d'ús"};
-        return s;
+        return ctrlDom.compara();
     }
 
     public int getType() {

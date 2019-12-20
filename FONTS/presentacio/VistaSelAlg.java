@@ -55,7 +55,7 @@ public class VistaSelAlg {
 
     //////////////////////// Metodos de las interfaces Listener
 
-    public void actionPerformed_buttonComprimir(ActionEvent event){
+    private void actionPerformed_buttonComprimir(ActionEvent event){
         try{
             iIOUtils.run();
         }catch(Exception e){
@@ -67,18 +67,18 @@ public class VistaSelAlg {
         vistaPrincipal.update();   
     }
 
-    public void actionPerformed_RadioButtonAlg0(ActionEvent event){
+    private void actionPerformed_RadioButtonAlg0(ActionEvent event){
         iIOUtils.setAlgorithm(0);
     }
 
-    public void actionPerformed_RadioButtonAlg1(ActionEvent event){
+    private void actionPerformed_RadioButtonAlg1(ActionEvent event){
         iIOUtils.setAlgorithm(1);
     }
 
-    public void actionPerformed_RadioButtonAlg2(ActionEvent event){
+    private void actionPerformed_RadioButtonAlg2(ActionEvent event){
         if(jpeg)iIOUtils.setAlgorithm(2);
         else {
-            vistaExepcions.noJPeg();
+            vistaExepcions.noJpeg();
             panelComprimir.removeAll();
             panelRadioButton.removeAll();
             grupo2.clearSelection();
