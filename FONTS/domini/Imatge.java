@@ -21,69 +21,7 @@ private String magicNum;
    public Imatge(){
        imatge = new Vector<Color>(); // Colorets
     }
-    public Imatge(int size){
-        imatge = new Vector<Color>(size); // Colorets
-    }
 
-//   public Imatge (String path) throws IOException {
-//       imatge = new Vector<Color>(); // Colorets
-//       creaImatge(path);
-//   }
-
-//    public void creaImatgeDePPM(String img){
-//       System.out.println(img.length());
-//       int it = 0;
-//       char[] imag = img.toCharArray();
-//       String aux = "";
-//       it = img.indexOf('P');
-//       magicNum = img.substring(it, it+2);
-//       img = img.substring(it+3);
-//        while (img.charAt(0) == '#'){ //retallo la string
-//           it = img.indexOf('\n') + 1;
-//           img = img.substring(it);
-//       }
-//        aux = img.substring(0,img.indexOf(' '));
-//        ample = Integer.parseInt(aux);
-//        aux = img.substring(img.indexOf(' ')+1, img.indexOf('\n'));
-//        alt = Integer.parseInt(aux);
-//        img = img.substring(img.indexOf('\n')+1);
-//        while (img.charAt(0) == '#'){ //retallo la string
-//            it = img.indexOf('\n') + 1;
-//            img = img.substring(it);
-//        }
-//        maxVal = Integer.parseInt(img.substring(0, img.indexOf('\n')));
-//        img = img.substring(img.indexOf('\n')+1);
-//        if (maxVal != 255){
-////            llençar excepcio
-//        }
-//        System.out.println("La imatge en strinng te ara" + img.length() + " chars o bytes ni idea");
-//        String contingut = img;
-//        System.out.println(magicNum);
-//        System.out.println(alt);
-//        System.out.println(ample);
-//        System.out.println(aux);
-//        System.out.println(it);
-//        System.out.println("Printo Imatge \n" + contingut);
-//        char[] bytes = contingut.toCharArray();
-//        System.out.println("Nombre de chars de la imatge: " + bytes.length); //Aixo no dona i no se perquè
-//        imatge = new Vector<Color>();
-//        imatge.setSize(ample*alt);
-//        int cont = 0;
-//        for (int i = 0; i < bytes.length; i+=3){  //tenir molt en compte que un char son dos bytes!!!! jo només en vull un.
-//            int r = (byte)bytes[i];
-//            int g = (byte)bytes[i+1];
-//            int b = (byte)bytes[i+2];
-//            if (r < 0) r = 256 + r;
-//            if (g < 0) g = 256 + g;
-//            if (b < 0) b = 256 + b;
-//
-//
-//            Color c = new Color(r, g, b);
-//            imatge.setElementAt(c, cont);  //Això m'ha d'omplir la imatge
-//            cont++;
-//        }
-//        System.out.println("");
-//    }
 
     public void operaFromYCbCr(){
 
@@ -94,9 +32,9 @@ private String magicNum;
             double R = (Y + (1.402 * (Cr - 128)));
             double G = (Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128));
             double B = (Y + 1.772 * (Cb - 128));
-            c.setR((int)R+20);
-            c.setG((int)G+20);
-            c.setB((int)B+20);
+            c.setR((int)R);
+            c.setG((int)G);
+            c.setB((int)B);
         }
 
     }
@@ -246,10 +184,6 @@ private String magicNum;
 
    public Color getColorPerIndex(int index){
        return this.imatge.get(index);
-   }
-
-   public void setColorPerIndex(int index, Color valor){
-       imatge.set(index, valor);
    }
 
     public int getAmple() {
