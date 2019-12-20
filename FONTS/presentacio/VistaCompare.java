@@ -32,9 +32,9 @@ public class VistaCompare {
 
 //////////////////////// Constructor 
 
-  public VistaCompare (String[] s) {
-    original = s[0];
-    tractat = s[1];
+  public VistaCompare () {
+    original = "Implementat en la proxima versio";
+    tractat = "No s'ha tingut temps d'acabar";
     inicializarComponentes();
   }
   
