@@ -10,10 +10,7 @@ import java.util.Vector;
 public class JPEGDriverP3 {
     public static void main(String[] args) throws Exception {
 //
-//        byte[] b = {'a',(byte)0x00,'c'};
-//        String i = new String(b);
-//        System.out.println(i.length());
-//        System.out.println(i);
+//
 
 
         Fitxer f = new Fitxer();
