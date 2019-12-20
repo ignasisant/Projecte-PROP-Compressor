@@ -9,7 +9,6 @@ abstract class JPEG extends Algorithm {
 	protected Vector<Integer> Y; //Aquests vectors són per fer les huffman encodings
 	protected Vector<Integer> Cr;
 	protected Vector<Integer> Cb;
-	protected String path;
 	protected Imatge imatge;
 
 
