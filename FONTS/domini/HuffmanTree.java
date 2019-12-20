@@ -253,7 +253,6 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
 
     private Node muntArbre(char[] arbre, int[] n){  //he de fer triquinyeles per passar el valor com a referencia
         Node node = new Node();
-        //System.out.println(arbre[n[0]]);
         //System.out.println(n[0]);
         if (arbre[n[0]] == '1'){ //és una fulla
             //System.out.println("Fulla!!");
