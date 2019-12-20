@@ -1,4 +1,4 @@
-package domini.testsDelQuim;
+package JPEGDrivers;
 
 import domini.Fitxer;
 import domini.JPEGCompressor;
@@ -19,7 +19,7 @@ public class JPEGDriverBlocs {
         Fitxer f = new Fitxer();
         //String fitxer = f.llegirFitxer("./ppms/blanc.ppm");
 
-        String fitxer = f.llegirFitxer("./EXE/Jocs de proves/ppms/boxes_1.ppm");
+        String fitxer = f.llegirFitxer("./FONTS/JPEGDrivers/ppms/boxes_1.ppm");
         System.out.println("Començo a comprimir");
         System.out.println("Començo a comprimir");
         JPEGCompressor j = new JPEGCompressor();
