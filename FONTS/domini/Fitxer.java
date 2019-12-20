@@ -21,7 +21,7 @@ public class Fitxer {
         this.ctrlDades = new CtrlDades();
     }
 
-    public String[] compress(String infile, String outfile, int type, int algoId) {
+    public String[] compress(String infile, String outfile, int type, int algoId) throws Exception {
 
         this.comp.setAlgorithm(algoId);
         return this.comp.compress(infile, outfile, type);

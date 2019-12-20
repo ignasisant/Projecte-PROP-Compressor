@@ -16,7 +16,7 @@ class Compressio {
         this.f = f;
     };
 
-    public String[] compress(String infile, String outfile, Integer type) {
+    public String[] compress(String infile, String outfile, Integer type) throws Exception {
         String[] info = null;
         if (type == 0)
             info = this.compressFile(infile, outfile);
@@ -31,32 +31,27 @@ class Compressio {
         return this.algo.getData();
     }
 
-    private String[] compressFile(String infile, String outfile) {
-        try {
+    private String[] compressFile(String infile, String outfile) throws Exception {
 
-            String del = "/";
-            if (infile.charAt(0) != '/')
-                del = "\\\\";
-            String all[] = infile.split(del);
-            String auxname = all[all.length - 1];
-            System.out.println("AUXN: " + auxname + " allsize: " + all.length);
-            String outf = getCompressOutputFile(infile, outfile);
+        String del = "/";
+        if (infile.charAt(0) != '/')
+            del = "\\\\";
+        String all[] = infile.split(del);
+        String auxname = all[all.length - 1];
 
-            String payload = this.f.llegirFitxer(infile);
+        String outf = getCompressOutputFile(infile, outfile);
 
-            this.algo.setData(payload);
+        String payload = this.f.llegirFitxer(infile);
 
-            this.st.initStats();
-            String compress = this.run();
-            String[] info = this.st.saveStats(infile, algo.getId(), payload.length(), compress.length());
+        this.algo.setData(payload);
 
-            this.f.writeToFile(algo.getId() + "\n" + auxname + "\n" + compress, outf);
-            return info;
+        this.st.initStats();
+        String compress = this.run();
+        String[] info = this.st.saveStats(infile, algo.getId(), payload.length(), compress.length());
 
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+        this.f.writeToFile(algo.getId() + "\n" + auxname + "\n" + compress, outf);
+        return info;
+
     }
 
     private String[] compressFolder(String infile, String outfile) {
