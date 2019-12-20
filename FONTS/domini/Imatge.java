@@ -116,7 +116,7 @@ private String magicNum;
         }
     }
 
-    public void creaImatgeDePPM(String img) throws PPMBadFormatted {
+    public void creaImatgeDePPM(String img) throws Exception {
         System.out.println(img.length());
         int it = 0;
         char[] imag = img.toCharArray();
@@ -166,6 +166,7 @@ private String magicNum;
         imatge.setSize(ample*alt);
         int cont = 0;
         if (bytes.length != alt*ample*3) throw new PPMBadFormatted();
+        if (600*600*3 < alt*ample*3) throw new PPMTooBig();
         for (int i = 0; i < bytes.length; i+=3){  //tenir molt en compte que un char son dos bytes!!!! jo només en vull un.
             int r = (byte)bytes[i];
             int g = (byte)bytes[i+1];
@@ -208,10 +209,22 @@ private String magicNum;
     public String creaImatgeFinal(){  //aixo ho canviarem aquesta tarda per un mètode de la classe imatge
         //Tot aixo cal canviar-ho encara que va bé pel debugging
         String header = "P6\n" + Integer.toString(ample) + " " + Integer.toString(alt) + "\n255\n";
-        StringBuilder result = new StringBuilder();
+        String result = "";
+        byte[] finali = new byte[ample*alt*3];
+        int cont = 0;
         for (Color i : imatge){
-            result.append((byte) i.getR()).append((byte) i.getG()).append((byte) i.getB());
+            byte R = (byte) i.getR();
+            finali[cont] = R;
+            cont ++;
+            byte G =  (byte) i.getG();
+            finali[cont] = G;
+            cont++;
+            byte B =  (byte) i.getB();
+            finali[cont] = B;
+            cont++;
+            //result += R + G + B;
         }
+        result = new String(finali);
         return header + result; //la imatge ve per aquí.
 //        FileOutputStream Hd = null;  //cal canviar-ho perque no estigui hardcoded
 //        Hd = new FileOutputStream("out.ppm");

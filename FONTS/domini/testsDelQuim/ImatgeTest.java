@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class ImatgeTest {
 
-    public static void main(String[] args) throws PPMBadFormatted {
+    public static void main(String[] args) throws Exception {
         Fitxer f = new Fitxer();
         String img = (f.llegirFitxer("./ppms/blanc.ppm"));
         Imatge imatge = new Imatge();

@@ -308,23 +308,23 @@ public class JPEGCompressor extends JPEG {
     //    } catch (IOException e) {
     //        e.printStackTrace();
     //    }
-       System.out.println(Y.size());
-       System.out.println("Printo la matriu DCTilu[0]:");
-       for (int i = 0; i < 8; i++){
-           for (int j = 0; j < 8; j++){
-               System.out.print(DCTilu[0][i][j]);
-               System.out.print(" ");
-           }
-           System.out.println();
-       }
-       System.out.println("Printo la matriu DCTiluTrans[0]:");
-       for (int i = 0; i < 8; i++){
-           for (int j = 0; j < 8; j++){
-               System.out.print(DCTiluTrans[0][i][j]);
-               System.out.print(" ");
-           }
-           System.out.println();
-       }
+//       System.out.println(Y.size());
+//       System.out.println("Printo la matriu DCTilu[0]:");
+//       for (int i = 0; i < 8; i++){
+//           for (int j = 0; j < 8; j++){
+//               System.out.print(DCTilu[0][i][j]);
+//               System.out.print(" ");
+//           }
+//           System.out.println();
+//       }
+//       System.out.println("Printo la matriu DCTiluTrans[0]:");
+//       for (int i = 0; i < 8; i++){
+//           for (int j = 0; j < 8; j++){
+//               System.out.print(DCTiluTrans[0][i][j]);
+//               System.out.print(" ");
+//           }
+//           System.out.println();
+//       }
 
        HuffmanTree huffcoder = new HuffmanTree();
        Vector<Integer> bigVector = new Vector<Integer>();
