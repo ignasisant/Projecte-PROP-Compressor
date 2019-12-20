@@ -32,9 +32,9 @@ private String magicNum;
             double R = (Y + (1.402 * (Cr - 128)));
             double G = (Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128));
             double B = (Y + 1.772 * (Cb - 128));
-            c.setR((int)R+20);
-            c.setG((int)G+20);
-            c.setB((int)B+20);
+            c.setR((int)R);
+            c.setG((int)G);
+            c.setB((int)B);
         }
 
     }
