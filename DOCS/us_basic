@@ -1,0 +1,23 @@
+Compilació:
+
+	-	Per compilar es necessari situar-se al directiri FONT/ del projecte i executar:
+			
+			make build
+			make jar
+
+	- Si no hi hagut cap error trobareu l'executable icetaton.jar en el directori EXE/ del projecte, per executar:
+
+			java -jar path/to/icetaton.jar
+
+	- Per eliminar tots .class generats durant la compilació:
+
+			make clean
+
+Manual d'us:
+
+- Al executar l’aplicació l’usuari ha de triar l’acció a dur a 		terme. Si es tria “Veure estadístiques” no podrem seleccionar 		arxiu. Per altre banda si triem “Comprimir” o bé “Descomprimir” no 	podrem pitjar “Continuar” si no hem triat l’arxiu a tractar.
+
+-Al seleccionar arxiu s’ha de tenir en compte que no podem comprimir un arxiu ja comprimit. Alhora no podem descomprimir un arxiu no comprimit. En els dos casos salten excepcions.
+
+-Per la resta de l’aplicacio els seu ús es intuitiu i fácil.
+
