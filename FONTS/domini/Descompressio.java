@@ -14,7 +14,7 @@ class Descompressio {
         this.f = f;
     };
 
-    public String[] decompress(String infile, String outfile, Integer type) {
+    public String[] decompress(String infile, String outfile) {
         String[] info;
         try {
             info = this.f.llegirDescomp(infile);

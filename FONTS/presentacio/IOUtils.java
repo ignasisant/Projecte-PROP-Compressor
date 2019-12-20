@@ -38,13 +38,13 @@ public class IOUtils {
                 stats = ctrlDom.compress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
             case 1:
-                stats = ctrlDom.decompress(infile, outfile, 0, this.algoId); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.decompress(infile, outfile, this.algoId); 
                 break;
             case 2:
                 stats = ctrlDom.compress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
                 break;
             case 3:
-                stats = ctrlDom.decompress(infile, outfile, 1, this.algoId); // 0  o 1 => fitxer o carpeta
+                stats = ctrlDom.decompress(infile, outfile,  this.algoId); 
                 break;
 
         }
@@ -75,7 +75,7 @@ public class IOUtils {
         return stats;
     }
 
-    public String getAllStats(){
+    public String getAllStats() throws Exception{
         return ctrlDom.getStats();
     }
 
