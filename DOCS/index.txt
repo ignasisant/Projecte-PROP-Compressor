@@ -1,0 +1,13 @@
+INDEX DIRECTORI DOC
+
+En aquest directori hi ha els seguents fitxer de documentació:
+
+Casos d'ús.pdf
+Descripcio del Grup.pdf
+Documentació Segona entrega.pdf
+index.txt
+Manual d'us.pdf
+Relació classe-persona.pdf
+uml_domini.png
+uml_presentacio.png
+us_basic.txt
