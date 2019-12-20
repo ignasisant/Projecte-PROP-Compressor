@@ -17,13 +17,14 @@ public class Fitxer {
     }
 
     public String[] compress(String infile, String outfile, int type, int algoId) {
+
         this.comp.setAlgorithm(algoId);
         return this.comp.compress(infile, outfile, type);
 
     }
 
     public String[] decompress(String infile, String outfile, int algoId) {
-
+        if(algoId == 2) ++algoId;
         this.decomp.setAlgorithm(algoId);
         return this.decomp.decompress(infile, outfile);
 

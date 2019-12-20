@@ -139,8 +139,11 @@ class Descompressio {
             this.algo = new LZW();
             break;
         case 2:
-            // this.algo = new jpeg();
-            break;
+            this.algo = new JPEGCompressor();
+           break;
+       case 3:
+            this.algo = new JPEGDecompressor();
+           break;
         default:
             // throw new InvalidAlgorithm();
         }
