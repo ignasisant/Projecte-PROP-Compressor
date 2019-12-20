@@ -1,13 +1,13 @@
+/**
+ * Class: Descompressio
+ * Author: Jordi Garcia Aguilar
+ */
 package domini;
-
-import java.io.*;
-import java.util.Vector;
 
 class Descompressio {
     private Algorithm algo;
     private Fitxer f;
     private Statistics st;
-    
 
     public Descompressio(Fitxer f) {
         this.st = Statistics.getStatistics();
@@ -16,47 +16,38 @@ class Descompressio {
 
     public String[] decompress(String infile, String outfile) throws Exception {
         String[] info;
-       
-            info = this.f.llegirDescomp(infile);
 
-            if (info[0].length() == 1) {
-                String[] stats = this.decompressFile(infile, outfile, info[1], info[2]);
-                return stats;
-            } else { // decompressio de carpeta
+        info = this.f.llegirDescomp(infile);
 
-                String[] stats = this.decompressFolder(infile, outfile, info[0] + "\n" + info[1] + "\n" + info[2]);
-                return stats;
+        if (info[0].length() == 1) {
+            String[] stats = this.decompressFile(infile, outfile, info[1], info[2]);
+            return stats;
+        } else { // decompressio de carpeta
 
-            }
-   
+            String[] stats = this.decompressFolder(infile, outfile, info[0] + "\n" + info[1] + "\n" + info[2]);
+            return stats;
+
+        }
 
     }
 
-    private String[] decompressFile(String infile, String outfile, String origName, String data) {
-        try {
+    private String[] decompressFile(String infile, String outfile, String origName, String data) throws Exception {
 
-            // this.ext_comp = getExtFromId(info.get(0)); aixo ena anira be per quan haguem
-            // d'endevinar el algo
-            String outf = getDecompressOutputFile(infile, outfile, origName);
+        String outf = getDecompressOutputFile(infile, outfile, origName);
 
-            // if(outfile == "") outfile = origName;
-            String payload = data;
+        // if(outfile == "") outfile = origName;
+        String payload = data;
 
-            algo.setData(payload);
+        algo.setData(payload);
 
-            this.st.initStats();
+        this.st.initStats();
 
-            String decompress = this.run();
+        String decompress = this.run();
 
-            String[] stat = this.st.saveStats(infile, algo.getId(), payload.length(), decompress.length());
+        String[] stat = this.st.saveStats(infile, algo.getId(), payload.length(), decompress.length());
 
-            this.f.writeToFile(decompress, outf);
-            return stat;
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+        this.f.writeToFile(decompress, outf);
+        return stat;
 
     }
 
@@ -98,7 +89,6 @@ class Descompressio {
         }
         String[] stat = this.st.saveStats(infile, algo.getId(), totini, totend);
         return stat;
-        // String nom = all.substring(0, ini-1);
 
     }
 
@@ -117,15 +107,12 @@ class Descompressio {
 
         }
 
-        System.out.println("OUTF: " + outfile);
         return outfile;
     }
 
     public String run() {
         return this.algo.decompress();
     }
-
-
 
     public void setAlgorithm(int algo) /* throws Exception */ {
         switch (algo) {
@@ -137,31 +124,12 @@ class Descompressio {
             break;
         case 2:
             this.algo = new JPEGCompressor();
-           break;
-       case 3:
+            break;
+        case 3:
             this.algo = new JPEGDecompressor();
-           break;
-        default:
-            // throw new InvalidAlgorithm();
-        }
+            break;
 
-    }
-    public String getExtFromId(String i)  {
-        int id = Integer.parseInt(i);
-        Algorithm al = null;
-        switch (id) {
-            case 0:
-                al = new LZ78();
-                break;
-            case 1:
-                al = new LZW();
-                break;
-            case 2:
-                // this.algo = new jpeg();
-                break;
-           
         }
-        return al.getExtension();
 
     }
 

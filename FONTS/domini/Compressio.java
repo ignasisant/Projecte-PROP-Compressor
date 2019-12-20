@@ -1,3 +1,8 @@
+/**
+ * Class: LZ78
+ * Author: Jordi Garcia Aguilar
+ */
+
 package domini;
 
 class Compressio {

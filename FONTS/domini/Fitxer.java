@@ -1,3 +1,8 @@
+/**
+ * Class: LZ78
+ * Author: Jordi Garcia Aguilar
+ */
+
 package domini;
 
 import java.io.*;
@@ -24,7 +29,8 @@ public class Fitxer {
     }
 
     public String[] decompress(String infile, String outfile, int algoId) throws Exception {
-        if(algoId == 2) ++algoId;
+        if (algoId == 2)
+            ++algoId;
         this.decomp.setAlgorithm(algoId);
         return this.decomp.decompress(infile, outfile);
 
@@ -57,15 +63,13 @@ public class Fitxer {
 
     }
 
-   
-
     public void saveStatistic(String nomFitxer, int algoId, double compress, long duration) throws IOException {
         this.ctrlDades.appendStatistic(nomFitxer, algoId, compress, duration);
 
     }
 
     public String getStats() throws Exception {
-        
+
         return this.ctrlDades.readStats();
 
     }
