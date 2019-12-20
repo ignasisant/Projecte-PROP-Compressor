@@ -28,7 +28,7 @@ public class JPEGDriverP3 {
         String comprimit = j.compress();
         //Compessio acabada
 
-        Vector<Integer> debugging = j.getDebugging();
+        Vector<Integer> debugging = j.getDebugging();//String fitxer = f.llegirFitxer("./ppms/blanc.ppm");;
 
         JPEGDecompressor dj = new JPEGDecompressor();
         //dj.setDebugging(debugging, 56, 56);
