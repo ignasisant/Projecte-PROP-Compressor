@@ -1,3 +1,8 @@
+
+/**
+ * Class: Color
+ * Author: Joaquim Ferrer Sagarra
+ */
 package domini;
 
 public class PPMTooBig extends Exception {

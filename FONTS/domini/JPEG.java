@@ -1,4 +1,9 @@
-package domini;//author joaquim.ferrer
+
+/**
+ * Class: Color
+ * Author: Joaquim Ferrer Sagarra
+ */
+package domini;
 
 import java.io.*;
 import java.util.*;
@@ -61,7 +66,7 @@ abstract class JPEG extends Algorithm {
 
 	@Override
 	public String getExtension() {
-		return ".jpeg";
+		return "jpeg";
 	}
 
 

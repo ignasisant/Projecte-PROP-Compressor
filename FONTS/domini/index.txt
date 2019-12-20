@@ -4,7 +4,7 @@ Aquest directori conte les classes de la capa de domini, de les qual el controla
 
 
 
-- Algorithm.java: Classe abstracta representant l'algoritme.
+-   Algorithm.java: Classe abstracta representant l'algoritme.
 -	Color.java:	Classe per tractar colors (RGB o YCbCr).
 -	Compressio.java:	Classe per tractar les crides als algoritmes a l'hora de comprimir
 -	Descompressio.java:	Classe per tractar les crides als algoritmes a l'hora de descomprimir
