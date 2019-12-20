@@ -31,8 +31,8 @@ public class JPEGDriverBlocs {
         Vector<Integer> debugging = j.getDebugging();
 
         JPEGDecompressor dj = new JPEGDecompressor();
-        dj.setDebugging(debugging, 56, 56);
-        //dj.setData(comprimit);  //el huffmann es queda encallat aquí.
+        //dj.setDebugging(debugging, 56, 56);
+        dj.setData(comprimit);  //el huffmann es queda encallat aquí.
         String Descomprimit = dj.decompress();
         f = new Fitxer();
         //f.writeToFile(Descomprimit,"out_amb_huffman.ppm");
