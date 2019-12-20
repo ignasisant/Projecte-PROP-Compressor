@@ -1,13 +1,10 @@
 package domini;
 
-import java.io.*;
-
 class Compressio {
     private Algorithm algo;
 
     private Fitxer f;
     private Statistics st;
-   
 
     public Compressio(Fitxer f) {
         this.st = Statistics.getStatistics();
@@ -24,6 +21,7 @@ class Compressio {
         return info;
 
     }
+
     public String getAlgoData() {
         return this.algo.getData();
     }
@@ -110,10 +108,10 @@ class Compressio {
             this.algo = new LZW();
             break;
         case 2:
-             this.algo = new JPEGCompressor();
+            this.algo = new JPEGCompressor();
             break;
         case 3:
-             this.algo = new JPEGDecompressor();
+            this.algo = new JPEGDecompressor();
             break;
         default:
             // throw new InvalidAlgorithm();
@@ -123,16 +121,15 @@ class Compressio {
 
     public String getCompressOutputFile(String infile, String outfile) {
         String esc = "/", del = "/";
-        boolean win = false;
+
         if (infile.charAt(0) != '/') {
             del = "\\"; // Filesystem windows!
             esc = "\\\\"; // escapem el \ per la regex
         }
-        // System.out.println("DEL: "+del);
-        // System.out.println("REG: "+"[.][^."+del+"]+$");
+
         if (outfile != "") {
             String[] parts = infile.split(esc);
-            // if(del == "\\") del = "\\\\";
+
             infile = parts[parts.length - 1];
             String outf = outfile + del + infile.replaceFirst("[.][^." + esc + "]+$", "." + algo.getExtension());
 
@@ -143,10 +140,9 @@ class Compressio {
                 outfile = outf;
 
         } else {
-            // if(del == "\\") del = "\\\\";
-            System.out.println("OOUUTT: " + outfile);
+
             outfile = infile.replaceFirst("[.][^." + esc + "]+$", "." + algo.getExtension());
-            System.out.println("OOUUTT: " + outfile);
+
             if (outfile == infile)
                 outfile = infile + "." + algo.getExtension();
 
