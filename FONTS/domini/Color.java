@@ -1,3 +1,8 @@
+
+/**
+ * Class: Color
+ * Author: Joaquim Ferrer Sagarra
+ */
 package domini;
 
 public class Color {  //cada imatge és una matriu de Colors

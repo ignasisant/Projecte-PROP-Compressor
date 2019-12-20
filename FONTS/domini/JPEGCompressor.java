@@ -1,3 +1,8 @@
+
+/**
+ * Class: Color
+ * Author: Joaquim Ferrer Sagarra
+ */
 package domini;
 
 import java.io.*;

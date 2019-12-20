@@ -1,4 +1,7 @@
-//author joaquim.ferrer
+/**
+ * Class: Color
+ * Author: Joaquim Ferrer Sagarra
+ */
 
 package domini;
 
