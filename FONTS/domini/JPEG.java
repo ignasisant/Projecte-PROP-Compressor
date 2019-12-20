@@ -5,7 +5,7 @@ import java.util.*;
 
 import domini.Imatge;
 
-abstract class jpeg extends Algorithm {
+abstract class JPEG extends Algorithm {
 	protected Vector<Integer> Y; //Aquests vectors són per fer les huffman encodings
 	protected Vector<Integer> Cr;
 	protected Vector<Integer> Cb;

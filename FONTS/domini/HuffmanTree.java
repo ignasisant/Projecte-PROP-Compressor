@@ -117,12 +117,6 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
 
 
     private Integer charsToInteger(String in){ //EPA I ELS NEGATIUS KLK?
-//        byte[] array = new byte[in.length()];
-////        for (int i = 0; i < in.length(); i++ ){
-////            array[i] = (byte) in.toCharArray()[i];
-////        }
-////        BigInteger big = new BigInteger(array);
-////        return big.intValue();
         char[] numbers = in.toCharArray();
         int result = 0;
         for(int i=numbers.length - 1; i>=0; i--)
@@ -309,7 +303,7 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
     }
 
 
-    public Vector<Integer> muntaStrucura( ){
+    private Vector<Integer> muntaStrucura( ){
         Vector<Integer> result = new Vector<Integer>();
         Node node = root;
         char[] joc = comprimit.toCharArray();
@@ -357,7 +351,6 @@ public class HuffmanTree {  //aquesta classe construeix un huffmanTree des de qu
     }
 
     public Vector<Integer> decode (String in){ //Cal saber la llargda de cada vector
-        //System.out.println("Inicio el decoder: m'arriba una string de " + in.length() + " bytes.");
         frequencies = new HashMap<Integer, Integer>();  //nombre de valors que té una DCT amb un maxval de 255
         traductor = new HashMap<Integer, String>();
         root = null;

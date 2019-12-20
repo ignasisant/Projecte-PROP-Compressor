@@ -2,11 +2,11 @@ package domini;
 
 import java.util.*;
 
-public class jpegDecompressor extends jpeg {
+public class JPEGDecompressor extends JPEG {
 
     private String data;
 
-   public jpegDecompressor() {
+   public JPEGDecompressor() {
        // Aqui anira la crida a la classe imatge comprimida que donarà d'una imatge
        // jpeg una cosa llegible
        // De moment això no està implememtat i esta "emulat" per la classe
@@ -258,9 +258,9 @@ public class jpegDecompressor extends jpeg {
        for (int matrix = 0; matrix < DCTiluTrans.length; matrix++) {
            for (int i = 0; i < 8; i++) {
                for (int j = 0; j < 8; j++) {
-                   DCTiluTrans[matrix][i][j] *= jpeg.QUANTY[i][j];
-                   DCTcrTrans[matrix][i][j] *= jpeg.QUANTC[i][j];
-                   DCTcbTrans[matrix][i][j] *= jpeg.QUANTC[i][j];
+                   DCTiluTrans[matrix][i][j] *= JPEG.QUANTY[i][j];
+                   DCTcrTrans[matrix][i][j] *= JPEG.QUANTC[i][j];
+                   DCTcbTrans[matrix][i][j] *= JPEG.QUANTC[i][j];
                }
            }
        }
@@ -274,25 +274,13 @@ public class jpegDecompressor extends jpeg {
 
    @Override
    public String decompress() {
-       //Obtinc els vectors (aixó canviarà a la segona entrega)
-    //    try {
-    //        llegeixdefitxer(path);
-    //    } catch (final IOException e) {
-    //        // TODO Auto-generated catch block
-    //        e.printStackTrace();
-    // //    }
 
        preparaMatrius();  //Desfem els zigzags i queden les matrius transformades.
        multiplica(); //Multipliquem les matrius per retornar el valor "Original"
        transformBlocks(); //Transformen les dctstrans a dcts matrius de YCbCr DCT3
        imatge.setImatge(getImageArray()); //Obtinc la imatge, només em falta parsejarla a PPM
        imatge.operaFromYCbCr();
-       //String fin = "";
-//       try {
-//           creaImatge("out.ppm");
-//       } catch (IOException e) {
-//           e.printStackTrace();
-//       }
+
        return imatge.creaImatgeFinal();
    }
 
