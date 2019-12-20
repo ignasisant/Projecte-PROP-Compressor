@@ -13,4 +13,5 @@ Aquest directori conté els packages del projecte i arxius per a la compilació:
 		Makefile necessari per generar l'executable
 - MANIFEST.MF:
 		Fitxer necessari per generar el .jar; estableix la classe d'inici.
-
+- JPEGDrivers:
+		Conte els drivers relacionats amb l'algoritme JPEG
