@@ -7,7 +7,7 @@ import domini.JPEGDecompressor;
 import java.util.Vector;
 
 
-public class jpegDriver {
+public class JPEGDriverBlanc {
     public static void main(String[] args) throws Exception {
 //
 //        byte[] b = {'a',(byte)0x00,'c'};
@@ -19,7 +19,7 @@ public class jpegDriver {
         Fitxer f = new Fitxer();
         //String fitxer = f.llegirFitxer("./ppms/blanc.ppm");
 
-        String fitxer = f.llegirFitxer("./ppms/maons.ppm");
+        String fitxer = f.llegirFitxer("./EXE/Jocs de proves/ppms/blanc.ppm");
         System.out.println("Començo a comprimir");
         System.out.println("Començo a comprimir");
         JPEGCompressor j = new JPEGCompressor();
