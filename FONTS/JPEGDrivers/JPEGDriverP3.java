@@ -17,7 +17,7 @@ public class JPEGDriverP3 {
 
 
         Fitxer f = new Fitxer();
-        //String fitxer = f.llegirFitxer("./ppms/blanc.ppm");
+
 
         String fitxer = f.llegirFitxer("./FONTS/JPEGDrivers/ppms/image.ppm");
         System.out.println("Començo a comprimir");
