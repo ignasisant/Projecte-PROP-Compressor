@@ -4,16 +4,13 @@ Aquest directori conté els packages del projecte i arxius per a la compilació:
 
 
 -	dades: 
-		Directori que conté les classes del package dades, corresponent a la capa de dades
+		Directori que conte les classes del package dades, corresponent a la capa de dades
 -	domini: 
-		Directori que conté les classes del package domini, corresponent a la capa de domini
+		Directori que conte les classes del package domini, corresponent a la capa de domini
 -	presentacio: 
-		Directori que conté les classes del package presentació, corresponent a la capa de presentació
+		Directori que conte les classes del package presentació, corresponent a la capa de presentació
 - JPEGDrivers:
-        HuffmanDriver: Driver de la classe HuffmanTree.
-        JPEGDriverBlanc: Driver de la classe JPEG.
-        JPEGDriverBlocs: Driver de la classe JPEG.
-        JPEGDriverP3: Driver de la classe JPEG.
+        Directori de drivers del JPEG.
 - Makefile: 
 		Makefile necessari per generar l'executable
 - MANIFEST.MF:

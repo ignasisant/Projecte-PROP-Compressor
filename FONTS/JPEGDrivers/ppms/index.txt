@@ -1,0 +1,4 @@
+blanc.ppm: Imatge PPM pels drivers.
+blau.ppm: Imatge PPM pels drivers.
+boxes_1.ppm: Imatge PPM pels drivers.
+imatge.ppm: Imatge PPM pels drivers.
