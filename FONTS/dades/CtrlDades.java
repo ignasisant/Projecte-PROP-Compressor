@@ -19,7 +19,8 @@ public class CtrlDades {
                 Path path = Paths.get(name);
                 byte[] data = Files.readAllBytes(path);
                 String payload = new String(data);
-               
+
+
                 //workaround d'un problema de trucament al llegir ppms
                 while (data.length > payload.length()) {
                     String aux = new String(Arrays.copyOfRange(data, payload.length(),data.length ));
