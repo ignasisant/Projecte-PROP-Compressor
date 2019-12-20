@@ -119,7 +119,7 @@ class Compressio {
 
     }
 
-    public String getCompressOutputFile(String infile, String outfile) {
+    private String getCompressOutputFile(String infile, String outfile) {
         String esc = "/", del = "/";
 
         if (infile.charAt(0) != '/') {

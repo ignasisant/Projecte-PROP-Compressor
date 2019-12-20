@@ -14,9 +14,9 @@ class Descompressio {
         this.f = f;
     };
 
-    public String[] decompress(String infile, String outfile) {
+    public String[] decompress(String infile, String outfile) throws Exception {
         String[] info;
-        try {
+       
             info = this.f.llegirDescomp(infile);
 
             if (info[0].length() == 1) {
@@ -28,10 +28,7 @@ class Descompressio {
                 return stats;
 
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+   
 
     }
 
