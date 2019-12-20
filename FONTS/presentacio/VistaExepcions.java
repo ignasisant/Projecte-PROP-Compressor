@@ -25,11 +25,10 @@ public class VistaExepcions {
 
   public VistaExepcions () {}
 
-  public void jaComprimit(){ //exepcio per cuan volem comprimir un arxiu ja comprimit6
+  public void jaComprimit(){ //exepcio per cuan volem comprimir un arxiu ja comprimit
     String message = "Aquest arxiu ja está comprimit!";
     JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
     return ;
-
   }
 
   public void noDescomprimir(String extension){ //exepcio per cuan no es pot descomprimir
@@ -45,10 +44,9 @@ public class VistaExepcions {
     String message = "Aquest arxiu no es pot comprimir!";
     JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
     return ;
-
   }
 
-  public void noJPeg(){ //exepcio per cuan l'arxiu no es pot comprimir amb jpeg
+  public void noJpeg(){ //exepcio per cuan l'arxiu no es pot comprimir amb jpeg
     String message = "Aquest arxiu no es pot comprimir amb l'algoritme JPEG!";
     JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", JOptionPane.ERROR_MESSAGE);
     return;

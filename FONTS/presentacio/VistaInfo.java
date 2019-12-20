@@ -51,11 +51,11 @@ public class VistaInfo {
 
 //////////////////////// Metodos de las interfaces Listener
 
-  public void actionPerformed_buttonHome(ActionEvent event){
+  private void actionPerformed_buttonHome(ActionEvent event){
       vistaPrincipal.volverHome();
   }
 
-  public void actionPerformed_buttonCompare(ActionEvent event){
+  private void actionPerformed_buttonCompare(ActionEvent event){
     new VistaCompare(iIOUtils.getCompare()); //s'obre finestra per comparar
   }
 

@@ -42,12 +42,11 @@ public class VistaStatistics {
   }
 
   public JPanel getPanelStatistics(){
-    return panelStatistics
-;
+    return panelStatistics;
  }
 //////////////////////// Metodos de las interfaces Listener
 
-  public void actionPerformed_buttonHome(ActionEvent event){
+  private void actionPerformed_buttonHome(ActionEvent event){
       vistaPrincipal.volverHome();
   }
 //////////////////////// Asignacion de listeners

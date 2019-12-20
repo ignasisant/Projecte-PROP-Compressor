@@ -16,19 +16,12 @@ public class LZW extends Algorithm{
     private int ID = 1;
     private String ext = "lzw";
 
-    public static void main(String[] args) {
-
-
-    }
-    public LZW() {
-
-
-
-    }
+    public LZW() { }
+    
     public int getId() { return this.ID;    }
     public String getExtension() { return this.ext;   }
-
     public String getData() { return this.inData;  }
+
     public void setData(String data) { this.inData = data;   }
 
     public String compress(){
