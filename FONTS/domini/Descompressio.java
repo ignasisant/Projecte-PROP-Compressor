@@ -76,12 +76,9 @@ class Descompressio {
             algo.setData(payload);
             String decompress = this.run();
             totend += decompress.length();
-            try {
-                this.f.writeToFile(decompress, outfile + del + nom);
-            } catch (Exception e) {
-                e.printStackTrace();
 
-            }
+            this.f.writeToFile(decompress, outfile + del + nom);
+
             if (max == all.length())
                 break;
             all = all.substring(max + 1);
