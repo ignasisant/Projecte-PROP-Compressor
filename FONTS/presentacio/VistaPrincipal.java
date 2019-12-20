@@ -334,7 +334,7 @@ private void asignar_listenersComponentes() {
     iIOUtils.setOutputFile("");
     labelInput.setText("Input no seleccionat");
     labelOutput.setText("Ubicació output no seleccionada");
-    fileChooser  = new JFileChooser(); // aixi al tornar a home es reinicialitza
+    fileChooser  = new JFileChooser(); 
     fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     fileChooser.setSelectedFile(null);
     fileChooser2 = new JFileChooser();

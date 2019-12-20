@@ -56,7 +56,7 @@ public class VistaInfo {
   }
 
   private void actionPerformed_buttonCompare(ActionEvent event){
-    new VistaCompare(iIOUtils.getCompare()); //s'obre finestra per comparar
+    new VistaCompare(); //s'obre finestra per comparar
   }
 
 //////////////////////// Asignacion de listeners
