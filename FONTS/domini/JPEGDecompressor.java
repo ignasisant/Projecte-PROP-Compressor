@@ -274,25 +274,13 @@ public class JPEGDecompressor extends JPEG {
 
    @Override
    public String decompress() {
-       //Obtinc els vectors (aixó canviarà a la segona entrega)
-    //    try {
-    //        llegeixdefitxer(path);
-    //    } catch (final IOException e) {
-    //        // TODO Auto-generated catch block
-    //        e.printStackTrace();
-    // //    }
 
        preparaMatrius();  //Desfem els zigzags i queden les matrius transformades.
        multiplica(); //Multipliquem les matrius per retornar el valor "Original"
        transformBlocks(); //Transformen les dctstrans a dcts matrius de YCbCr DCT3
        imatge.setImatge(getImageArray()); //Obtinc la imatge, només em falta parsejarla a PPM
        imatge.operaFromYCbCr();
-       //String fin = "";
-//       try {
-//           creaImatge("out.ppm");
-//       } catch (IOException e) {
-//           e.printStackTrace();
-//       }
+
        return imatge.creaImatgeFinal();
    }
 
