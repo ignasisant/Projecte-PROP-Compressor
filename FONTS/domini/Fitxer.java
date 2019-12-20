@@ -23,7 +23,7 @@ public class Fitxer {
 
     }
 
-    public String[] decompress(String infile, String outfile, int algoId) {
+    public String[] decompress(String infile, String outfile, int algoId) throws Exception {
         if(algoId == 2) ++algoId;
         this.decomp.setAlgorithm(algoId);
         return this.decomp.decompress(infile, outfile);
